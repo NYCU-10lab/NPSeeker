@@ -1,7 +1,7 @@
 # NPSeeker v1
 
 <p align="center">
-  <img width="800" src="Image/NPSeeker-flowchart.png"><br>
+  <img width="800" src="Images/NPSeeker-flowchart.png"><br>
   Schematic representation of the NPSeeker probe design algorithm.
 </p>
 
