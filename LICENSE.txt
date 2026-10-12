@@ -1,0 +1,228 @@
+
+NPSeeker Executable Software License
+Version 1.5 (for NPSeeker 1.5.x) - 10 October 2026
+
+Copyright (c) 2026 Wei-Cheng Lo, Hao-Yu Peng, and Hui Zhi Gan.
+All rights reserved except as expressly granted under this License.
+
+
+====================================
+1. Scope
+====================================
+
+This License applies only to the official compiled executable files of NPSeeker
+(Nucleic Acid Probe Seeker) and the original user documentation distributed
+with them by the copyright holders (collectively, the "Software").
+
+The Software includes components of the Go programming language (runtime and
+standard library), which are distributed under their own BSD-style license.
+See Section 13 (Third-Party Notices).
+
+The genome sequence files in the dat folder were obtained from the GenBank and
+RefSeq databases of the National Center for Biotechnology Information (NCBI,
+https://www.ncbi.nlm.nih.gov/) and are provided as example and research data.
+They are not part of the Software and are not covered by this License. These
+files, and any other third-party software, data, or online services used with
+NPSeeker, remain subject to their own licenses or terms of use.
+
+
+====================================
+2. Permitted Use
+====================================
+
+Subject to the terms of this License, you may:
+
+a. install and use the Software for personal or educational purposes,
+   academic or other non-commercial research, or internal, non-fee research
+   and evaluation;
+
+b. make copies of the Software for backup or archival purposes;
+
+c. redistribute complete and unmodified copies of the Software package for
+   non-commercial purposes, provided that:
+
+   i.   no fee is charged for the Software;
+   ii.  this License and all copyright notices are included without alteration;
+   iii. no authorship, official distributor status, affiliation, sponsorship,
+        or endorsement is falsely claimed; and
+   iv.  any third-party materials included in the package are redistributed
+        only in accordance with their applicable licenses or terms of use; and
+
+d. translate the user documentation, or quote parts of it in teaching or
+   research materials, and share the results for non-commercial purposes,
+   provided that no fee is charged, the original NPSeeker documentation is
+   credited, and any independently prepared translation is clearly marked as
+   unofficial.
+
+Use by a for-profit organization solely for internal, non-fee research or
+evaluation is permitted, provided that the Software is not used to provide a
+paid service, incorporated into a commercial product or service, or otherwise
+used for direct revenue generation.
+
+
+====================================
+3. Research Outputs
+====================================
+
+Data, reports, analyses, and research results produced through permitted use of
+the Software are not restricted by this License. Academic users are encouraged
+to cite the associated NPSeeker publication when reporting results obtained
+using the Software.
+
+
+====================================
+4. Restrictions
+====================================
+
+Unless you have obtained prior written permission from the copyright holders,
+you may not:
+
+a. modify, patch, adapt, translate, or create derivative works of the Software,
+   except as permitted in Section 2(d);
+
+b. reverse engineer, decompile, disassemble, or otherwise attempt to derive the
+   source code or internal implementation of the Software, except to the extent
+   that such a restriction is prohibited by applicable law;
+
+c. distribute a modified version of the Software;
+
+d. sell, sublicense, rent, lease, or charge a fee for access to or copies of
+   the Software;
+
+e. use the Software to provide paid analysis, consulting, hosted access, cloud
+   access, or any other fee-based service;
+
+f. incorporate the Software into a product or service that is sold, licensed,
+   offered for a fee, or used for direct revenue generation;
+
+g. remove, obscure, or alter any copyright, attribution, or license notice; or
+
+h. use the names or logos of the copyright holders, 10Lab, or National
+   Yang Ming Chiao Tung University in a manner that implies sponsorship or
+   endorsement without prior permission from the relevant party.
+
+
+====================================
+5. Ownership and Reserved Rights
+====================================
+
+The Software is licensed, not sold. The copyright holders retain all ownership
+rights in the Software. No patent, trademark, trade name, or other intellectual
+property right is granted except for the limited copyright permissions
+expressly stated in this License.
+
+
+====================================
+6. Future Releases
+====================================
+
+Each NPSeeker release is governed by the license distributed with that release.
+Future versions may be released under different terms. A later license does not
+automatically change the terms applicable to a copy already distributed under
+this License.
+
+
+====================================
+7. Termination
+====================================
+
+Your rights under this License terminate automatically if you fail to comply
+with its terms. Upon termination, you must stop using and redistributing the
+Software and delete all copies in your possession or control, except where
+retention is required by law.
+
+The copyright holders may reinstate permission in writing.
+
+
+====================================
+8. No Warranty
+====================================
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE SOFTWARE IS PROVIDED
+"AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE, ACCURACY, RELIABILITY, TITLE, AND NON-INFRINGEMENT.
+
+THE COPYRIGHT HOLDERS DO NOT WARRANT THAT THE SOFTWARE WILL BE ERROR-FREE,
+UNINTERRUPTED, SECURE, OR SUITABLE FOR ANY PARTICULAR SCIENTIFIC, DIAGNOSTIC,
+CLINICAL, COMMERCIAL, OR REGULATORY PURPOSE.
+
+
+====================================
+9. Limitation of Liability
+====================================
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE COPYRIGHT HOLDERS SHALL
+NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES, OR FOR ANY LOSS OF DATA, PROFITS, REVENUE, BUSINESS, OR
+RESEARCH RESULTS, ARISING FROM OR RELATED TO THE SOFTWARE OR ITS USE, EVEN IF
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+
+====================================
+10. Severability
+====================================
+
+If any provision of this License is held to be invalid or unenforceable, the
+remaining provisions shall remain in effect to the fullest extent permitted by
+applicable law.
+
+
+====================================
+11. Governing Law
+====================================
+
+This License is governed by the laws of the Republic of China (Taiwan). The
+Taiwan Hsinchu District Court shall be the court of first instance for any
+dispute arising out of or in connection with this License.
+
+
+====================================
+12. Commercial Licensing and Contact
+====================================
+
+For permission to use NPSeeker in a paid service, commercial product, or other
+use not permitted by this License, please contact:
+
+Wei-Cheng Lo
+Institute of Bioinformatics and Systems Biology
+National Yang Ming Chiao Tung University
+Hsinchu, Taiwan
+Email: WadeLo@nycu.edu.tw
+
+
+====================================
+13. Third-Party Notices
+====================================
+
+The Software includes components of the Go programming language, distributed
+under the following license (from https://go.dev/LICENSE):
+
+Copyright 2009 The Go Authors.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+   * Neither the name of Google LLC nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
