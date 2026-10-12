@@ -1,0 +1,8 @@
+29a21bf682e7d851aadc5f62d02ed716e5f04c0ff99d582b5b57569055e4760d  NPSeeker-1.5.42-Windows.tar.gz
+21a9648bc1aace536261e80921a88bdeeba17c48e40ac58c4356b245ee69a9a9  NPSeeker-1.5.42-Windows.zip
+8c038f049feaeb2bfee60b5db912b2c30a2a0e3d0e7832b65084640d8b5da2da  NPSeeker-1.5.42-macOS.tar.gz
+773deb74eedfec67f648f33cba7c2a6bb5c4921f7247f293fc3e5f3f103fdb60  NPSeeker-1.5.42-macOS.zip
+496cf599148b900deeaa9d44fd96162bbdf14d45552c6c276cec34cfebd479ce  NPSeeker-1.5.42-Linux.tar.gz
+8428451a4135dfa1b7af302aea8db5d95aab6f59235b54b467dfcbadc2c535cd  NPSeeker-1.5.42-Linux.zip
+ea433be9fb0382fd4fad6092080de95f3161aff11ed47ad1e81eeba66befdcff  NPSeeker-1.5.42-datasets.tar.gz
+66381f708a1d4c406d81de4dee50744dff4d606e3c5520651b6321c6dfaed2f4  NPSeeker-1.5.42-datasets.zip
