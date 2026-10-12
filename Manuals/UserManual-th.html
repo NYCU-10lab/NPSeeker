@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="manual2html.py (from UserManual-th.txt; do not edit by hand)">
+<title>คู่มือการใช้งาน NPSeeker</title>
+<style>
+:root { color-scheme: light dark; --text: #1f2933; --bg: #ffffff; --muted: #6b7a88; --line: #d9dee3;
+        --code-bg: #f3f5f7; --nav-bg: #f4f6f8; --note-bg: #fff8e1; --note-line: #e0b84a; --accent: #1f6feb; }
+@media (prefers-color-scheme: dark) {
+  :root { --text: #e6edf3; --bg: #0f1419; --muted: #9aa7b4; --line: #333b44;
+          --code-bg: #1a2027; --nav-bg: #1a2027; --note-bg: #3a3218; --note-line: #b8932f; --accent: #58a6ff; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+       font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif; }
+.wrap { max-width: 1240px; margin: 0 auto; display: flex; gap: 2.5rem; padding: 0 1.25rem; }
+nav.toc { flex: 0 0 16rem; position: sticky; top: 0; align-self: flex-start; max-height: 100vh; overflow-y: auto;
+          padding: 1.5rem 0 3rem; font-size: .88rem; line-height: 1.45; }
+nav.toc a { display: block; padding: .2rem .5rem; color: var(--text); text-decoration: none; border-radius: 3px; }
+nav.toc a:hover { background: var(--nav-bg); color: var(--accent); }
+nav.toc a.sub { padding-left: 1.4rem; color: var(--muted); font-size: .84rem; }
+main { flex: 1; min-width: 0; padding: 1.5rem 0 5rem; }
+[id] { scroll-margin-top: 1rem; }
+a { color: var(--accent); }
+code, pre { font-family: ui-monospace, "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace; font-size: .92em; }
+code { white-space: nowrap; }
+code.message { white-space: normal; overflow-wrap: anywhere; }
+h1 { margin-top: 0; }
+h2 { border-bottom: 1px solid var(--line); padding-bottom: 4px; margin-top: 2em; }
+h4.option { margin: 1.4em 0 .4em; }
+.opt-type, .version, .toc-title { color: var(--muted); font-weight: normal; }
+.toc-title { text-transform: uppercase; letter-spacing: .06em; font-size: .78rem; margin: 0 0 .5rem; }
+pre { background: var(--code-bg); padding: 10px 12px; overflow-x: auto; border-radius: 4px; }
+table { border-collapse: collapse; margin: .6em 0; }
+th, td { text-align: left; vertical-align: top; padding: 3px 14px 3px 0; }
+td:first-child { white-space: nowrap; }
+th { border-bottom: 1px solid var(--line); }
+.note { background: var(--note-bg); border-left: 4px solid var(--note-line); padding: 2px 12px; margin: 1em 0; }
+.toc-head { display: flex; align-items: center; border-radius: 3px; }
+.toc-head:hover { background: var(--nav-bg); }
+.toc-head a { flex: 1; }
+nav.toc .toc-head a:hover { background: none; }
+.js .toc-subs { display: none; }
+.js .toc-ch.open .toc-subs { display: block; }
+.toc-toggle { flex: none; width: 26px; height: 24px; border: 0; background: none; padding: 0; cursor: pointer;
+              color: var(--muted); display: flex; align-items: center; justify-content: center; }
+.toc-toggle:hover { color: var(--accent); }
+.toc-toggle::before { content: ""; width: 6px; height: 6px; border-right: 1.5px solid currentColor;
+                      border-bottom: 1.5px solid currentColor; transform: rotate(-45deg); transition: transform .15s; }
+.toc-ch.open .toc-toggle::before { transform: rotate(45deg); }
+@media (max-width: 900px) {
+  .wrap { flex-direction: column; gap: 0; }
+  nav.toc { position: static; max-height: none; flex: none; border-bottom: 1px solid var(--line); }
+  .js nav.toc:not(.open) .toc-ch { display: none; }
+  .js .toc-title { cursor: pointer; font-size: .88rem; }
+  .js .toc-title::before { content: "\25B8  "; }
+  .js nav.toc.open .toc-title::before { content: "\25BE  "; }
+}
+</style>
+<script>
+document.documentElement.classList.add('js');
+document.addEventListener('DOMContentLoaded', function () {
+  var nav = document.querySelector('nav.toc');
+  if (!nav) return;
+  nav.querySelectorAll('.toc-ch').forEach(function (ch) {
+    if (!ch.querySelector('.toc-subs a')) return;
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'toc-toggle'; b.title = 'Show or hide the sections';
+    ch.firstElementChild.appendChild(b);
+  });
+  nav.querySelector('.toc-title').addEventListener('click', function () { nav.classList.toggle('open'); });
+  nav.addEventListener('click', function (e) {
+    var t = e.target.closest('.toc-toggle');
+    if (t) { t.closest('.toc-ch').classList.toggle('open'); return; }
+    var a = e.target.closest('a');
+    if (!a) return;
+    if (a.closest('.toc-ch')) a.closest('.toc-ch').classList.add('open');
+    nav.classList.remove('open');
+  });
+  var cur = Array.prototype.find.call(nav.querySelectorAll('a'), function (a) { return a.hash && a.hash === location.hash; });
+  if (cur && cur.closest('.toc-ch')) cur.closest('.toc-ch').classList.add('open');
+});
+</script>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc">
+<p class="toc-title">สารบัญ</p>
+<div class="toc-ch"><div class="toc-head"><a href="#intro-2">เกี่ยวกับ NPSeeker</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#intro-8">เกี่ยวกับคู่มือฉบับนี้</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-0">0. เริ่มต้นใช้งาน</a></div><div class="toc-subs">
+<a href="#sec-0-1" class="sub">0.1 ดาวน์โหลดเวอร์ชันที่เหมาะสม</a>
+<a href="#sec-0-2" class="sub">0.2 แตกไฟล์แพ็กเกจ</a>
+<a href="#sec-0-3" class="sub">0.3 ตรวจสอบว่าเปิด NPSeeker ได้</a>
+<a href="#sec-0-4" class="sub">0.4 ทดลองวิเคราะห์ผ่านส่วนติดต่อแบบกราฟิก</a>
+<a href="#sec-0-5" class="sub">0.5 ทดลองวิเคราะห์ผ่านบรรทัดคำสั่ง</a>
+<a href="#sec-0-6" class="sub">0.6 ดูวิธีใช้ของโปรแกรม</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-1">1. วิธีที่ NPSeeker ออกแบบและให้คะแนนโพรบ</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-2">2. การเตรียมจีโนมเป้าหมายและจีโนมควบคุม</a></div><div class="toc-subs">
+<a href="#sec-2-1" class="sub">2.1 ระบุข้อมูลเป็นโฟลเดอร์</a>
+<a href="#sec-2-2" class="sub">2.2 ระบุข้อมูลด้วยรายการไฟล์</a>
+<a href="#sec-2-3" class="sub">2.3 ระบุไฟล์ FASTA เดี่ยว</a>
+<a href="#sec-2-4" class="sub">2.4 เนื้อหา FASTA และการตรวจสอบข้อมูลเข้า</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-3">3. การอ่านผลและการคัดเลือกโพรบ</a></div><div class="toc-subs">
+<a href="#sec-3-1" class="sub">3.1 ผลลัพธ์ที่แสดงบนหน้าจอ</a>
+<a href="#sec-3-2" class="sub">3.2 ไฟล์ผลลัพธ์</a>
+<a href="#sec-3-3" class="sub">3.3 แนวทางคัดเลือกโพรบ</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-4">4. การจัดกลุ่มจีโนมเป้าหมายและโหมด single/multi</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-5">5. ตัวเลือกและพารามิเตอร์</a></div><div class="toc-subs">
+<a href="#sec-5-1" class="sub">5.1 ความยาวโพรบและทรัพยากรคอมพิวเตอร์ (General settings)</a>
+<a href="#sec-5-2" class="sub">5.2 ผลลัพธ์และบันทึกการทำงาน (Output)</a>
+<a href="#sec-5-3" class="sub">5.3 การจัดกลุ่มและจัดอันดับ (Target clustering, Probe ranking)</a>
+<a href="#sec-5-4" class="sub">5.4 การกรองโพรบที่เป็นไปได้ (Candidate filtering)</a>
+<a href="#sec-5-5" class="sub">5.5 ตัวเลือกขั้นสูง (Advanced)</a>
+<a href="#sec-5-6" class="sub">5.6 ส่วนติดต่อแบบกราฟิกและวิธีใช้ (Graphical interface)</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-6">6. ส่วนติดต่อแบบกราฟิก</a></div><div class="toc-subs">
+<a href="#sec-6-1" class="sub">6.1 เปิดโปรแกรมและเชื่อมต่อ</a>
+<a href="#sec-6-2" class="sub">6.2 หน้าหลักของส่วนติดต่อ</a>
+<a href="#sec-6-3" class="sub">6.3 ปิดหน้าเว็บ ออกจากโปรแกรม และเก็บผลลัพธ์</a>
+<a href="#sec-6-4" class="sub">6.4 ใช้ส่วนติดต่อบนเซิร์ฟเวอร์ระยะไกล</a>
+<a href="#sec-6-5" class="sub">6.5 ที่เก็บไฟล์การตั้งค่า</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-7">7. ประสิทธิภาพและการแก้ไขปัญหา</a></div><div class="toc-subs">
+<a href="#sec-7-1" class="sub">7.1 หน่วยความจำ เวลา และไฟล์ชั่วคราว</a>
+<a href="#sec-7-2" class="sub">7.2 ข้อความผิดพลาดที่พบบ่อย</a>
+<a href="#sec-7-3" class="sub">7.3 เอาต์พุตมาตรฐานและเอาต์พุตข้อผิดพลาด</a>
+<a href="#sec-7-4" class="sub">7.4 ไม่พบโพรบหรือประมวลผลช้า</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-8">8. ตัวอย่างการใช้งาน</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#app-A">ภาคผนวก A  สรุปตัวเลือกทั้งหมด</a></div><div class="toc-subs">
+</div></div>
+</nav>
+<main>
+<h1>คู่มือการใช้งาน NPSeeker</h1>
+<p class="version">เวอร์ชัน 1.5.42</p>
+<h2 id="intro-2">เกี่ยวกับ NPSeeker</h2>
+<p>NPSeeker (Nucleic Acid Probe Seeker) เป็นโปรแกรมออกแบบโพรบกรดนิวคลีอิกจากลำดับจีโนม โดยเน้นการคัดเลือกโพรบสำหรับไบโอเซนเซอร์ เช่น BioFET (ทรานซิสเตอร์สนามไฟฟ้าสำหรับการตรวจวัดทางชีวภาพ) โพรบกรดนิวคลีอิกคือสาย DNA สั้น ๆ ที่สามารถจับ กับ DNA ของสิ่งมีชีวิตที่ต้องการตรวจหา เพื่อช่วยในการตรวจจับหรือระบุชนิดสิ่งมีชีวิต</p>
+<p>NPSeeker รับจีโนมสองกลุ่ม ได้แก่ กลุ่มเป้าหมาย (target) ซึ่งต้องการตรวจหา และกลุ่มควบคุม (control) ซึ่งไม่ต้องการให้ตรวจพบ โปรแกรมจะค้นหาลำดับ DNA ที่พบร่วมกันในจีโนมเป้าหมายทุกชุด จากนั้นประเมินความคล้ายคลึงกับจีโนมควบคุม ความสามารถในการจับกับลำดับเป้าหมาย และแนวโน้มที่โพรบ จะพับกลับมาจับกับตัวเอง แล้วจัดอันดับโพรบที่เป็นไปได้ตามคะแนน ผู้ใช้กำหนดความยาวโพรบได้ตั้งแต่ 5 ถึง 256 นิวคลีโอไทด์</p>
+<p>ข้อมูลบทความและการติดต่อ:</p>
+<table>
+<tr><td>บทความ</td><td>NPSeeker: A BioFET-oriented Nucleic Acid Probe Design Algorithm for Efficient Species Identification and Classification</td></tr>
+<tr><td>ผู้เขียน</td><td>Hao-Yu Peng, Hui Zhi Gan, et al.</td></tr>
+<tr><td>เว็บไซต์</td><td><a href="https://10lab.ceb.nycu.edu.tw/NPSeeker/">https://10lab.ceb.nycu.edu.tw/NPSeeker/</a></td></tr>
+<tr><td>GitHub</td><td><a href="https://github.com/NYCU-10lab/NPSeeker/">https://github.com/NYCU-10lab/NPSeeker/</a></td></tr>
+<tr><td>ติดต่อ</td><td><a href="mailto:WadeLo@nycu.edu.tw">WadeLo@nycu.edu.tw</a></td></tr>
+</table>
+<p>หากใช้ NPSeeker ในงานวิจัย โปรดอ้างอิงบทความข้างต้น</p>
+<h2 id="intro-8">เกี่ยวกับคู่มือฉบับนี้</h2>
+<p>หากเพิ่งเริ่มใช้ NPSeeker แนะนำให้เริ่มที่<a href="#ch-0">บทที่ 0</a> หากต้องการใช้ส่วนติดต่อแบบกราฟิก เมื่อทำตามขั้นตอนใน หัวข้อที่ <a href="#sec-0-1">0.1</a> ถึง <a href="#sec-0-3">0.3</a> เรียบร้อยแล้ว สามารถไปที่<a href="#sec-0-4">หัวข้อ 0.4</a> ได้โดยตรง การเตรียมไฟล์จีโนมของตนเองอยู่ ใน<a href="#ch-2">บทที่ 2</a> และการปรับค่าพารามิเตอร์อยู่ใน<a href="#ch-5">บทที่ 5</a></p>
+<p>โปรแกรมมีระบบช่วยเหลือในตัว: <code>-h</code> แสดงตัวเลือกที่ใช้บ่อย ส่วน <code>-help</code> แสดงตัวเลือกทั้งหมด คู่มือฉบับนี้ อธิบายขั้นตอน ตัวอย่าง และข้อควรพิจารณาเพิ่มเติม มีทั้งไฟล์ข้อความ (<code>UserManual-th.txt</code>) และ HTML (<code>UserManual-th.html</code>) หรือเปิดอ่านผ่านหน้า Help ในส่วนติดต่อแบบกราฟิกได้</p>
+<h2 id="ch-0">0. เริ่มต้นใช้งาน</h2>
+<div class="note"><p>เว้นแต่ระบุเป็นอย่างอื่น คำสั่งในคู่มือนี้ใช้รูปแบบของ macOS และ Linux โดยจะระบุคำสั่งสำหรับ Windows เมื่อแตกต่างกัน</p></div>
+<p>หากไม่เคยใช้โปรแกรมผ่านบรรทัดคำสั่งมาก่อน ให้ทำตามหัวข้อนี้ตามลำดับ</p>
+<h3 id="sec-0-1">0.1 ดาวน์โหลดเวอร์ชันที่เหมาะสม</h3>
+<p>ดาวน์โหลดไฟล์แพ็กเกจสำหรับระบบปฏิบัติการของคุณจากเว็บไซต์ NPSeeker หรือ GitHub มีแพ็กเกจแยก สำหรับ Windows, macOS และ Linux โดยแต่ละแพ็กเกจมีไฟล์โปรแกรมสำหรับสถาปัตยกรรมตัวประมวลผล สองแบบ:</p>
+<table>
+<tr><td>x86_64</td><td>ตัวประมวลผล Intel และ AMD ส่วนใหญ่</td></tr>
+<tr><td>arm64</td><td>Mac ที่ใช้ชิป Apple ตระกูล M และคอมพิวเตอร์ระบบ ARM อื่น ๆ</td></tr>
+</table>
+<p>หากไม่แน่ใจว่าคอมพิวเตอร์ใช้สถาปัตยกรรมใด:</p>
+<ul>
+<li>Windows: เปิด "การตั้งค่า -&gt; ระบบ -&gt; เกี่ยวกับ" แล้วดู "ชนิดของระบบ" หากแสดง x64 หมายถึง x86_64 และ ARM64 หมายถึง arm64</li>
+<li>macOS: เปิด "เมนู Apple -&gt; เกี่ยวกับ Mac เครื่องนี้" เครื่องที่ใช้ชิป Apple ตระกูล M เป็น arm64 ส่วนเครื่องที่ใช้ Intel เป็น x86_64</li>
+<li>Linux: เปิดเทอร์มินัล พิมพ์ uname <code>-m</code> แล้วกด Enter หากได้ x86_64 ให้ใช้ x86_64 และหากได้ aarch64 ให้ใช้ arm64</li>
+</ul>
+<h3 id="sec-0-2">0.2 แตกไฟล์แพ็กเกจ</h3>
+<p>แตกไฟล์ที่ดาวน์โหลดไว้ลงในโฟลเดอร์ที่ต้องการ:</p>
+<ul>
+<li>Windows: คลิกขวาที่ไฟล์แพ็กเกจ แล้วเลือก "แยกทั้งหมด" (Extract All)</li>
+<li>macOS: ดับเบิลคลิกไฟล์แพ็กเกจ</li>
+<li>Linux: เปิดเทอร์มินัล แล้วใช้คำสั่ง tar xzf ตามด้วยชื่อไฟล์แพ็กเกจ</li>
+</ul>
+<p>ในโฟลเดอร์ NPSeeker ที่แตกไฟล์แล้วจะมี:</p>
+<table>
+<tr><td><code>bin/</code></td><td>โปรแกรมสำหรับ x86_64: npseeker (Windows ใช้ <code>npseeker.exe</code>)</td></tr>
+<tr><td><code>bin.arm64/</code></td><td>โปรแกรมสำหรับ arm64</td></tr>
+<tr><td><code>doc/</code></td><td>คู่มือการใช้งาน</td></tr>
+<tr><td><code>dat/sample/</code></td><td>ข้อมูลตัวอย่างสำหรับการทดลองใช้งานครั้งแรก</td></tr>
+</table>
+<p>จีโนมแบคทีเรียที่ใช้ในบทความ NPSeeker (แกรมลบ GN และแกรมบวก GP) มีให้ดาวน์โหลดแยกต่างหาก (NPSeeker-1.5.42-datasets.zip หรือ <code>.tar.gz</code>) สามารถแตกไฟล์ แล้วย้ายโฟลเดอร์ datasets ที่อยู่ข้างใน (ใต้ <code>NPSeeker/dat/</code>) ไปไว้ในโฟลเดอร์ dat ของโปรแกรม เพื่อทดสอบด้วยตัวอย่างคำสั่งใน<a href="#ch-8">บทที่ 8</a> ได้ตามที่เขียนไว้</p>
+<p>การวิเคราะห์บนเครื่องไม่จำเป็นต้องติดตั้งโปรแกรมหรือเชื่อมต่ออินเทอร์เน็ต ตัวอย่างคำสั่งในคู่มือนี้ใช้ โปรแกรม x86_64 ในโฟลเดอร์ <code>bin/</code> หากใช้ arm64 ให้เปลี่ยน bin เป็น bin.arm64 ในคำสั่ง</p>
+<h3 id="sec-0-3">0.3 ตรวจสอบว่าเปิด NPSeeker ได้</h3>
+<p>เปิดหน้าต่างบรรทัดคำสั่ง แล้วเปลี่ยนไดเรกทอรีไปยังโฟลเดอร์ NPSeeker ที่แตกไฟล์ไว้:</p>
+<ul>
+<li>Windows: เปิดโฟลเดอร์ NPSeeker ใน File Explorer พิมพ์ cmd ในแถบที่อยู่ แล้วกด Enter หน้าต่าง Command Prompt จะเปิดขึ้นในโฟลเดอร์นั้น สามารถใช้ PowerShell กับคำสั่งเดียวกันได้</li>
+<li>macOS: เปิด "Terminal" (Applications -&gt; Utilities) พิมพ์ cd ตามด้วยเว้นวรรค แล้วลากโฟลเดอร์ NPSeeker มาวางในหน้าต่าง Terminal จากนั้นกด Enter</li>
+<li>Linux: เปิดเทอร์มินัลแล้วใช้ cd เพื่อเข้าโฟลเดอร์ NPSeeker</li>
+</ul>
+<p>ป้อนคำสั่งสำหรับระบบของคุณ แล้วกด Enter:</p>
+<pre>Windows:          .\bin\npseeker.exe -h
+macOS, Linux:     ./bin/npseeker -h</pre>
+<p>หากหน้าจอแสดงโลโก้ วิธีใช้ และตัวเลือกพื้นฐาน แสดงว่าโปรแกรมพร้อมใช้งาน</p>
+<p>ระบบปฏิบัติการอาจแสดงคำเตือนความปลอดภัยเมื่อเปิดโปรแกรมที่ดาวน์โหลดจากอินเทอร์เน็ตเป็นครั้งแรก หากโปรแกรมไม่มีลายเซ็นดิจิทัล</p>
+<div class="note"><p>ก่อนอนุญาตให้เปิดโปรแกรม ตรวจสอบว่าได้ดาวน์โหลดจากเว็บไซต์ NPSeeker หรือ GitHub ที่ระบุในหัวข้อ "เกี่ยวกับ NPSeeker" เท่านั้น อย่าข้ามคำเตือนสำหรับซอฟต์แวร์ที่ไม่ทราบแหล่งที่มา</p></div>
+<ul>
+<li>Windows: อาจพบหน้าต่างสีน้ำเงินจาก Microsoft Defender SmartScreen ที่แจ้งว่า Windows ปกป้องพีซีของคุณ และมีเพียงปุ่มไม่ให้เรียกใช้ ให้คลิกตัวเลือกข้อมูลเพิ่มเติม ("More info" ในระบบภาษาอังกฤษ) เพื่อดูชื่อโปรแกรมและข้อมูลผู้เผยแพร่ที่ไม่รู้จัก จากนั้นเลือกให้ เรียกใช้ต่อไป ("Run anyway" ในระบบภาษาอังกฤษ) คำเตือนนี้โดยทั่วไปจะปรากฏเพียงครั้งเดียว สำหรับไฟล์โปรแกรมเดียวกัน</li>
+<li>macOS: ระบบอาจบล็อกแอปที่ไม่ได้ผ่านการรับรองจาก Apple ใน Terminal ให้ใช้ xattr <code>-dr</code> com.apple.quarantine ตามด้วยตำแหน่งโฟลเดอร์ NPSeeker (ลากโฟลเดอร์มาวางใน Terminal เพื่อใส่ตำแหน่งได้) หรือทดลองเปิด NPSeeker หนึ่งครั้ง แล้วไปที่ "การตั้งค่าระบบ -&gt; ความเป็นส่วนตัวและความปลอดภัย" เลือก "ยืนยันจะเปิด" สำหรับ npseeker</li>
+<li>Linux: โดยปกติไม่ต้องตั้งค่าเพิ่ม หากพบ "permission denied" ให้ใช้ chmod +x <code>bin/npseeker</code> (หรือ chmod +x <code>bin.arm64/npseeker</code> สำหรับ arm64) แล้วลองใหม่</li>
+</ul>
+<h3 id="sec-0-4">0.4 ทดลองวิเคราะห์ผ่านส่วนติดต่อแบบกราฟิก</h3>
+<p>หากไม่ต้องการใช้บรรทัดคำสั่ง NPSeeker มีส่วนติดต่อที่เปิดผ่านเว็บเบราว์เซอร์ได้ บน Windows ให้ดับเบิลคลิก <code>npseeker.exe</code> ใน <code>bin/</code> สำหรับ macOS หรือ Linux ให้ป้อนคำสั่งต่อไปนี้:</p>
+<pre>./bin/npseeker --gui</pre>
+<p>เมื่อหน้าโปรแกรมเปิดในเบราว์เซอร์ ให้ไปที่หน้า Design แล้วทดลองกับข้อมูลตัวอย่างที่แนบมา:</p>
+<ul>
+<li>Target: เลือก <code>dat/sample/S.aureus/</code> ซึ่งมีจีโนมของ Staphylococcus aureus หนึ่งชุด</li>
+<li>Control: เลือก <code>dat/sample/yeast/</code> ซึ่งมีจีโนมจากยีสต์สองชนิด</li>
+<li>Probe length: ใช้ค่าเริ่มต้น 25 และไม่ต้องปรับตัวเลือกอื่น</li>
+<li>คลิก "Check" เพื่อตรวจสอบข้อมูลและการตั้งค่า แล้วคลิก "Go" เพื่อเริ่มวิเคราะห์</li>
+<li>เมื่อเสร็จแล้ว ไปที่หน้า Results เพื่อดูโพรบที่จัดอันดับพร้อมคะแนน และดาวน์โหลดผลที่ต้องการเก็บไว้</li>
+</ul>
+<p>ส่วนติดต่อแบบกราฟิกทำงานบนคอมพิวเตอร์ของคุณเอง ไม่ได้อัปโหลดไฟล์จีโนมไปยังเว็บไซต์ภายนอก ดูรายละเอียดส่วนติดต่อและวิธีออกจากโปรแกรมใน<a href="#ch-6">บทที่ 6</a></p>
+<h3 id="sec-0-5">0.5 ทดลองวิเคราะห์ผ่านบรรทัดคำสั่ง</h3>
+<p>สามารถวิเคราะห์ข้อมูลตัวอย่างชุดเดียวกันผ่านบรรทัดคำสั่งได้โดยตรง:</p>
+<pre>Windows:          .\bin\npseeker.exe dat\sample\S.aureus\ dat\sample\yeast\
+macOS, Linux:     ./bin/npseeker     dat/sample/S.aureus/ dat/sample/yeast/</pre>
+<p>โปรแกรมควรทำงานเสร็จภายในไม่กี่วินาที และแสดงรายชื่อโพรบที่เรียงตามคะแนน ดังตัวอย่างบางส่วน:</p>
+<pre>Best probes of cluster 0:
+Rank Probe                     Exclus Purity UnFold Affini  Score     Tm
+   1 CCGACTAACCCAGAGCGGACGAGCC  50.84  61.32 100.00  64.22  69.10  65.88
+   2 GACCCGACTAACCCAGAGCGGACGA  50.84  61.40 100.00  63.68  68.98  64.24
+...</pre>
+<p>แต่ละแถวคือโพรบที่เป็นไปได้หนึ่งรายการ คอลัมน์ Probe แสดงลำดับ DNA ส่วน Score คือคะแนนรวม โพรบที่ได้คะแนนสูงจะอยู่ด้านบน ความหมายของคอลัมน์อื่นอธิบายใน<a href="#ch-3">บทที่ 3</a> เมื่อจบการทำงานจะมีข้อความ Note เตือนให้ใช้ <a href="#opt-o"><code>-o</code></a> หากต้องการบันทึกผลทั้งหมดลงไฟล์ ตัวอย่างเช่น:</p>
+<pre>./bin/npseeker dat/sample/S.aureus/ dat/sample/yeast/ -o result/</pre>
+<p>โปรแกรมจะบันทึกไฟล์ไว้ใน <code>result/</code> (<a href="#sec-3-2">หัวข้อ 3.2</a>) หากต้องการวิเคราะห์อีกครั้ง ให้เลือกโฟลเดอร์ผลลัพธ์ ใหม่ หรือใช้ <a href="#opt-w"><code>-w</code></a> เมื่อยินยอมให้แทนที่ผลเดิมเท่านั้น หากต้องการใช้จีโนมของตนเอง ให้เปลี่ยนโฟลเดอร์ ตัวอย่างทั้งสองเป็นข้อมูลเป้าหมายและข้อมูลควบคุม (<a href="#ch-2">บทที่ 2</a>)</p>
+<h3 id="sec-0-6">0.6 ดูวิธีใช้ของโปรแกรม</h3>
+<pre>./bin/npseeker -h               ตัวเลือกที่ใช้บ่อย
+./bin/npseeker -help            ตัวเลือกทั้งหมด
+./bin/npseeker -help -mode      วิธีใช้ -mode (หรือ -help mode)
+./bin/npseeker -help Output     วิธีใช้หมวด Output ใน -help
+./bin/npseeker -help target     วิธีใช้ target (หรือ control)</pre>
+<p>หากระบุตัวเลือกไม่ถูกต้อง NPSeeker จะแจ้งปัญหา พร้อมบอกวิธีเปิดคำอธิบายที่เกี่ยวข้อง และจะไม่เริ่ม วิเคราะห์</p>
+<h2 id="ch-1">1. วิธีที่ NPSeeker ออกแบบและให้คะแนนโพรบ</h2>
+<p>NPSeeker รับจีโนมเป้าหมายและจีโนมควบคุมเป็นข้อมูลเข้า แล้วสร้างรายชื่อโพรบที่เป็นไปได้ตามลำดับ คะแนน เป้าหมายคือสิ่งมีชีวิตที่ต้องการตรวจพบ ส่วนกลุ่มควบคุมคือสิ่งมีชีวิตที่ไม่ต้องการให้โพรบจับ ซึ่งมักเป็น ชนิดที่ใกล้เคียงและอาจสับสนกับเป้าหมายได้ การวิเคราะห์มีสี่ขั้นตอนหลัก:</p>
+<ul>
+<li>ค้นหาลำดับที่มีร่วมกัน: โปรแกรมอ่านลำดับนิวคลีโอไทด์ต่อเนื่องทุกช่วงที่ยาว k ตำแหน่ง เรียกว่า k-mer เช่น ACGTA มี 3-mer ได้แก่ ACG, CGT และ GTA ทุก k-mer ที่พบในจีโนมเป้าหมายทุกชุดจะกลายเป็น โพรบที่เป็นไปได้ หากต้องการตรวจเป้าหมายทั้งหมดด้วยโพรบเพียงชนิดเดียว โพรบนั้นต้องมีลำดับร่วมอยู่ใน ทุกเป้าหมาย เนื่องจาก DNA มีสองสายที่เป็นคู่สมกัน NPSeeker จึงถือว่า k-mer กับลำดับคู่สมแบบย้อน กลับ (reverse complement) เป็น k-mer เดียวกัน</li>
+<li>กรองโพรบที่เป็นไปได้: ตัดลำดับที่ไม่เหมาะสม เช่น มีสัดส่วนเบสไม่สมดุล มีเบสซ้ำติดกันยาวเกินไป (เช่น AAAA) หรือมีแนวโน้มพับกลับมาจับกับตัวเองหรือจับกับโพรบสำเนาอื่น การกรองช่วยลดเวลาที่ต้องใช้ กับลำดับคุณภาพต่ำในขั้นตอนถัดไป</li>
+<li>ตรวจสอบกลุ่มควบคุม: ค้นหาในจีโนมควบคุมว่ามีลำดับตรงกันทุกตำแหน่ง ลำดับคล้ายกันที่ต่างเพียงไม่กี่เบส หรือชิ้นส่วนสั้น ๆ ของโพรบหรือไม่</li>
+<li>ให้คะแนนและจัดอันดับ: คำนวณคะแนนสี่องค์ประกอบของแต่ละโพรบ แล้วนำมารวมเป็นคะแนนรวม</li>
+</ul>
+<table>
+<tr><td>Exclusivity</td><td>พบในเป้าหมาย แต่พบในกลุ่มควบคุมน้อย</td></tr>
+<tr><td>Purity</td><td>มีลำดับคล้ายหรือชิ้นส่วนสั้น ๆ ตรงกับกลุ่มควบคุมน้อย จึงลดความเสี่ยงของการจับกับลำดับที่ไม่ต้องการ</td></tr>
+<tr><td>Unfoldability</td><td>มีแนวโน้มพับกลับมาจับกับตัวเองต่ำ จึงเปิดโอกาสให้โพรบจับกับเป้าหมายได้</td></tr>
+<tr><td>Affinity</td><td>ความแรงของการจับที่คาดการณ์จากพลังงานอิสระ ของการจับ (พลังงานที่ปลดปล่อยเมื่อโพรบจับเป้าหมาย)</td></tr>
+</table>
+<p>คะแนนแต่ละองค์ประกอบและคะแนนรวมอยู่ระหว่าง 0 ถึง 100 โดยคะแนนสูงแสดงถึงคุณสมบัติที่คาดการณ์ว่าดี กว่า ค่าเริ่มต้นให้น้ำหนักทั้งสี่องค์ประกอบเท่ากัน คะแนนเหล่านี้ช่วยคัดเลือกโพรบไปทดสอบในห้องปฏิบัติการ ไม่ใช่ความแรงสัญญาณ BioFET ที่วัดได้จริง และไม่รับประกันผลการทดลอง</p>
+<p>หากจีโนมเป้าหมายแตกต่างกันมากจนมี k-mer ร่วมกันไม่เพียงพอ NPSeeker จะแบ่งจีโนมออกเป็นกลุ่ม แล้วค้นหาโพรบในแต่ละกลุ่มแยกกัน ดูการจัดกลุ่มและโหมดผลลัพธ์ใน<a href="#ch-4">บทที่ 4</a> ส่วนสมการคะแนนและรายละเอียด อัลกอริทึมอยู่ในบทความวิจัย</p>
+<h2 id="ch-2">2. การเตรียมจีโนมเป้าหมายและจีโนมควบคุม</h2>
+<p>อาร์กิวเมนต์สองตัวแรกของบรรทัดคำสั่งคือข้อมูลเป้าหมายและข้อมูลควบคุมตามลำดับ แล้วจึงตามด้วยตัวเลือก:</p>
+<pre>./bin/npseeker &lt;target&gt; &lt;control&gt; [options]</pre>
+<p>ให้เตรียมหนึ่งไฟล์ FASTA ต่อหนึ่งจีโนม FASTA เป็นรูปแบบไฟล์ข้อความสำหรับลำดับ DNA โดยทั่วไปใช้ นามสกุล <code>.fasta</code>, <code>.fna</code> หรือ <code>.fa</code> สามารถระบุข้อมูลเป้าหมายและควบคุมแยกกันเป็นโฟลเดอร์ รายการ ไฟล์ หรือไฟล์ FASTA เดี่ยวได้</p>
+<h3 id="sec-2-1">2.1 ระบุข้อมูลเป็นโฟลเดอร์</h3>
+<p>เมื่อระบุโฟลเดอร์ NPSeeker จะอ่านเฉพาะไฟล์นามสกุล <code>.fasta</code>, <code>.fna</code> หรือ <code>.fa</code> และถือว่าแต่ละไฟล์ เป็นหนึ่งจีโนม รองรับนามสกุลตัวพิมพ์เล็กทั้งหมดหรือตัวพิมพ์ใหญ่ทั้งหมด เช่น <code>.FASTA</code> โปรแกรมจะไม่ค้นหาใน โฟลเดอร์ย่อย</p>
+<pre>./bin/npseeker targets/ controls/</pre>
+<p>ไฟล์บีบอัด (<code>.gz</code>, <code>.zst</code>) ในโฟลเดอร์จะไม่ถูกนำมาวิเคราะห์ หากต้องการใช้ไฟล์ FASTA ที่บีบอัด ให้ระบุผ่านรายการไฟล์แทน</p>
+<h3 id="sec-2-2">2.2 ระบุข้อมูลด้วยรายการไฟล์</h3>
+<p>รายการไฟล์เป็นไฟล์ข้อความธรรมดาที่ระบุพาธของไฟล์ FASTA หนึ่งไฟล์ต่อหนึ่งบรรทัด เติม @ หน้าชื่อ รายการ เพื่อบอก NPSeeker ให้เปิดไฟล์นั้นในฐานะรายการไฟล์:</p>
+<pre>./bin/npseeker @target.list @control.list</pre>
+<p>ตัวอย่างเนื้อหาใน <code>target.list</code>:</p>
+<pre># Three target genomes
+genomes/strain_A.fasta
+genomes/strain_B.fna.gz
+/data/others/strain_C.fa</pre>
+<ul>
+<li>บรรทัดว่างและบรรทัดที่เริ่มด้วย # จะถูกข้าม จึงสามารถใช้เขียนหมายเหตุได้</li>
+<li>พาธสัมพัทธ์จะอ้างอิงจากไดเรกทอรีที่เรียก NPSeeker ไม่ใช่ไดเรกทอรีที่เก็บไฟล์รายการ</li>
+<li>ไฟล์ในรายการอาจอยู่คนละโฟลเดอร์ และรองรับ FASTA ที่บีบอัดด้วย gzip (<code>.gz</code>) หรือ zstd (<code>.zst</code>)</li>
+<li>เมื่อใช้ <a href="#opt-cluster-order"><code>-cluster-order</code></a> input ลำดับไฟล์ในรายการจะกำหนดลำดับการประมวลผลเพื่อจัดกลุ่ม (<a href="#ch-4">บทที่ 4</a>)</li>
+</ul>
+<p>หากระบุไฟล์ที่ไม่ใช่นามสกุล FASTA โดยไม่มี @ โปรแกรมจะตีความเป็นรายการไฟล์เช่นกัน แต่แนะนำให้เติม @ เพื่อระบุเจตนาให้ชัดเจน</p>
+<h3 id="sec-2-3">2.3 ระบุไฟล์ FASTA เดี่ยว</h3>
+<p>หากกลุ่มเป้าหมายหรือกลุ่มควบคุมมีเพียงหนึ่งจีโนม สามารถส่งไฟล์ FASTA ให้ NPSeeker ได้โดยตรง และใช้ไฟล์ FASTA ที่บีบอัดได้ด้วย:</p>
+<pre>./bin/npseeker strain_A.fasta controls/</pre>
+<h3 id="sec-2-4">2.4 เนื้อหา FASTA และการตรวจสอบข้อมูลเข้า</h3>
+<ul>
+<li>ไฟล์ FASTA หนึ่งไฟล์อาจมีหลายระเบียนลำดับ เช่น โครโมโซมและพลาสมิด ทุกระเบียนในไฟล์เดียวกันถือ เป็นหนึ่งจีโนม</li>
+<li>NPSeeker รับเบส A, C, G และ T ทั้งตัวพิมพ์ใหญ่และเล็ก ตัวอักษรอื่น เช่น N จะทำให้ลำดับขาดช่วง และไม่รวม k-mer ที่คร่อมตำแหน่งดังกล่าว</li>
+<li>NPSeeker ตรวจสอบรูปแบบ FASTA ของไฟล์ข้อมูลเข้า หากไฟล์หายไปหรือไม่ถูกต้อง โปรแกรมจะหยุด พร้อมข้อความผิดพลาด (<a href="#sec-7-2">หัวข้อ 7.2</a>)</li>
+<li>ไฟล์เดียวกันห้ามอยู่ทั้งในกลุ่มเป้าหมายและกลุ่มควบคุม หากพบไฟล์ซ้ำ โปรแกรมจะแจ้งและหยุดทำงาน</li>
+</ul>
+<div class="note"><p>การเลือกจีโนมเป้าหมายและจีโนมควบคุมมีผลโดยตรงต่ออันดับของโพรบ ควรใช้จีโนมควบคุมจากสิ่งมีชีวิตที่ มีโอกาสถูกสับสนกับเป้าหมายจริง มากกว่าการเลือกชนิดที่ไม่เกี่ยวข้องกันโดยไม่มีเหตุผล</p></div>
+<h2 id="ch-3">3. การอ่านผลและการคัดเลือกโพรบ</h2>
+<h3 id="sec-3-1">3.1 ผลลัพธ์ที่แสดงบนหน้าจอ</h3>
+<p>หากไม่ใช้ <a href="#opt-o"><code>-o</code></a> โปรแกรมจะแสดงโพรบอันดับสูงสุดจำนวน <a href="#opt-top"><code>-top</code></a> รายการ (ค่าเริ่มต้น 200) บนหน้าจอ โดยมี Rank, Probe, คะแนนองค์ประกอบทั้งสี่, Score และ Tm หากใช้ <a href="#opt-o"><code>-o</code></a> โปรแกรมจะบันทึกผลโดยละเอียดลง ไฟล์ และแสดงชื่อไฟล์ที่บันทึกไว้แทน เพิ่ม <a href="#opt-v"><code>-v</code></a> เพื่อดูการตั้งค่าและเวลาที่ใช้ในแต่ละขั้นตอน</p>
+<h3 id="sec-3-2">3.2 ไฟล์ผลลัพธ์</h3>
+<p>ตัวอย่างเช่น <a href="#opt-o"><code>-o</code></a> <code>result/</code> จะบันทึกผลในรูปแบบ CSV (ค่าที่คั่นด้วยจุลภาค) เป็นค่าเริ่มต้น:</p>
+<table>
+<tr><td><code>cluster_N_probes.csv</code></td><td>รายชื่อโพรบตามอันดับ โดย N คือเลขกลุ่มเริ่มจาก 0</td></tr>
+<tr><td><code>cluster.csv</code></td><td>การจัดกลุ่มของแต่ละจีโนม</td></tr>
+<tr><td><code>flag.csv</code></td><td>ค่าตัวเลือกที่ใช้ในการวิเคราะห์ครั้งนั้น</td></tr>
+</table>
+<p>หากต้องการตารางข้อความที่จัดคอลัมน์ด้วยช่องว่างและอ่านได้ง่าย ให้ใช้ <a href="#opt-format"><code>-format</code></a> txt ไฟล์ CSV เหมาะกับการเปิดใน Excel หรือโปรแกรมอื่น จำนวนไฟล์โพรบขึ้นกับโหมด single หรือ multi (<a href="#ch-4">บทที่ 4</a>)</p>
+<p>คอลัมน์ของ <code>cluster_N_probes.csv</code> มีดังนี้:</p>
+<table>
+<tr><td>Rank</td><td>อันดับของโพรบ</td></tr>
+<tr><td>Probe</td><td>ลำดับโพรบ เขียนในทิศทาง 5' ไป 3'</td></tr>
+<tr><td>Tgt</td><td>จำนวนครั้งที่พบในจีโนมเป้าหมาย</td></tr>
+<tr><td>Ctl</td><td>จำนวนครั้งที่พบแบบตรงทุกเบสในจีโนมควบคุม ยิ่งน้อยยิ่งดี</td></tr>
+<tr><td>Exclus</td><td>คะแนน Exclusivity คำนวณจาก Tgt และ Ctl</td></tr>
+<tr><td>MMs</td><td>คะแนนของลำดับที่คล้ายกันในจีโนมควบคุม ยิ่งต่ำยิ่งดี</td></tr>
+<tr><td>Subseq</td><td>คะแนนของชิ้นส่วนโพรบที่สั้นกว่าซึ่งพบในจีโนมควบคุม ยิ่งต่ำยิ่งดี</td></tr>
+<tr><td>Purity</td><td>คะแนน Purity คำนวณจาก MMs และ Subseq</td></tr>
+<tr><td>SelfAn</td><td>แนวโน้มที่โพรบจะพับมาจับกับตัวเอง (self-annealing) ยิ่งต่ำยิ่งดี</td></tr>
+<tr><td>Dimer</td><td>แนวโน้มจับคู่กับโพรบอีกโมเลกุล (dimer) ยิ่งต่ำยิ่งดี</td></tr>
+<tr><td>UnFold</td><td>คะแนน Unfoldability คำนวณจาก SelfAn และ Dimer</td></tr>
+<tr><td>Affini</td><td>คะแนน Affinity อ้างอิงพลังงานอิสระของการจับ</td></tr>
+<tr><td>Score</td><td>ค่าเฉลี่ยถ่วงน้ำหนักของคะแนนองค์ประกอบทั้งสี่</td></tr>
+<tr><td>Tm</td><td>อุณหภูมิหลอมเหลว (°C) ที่ดูเพล็กซ์โพรบ-เป้าหมาย ครึ่งหนึ่งแยกออกจากกัน ไม่รวมอยู่ใน Score</td></tr>
+</table>
+<p>Exclus, Purity, UnFold, Affini และ Score มีค่าระหว่าง 0 ถึง 100 โดยค่าสูงดีกว่า หาก เป้าหมายถูกแบ่งเป็นหลายกลุ่ม Tgt จะนับลำดับที่คล้ายกันในจีโนมเป้าหมายของกลุ่มอื่นด้วย จึงไม่จำเป็นต้อง หมายถึงจำนวนที่ตรงกันทุกตำแหน่งเท่านั้น</p>
+<p>ไฟล์ <code>cluster.csv</code> มีสามคอลัมน์: Group (target หรือ control), Cluster (เลขกลุ่มของเป้าหมาย เว้นว่างสำหรับกลุ่มควบคุม) และ File (ชื่อไฟล์) ส่วน <code>flag.csv</code> มีคอลัมน์ Option และ Value เพื่อให้ตรวจสอบการตั้งค่าที่ใช้ได้</p>
+<p>หากโฟลเดอร์ผลลัพธ์ยังไม่มี โปรแกรมจะสร้างให้ และใช้โฟลเดอร์ที่มีอยู่แต่ยังว่างได้เช่นกัน หากมีไฟล์อยู่แล้ว โปรแกรมจะหยุดเพื่อป้องกันการเขียนทับ ใช้ <a href="#opt-w"><code>-w</code></a> เฉพาะเมื่อต้องการแทนที่ผลเดิม โดย NPSeeker จะลบเฉพาะไฟล์ผลลัพธ์ของ NPSeeker ที่มีอยู่ก่อน (cluster_N_probes, cluster และ flag) แต่เก็บไฟล์อื่นที่ไม่เกี่ยวข้องไว้ ควรตรวจสอบว่าไม่ต้องการผลเดิมแล้วก่อนใช้ <a href="#opt-w"><code>-w</code></a></p>
+<h3 id="sec-3-3">3.3 แนวทางคัดเลือกโพรบ</h3>
+<p>Score เป็นจุดเริ่มต้นที่ดีในการจัดอันดับ แต่ไม่ควรใช้คะแนนรวมเพียงอย่างเดียว ควรพิจารณาข้อมูลอื่นตาม ลักษณะงานด้วย:</p>
+<ul>
+<li>Ctl: ถ้ามากกว่า 0 แสดงว่ามีลำดับเดียวกันทุกเบสอยู่ในจีโนมควบคุม จึงอาจเกิดการจับกับสิ่งมีชีวิตนอก เป้าหมาย (cross-reactivity)</li>
+<li>Tgt: หากพบหลายตำแหน่งอาจให้สัญญาณแรงขึ้น แต่ก็อาจเป็นบริเวณลำดับซ้ำ Tgt ไม่ใช่ตัวทำนายความ แรงสัญญาณโดยตรง</li>
+<li>Purity และ UnFold: ช่วยเปรียบเทียบความเสี่ยงจากการจับผิดเป้าหมายและการพับกลับมาจับกับตัวเอง</li>
+<li>Tm: หากการทดลองมีข้อจำกัดเรื่องอุณหภูมิหรือใช้โพรบหลายชนิดร่วมกัน ควรเปรียบเทียบอุณหภูมิหลอมเหลว และควรเลือกโพรบที่มีค่า Tm ใกล้เคียงกัน</li>
+</ul>
+<p>ผู้ใช้สามารถตรวจสอบโพรบกับ NCBI BLAST เพื่อค้นหาลำดับคล้ายในสิ่งมีชีวิตอื่น หรือใช้ UNAFold (mfold) ประเมินโครงสร้างการพับตัว หน้า Results มีลิงก์ไปยังบริการทั้งสอง แต่จะส่งลำดับโพรบที่เลือก ไปยังเว็บไซต์ภายนอก (<a href="#sec-6-2">หัวข้อ 6.2</a>) สุดท้ายต้องทดสอบโพรบภายใต้สภาวะการทดลองจริง จึงจะทราบว่า เหมาะกับแพลตฟอร์ม BioFET ที่ใช้หรือไม่</p>
+<h2 id="ch-4">4. การจัดกลุ่มจีโนมเป้าหมายและโหมด single/multi</h2>
+<p>หากจีโนมเป้าหมายมี k-mer ร่วมกันน้อยเกินไป NPSeeker จะจัดจีโนมเป็นกลุ่ม (cluster) โดยพิจารณาที ละจีโนม จีโนมใหม่จะเข้ากลุ่มปัจจุบันได้ก็ต่อเมื่อจำนวน k-mer ที่พบร่วมกันในสมาชิกทุกชุดรวมถึงจีโนมใหม่นั้น ยังไม่น้อยกว่า <a href="#opt-min-shared"><code>-min-shared</code></a> มิฉะนั้นจะเลื่อนไปจัดในกลุ่มถัดไป กลุ่มเหล่านี้ใช้เพื่อค้นหาโพรบ ไม่ใช่การจัด จำแนกทางวิวัฒนาการหรือสายสัมพันธ์เชิงวิวัฒนาการ</p>
+<p>ตัวเลือก <a href="#opt-cluster-order"><code>-cluster-order</code></a> กำหนดลำดับการพิจารณาจีโนมเป้าหมาย:</p>
+<ul>
+<li>auto (ค่าเริ่มต้น): เลือกลำดับอย่างแน่นอนตามความคล้ายของ k-mer ระหว่างจีโนม การสลับลำดับไฟล์ ข้อมูลเข้าจะไม่เปลี่ยนการจัดกลุ่ม หากเป็นชุดจีโนมเดิม</li>
+<li>input: ใช้ลำดับที่ผู้ใช้ระบุ เช่น ลำดับในไฟล์รายการ เหมาะเมื่อต้องการให้จีโนมอ้างอิงที่กำหนดเป็นจุด เริ่มของกลุ่มแรก</li>
+</ul>
+<p>ค่าเริ่มต้นของ <a href="#opt-min-shared"><code>-min-shared</code></a> คือ 1 หมายความว่าจีโนมใหม่เข้ากลุ่มได้หากสมาชิกทุกชุดยังมี k-mer ร่วมกันอย่างน้อยหนึ่งรายการ ดังนั้นเป้าหมายมักรวมเป็นกลุ่มเดียว การเพิ่มค่านี้อาจทำให้เกิดหลายกลุ่มและ เปลี่ยนชุดโพรบที่เป็นไปได้ในแต่ละกลุ่ม</p>
+<p>เมื่อมีจีโนมเป้าหมายมากกว่าหนึ่งกลุ่ม <a href="#opt-mode"><code>-mode</code></a> จะกำหนดวิธีจัดอันดับและบันทึกโพรบ:</p>
+<ul>
+<li>single (ค่าเริ่มต้น): รวมโพรบจากทุกกลุ่มเป็นอันดับชุดเดียว แล้วเก็บเฉพาะ <a href="#opt-top"><code>-top</code></a> อันดับแรกทั้งหมดใน <code>cluster_0_probes.csv</code> โพรบอันดับสูงหลายรายการอาจมาจากกลุ่มเดียวกัน</li>
+<li>multi: จัดอันดับแต่ละกลุ่มแยกกัน และเก็บได้สูงสุด <a href="#opt-top"><code>-top</code></a> รายการต่อกลุ่ม ลงใน <code>cluster_0_probes.csv</code>, <code>cluster_1_probes.csv</code> เป็นต้น เหมาะเมื่อต้องการโพรบสำหรับทุก กลุ่มเป้าหมาย</li>
+</ul>
+<p>ในโหมด multi การเลือกโพรบจากทุกกลุ่มทำให้ได้ชุดโพรบที่ครอบคลุมกลุ่มเป้าหมายทั้งหมดในเชิงคำนวณ แต่ประสิทธิภาพการตรวจจับจริงยังต้องพิสูจน์ด้วยการทดลอง ตรวจสอบสมาชิกของแต่ละกลุ่มใน <code>cluster.csv</code> หากไม่เหลือโพรบที่ผ่านการกรองในกลุ่มใด NPSeeker จะแจ้งคำเตือน แต่ยังบันทึกผลของกลุ่มอื่น</p>
+<h2 id="ch-5">5. ตัวเลือกและพารามิเตอร์</h2>
+<p>ให้ใส่ตัวเลือกหลังอาร์กิวเมนต์ target และ control ตัวเลือกที่ต้องระบุค่าให้เว้นวรรคก่อนค่า เช่น <a href="#opt-k"><code>-k</code></a> 31 ส่วนตัวเลือกเปิด<code>/</code>ปิดอย่าง <a href="#opt-v"><code>-v</code></a>, <a href="#opt-w"><code>-w</code></a> และ <code>--gui</code> ไม่ต้องมีค่า บางตัวเลือกมีชื่อย่อและชื่อเต็ม เช่น <a href="#opt-k"><code>-k</code></a> และ <a href="#opt-k"><code>-kmer</code></a> สามารถใช้แทนกันได้ ตัวเลขรองรับรูปแบบวิทยาศาสตร์ เช่น 1e7 หมายถึง 10,000,000 หัวข้อด้านล่างเรียงตามหมวดของผลลัพธ์ <code>-help</code> โดยชื่อในวงเล็บของแต่ละหัวข้อคือชื่อหมวดใน <code>-help</code> และมีตารางสรุปใน<a href="#app-A">ภาคผนวก A</a></p>
+<h3 id="sec-5-1">5.1 ความยาวโพรบและทรัพยากรคอมพิวเตอร์ (General settings)</h3>
+<h4 class="option" id="opt-k"><code>-k, -kmer</code> <span class="opt-type">[จำนวนเต็ม 5 ถึง 256; ค่าเริ่มต้น: 25]</span></h4>
+<p>กำหนดความยาวโพรบเป็นจำนวนนิวคลีโอไทด์ ให้เลือกตามความต้องการของการทดลอง เมื่อ k เพิ่มขึ้น จีโนมเป้าหมายที่แตกต่างกันมากจะมีโอกาสพบลำดับยาวเท่ากันร่วมกันน้อยลง และอาจต้องแบ่งเป็นหลายกลุ่ม เวลาทำงานขึ้นกับขนาดจีโนมและจำนวนโพรบที่เป็นไปได้เป็นหลัก โพรบที่ยาวกว่าไม่ได้ใช้เวลามากกว่าเสมอ ไป (ดูรูปที่ 4 ในบทความ)</p>
+<h4 class="option" id="opt-t"><code>-t, -threads</code> <span class="opt-type">[จำนวนเต็ม; ค่าเริ่มต้น: 0]</span></h4>
+<p>กำหนดจำนวนเธรดทำงาน ค่า 0 ใช้ฮาร์ดแวร์เธรดที่มีทั้งหมด หากยังต้องใช้คอมพิวเตอร์ทำงานอื่นร่วมด้วย ให้ลดจำนวนเธรด</p>
+<h4 class="option" id="opt-m"><code>-m, -memory</code> <span class="opt-type">[ขนาดหน่วยความจำ; ค่าเริ่มต้น: ครึ่งหนึ่งของ RAM สูงสุด 8G]</span></h4>
+<p>กำหนดงบประมาณหน่วยความจำสำหรับขั้นตอนคำนวณหลัก เช่น <a href="#opt-m"><code>-m</code></a> 8G หรือ <a href="#opt-m"><code>-m</code></a> 512M หากไม่ใส่หน่วย โปรแกรมจะตีความเป็น GiB การกำหนดหน่วยความจำน้อยลงทำให้ต้องประมวลผลเป็นชุดย่อยมากขึ้นและอาจ ช้าลง แต่ไม่เปลี่ยนผลวิเคราะห์ หน่วยความจำสำหรับโหลดโพรบเป็นชุดตาม <a href="#opt-b"><code>-b</code></a> และข้อมูลอื่นขณะทำงานจะ เพิ่มจากงบประมาณนี้ (<a href="#sec-5-5">หัวข้อ 5.5</a>)</p>
+<h3 id="sec-5-2">5.2 ผลลัพธ์และบันทึกการทำงาน (Output)</h3>
+<h4 class="option" id="opt-o"><code>-o, -out-dir</code> <span class="opt-type">[โฟลเดอร์; ค่าเริ่มต้น: ไม่บันทึกไฟล์ผลลัพธ์]</span></h4>
+<p>ระบุโฟลเดอร์ที่จะเก็บไฟล์ผลลัพธ์ (<a href="#sec-3-2">หัวข้อ 3.2</a>) หากไม่ใช้ <a href="#opt-o"><code>-o</code></a> โปรแกรมจะแสดงผลบนหน้าจอโดยมีคอลัมน์ น้อยกว่า แนะนำให้บันทึกไฟล์หากต้องการเก็บผล เปรียบเทียบ หรือทำการวิเคราะห์ซ้ำในภายหลัง</p>
+<h4 class="option" id="opt-w"><code>-w, --overwrite</code></h4>
+<p>อนุญาตให้ใช้โฟลเดอร์ <a href="#opt-o"><code>-o</code></a> ที่มีไฟล์อยู่แล้ว โดยจะลบไฟล์ผลลัพธ์ NPSeeker ก่อนหน้าออกก่อนเขียนไฟล์ใหม่ แต่ไม่ลบไฟล์อื่น (<a href="#sec-3-2">หัวข้อ 3.2</a>)</p>
+<h4 class="option" id="opt-top"><code>-top</code> <span class="opt-type">[จำนวนเต็ม; ค่าเริ่มต้น: 200]</span></h4>
+<p>กำหนดจำนวนโพรบอันดับสูงสุดที่จะส่งออกในแต่ละชุดการจัดอันดับ เพิ่มค่านี้หากต้องการดูโพรบมากขึ้น แต่ค่าที่สูงมากจะทำให้ไฟล์ใหญ่ขึ้น และอาจต้องใช้หน่วยความจำและเวลามากขึ้น</p>
+<h4 class="option" id="opt-format"><code>-format</code> <span class="opt-type">[csv หรือ txt; ค่าเริ่มต้น: csv]</span></h4>
+<p>กำหนดรูปแบบไฟล์ผลลัพธ์ csv เป็นค่าที่คั่นด้วยจุลภาค เหมาะกับตารางคำนวณและโปรแกรมอื่น ส่วน txt เป็นตารางที่จัดคอลัมน์ด้วยช่องว่าง อ่านได้โดยตรง</p>
+<h4 class="option" id="opt-v"><code>-v, --verbose</code></h4>
+<p>แสดงรายละเอียดเพิ่มเติม เช่น ข้อมูลเข้า การตั้งค่า ขั้นตอนประมวลผล และเวลาที่ใช้ในแต่ละขั้นตอน ใช้ติดตามงานที่ใช้เวลานานหรือแก้ปัญหา การวิเคราะห์ที่เริ่มจากส่วนติดต่อแบบกราฟิกจะใช้บันทึกละเอียดนี้ เสมอ</p>
+<h3 id="sec-5-3">5.3 การจัดกลุ่มและจัดอันดับ (Target clustering, Probe ranking)</h3>
+<h4 class="option" id="opt-cluster-order"><code>-cluster-order</code> <span class="opt-type">[auto หรือ input; ค่าเริ่มต้น: auto]</span></h4>
+<p>กำหนดลำดับที่ใช้จัดกลุ่มจีโนมเป้าหมาย auto ไม่ขึ้นกับลำดับไฟล์ข้อมูลเข้า ส่วน input ใช้ลำดับที่ระบุไว้ ดูรายละเอียดและกรณีใช้งานใน<a href="#ch-4">บทที่ 4</a></p>
+<h4 class="option" id="opt-min-shared"><code>-min-shared</code> <span class="opt-type">[จำนวนเต็ม; ค่าเริ่มต้น: 1]</span></h4>
+<p>กำหนดจำนวน k-mer ขั้นต่ำที่ต้องพบร่วมกันในสมาชิกทุกจีโนมของกลุ่ม การเพิ่มเกณฑ์นี้โดยทั่วไปทำให้มีหลาย กลุ่มขึ้น แต่ไม่ได้รับประกันว่าทุกกลุ่มจะได้โพรบที่เหมาะสม (<a href="#ch-4">บทที่ 4</a>)</p>
+<h4 class="option" id="opt-mode"><code>-mode</code> <span class="opt-type">[single หรือ multi; ค่าเริ่มต้น: single]</span></h4>
+<p>สองโหมดนี้ให้ผลต่างกันเฉพาะเมื่อเป้าหมายมีหลายกลุ่ม single รวมโพรบของทุกกลุ่มเป็นรายการอันดับเดียว ส่วน multi สร้างรายการอันดับแยกแต่ละกลุ่ม ดูแนวทางเลือกโหมดใน<a href="#ch-4">บทที่ 4</a></p>
+<h4 class="option" id="opt-weights"><code>-weights</code> <span class="opt-type">[KEY=WEIGHT คั่นด้วยจุลภาค; ค่าเริ่มต้น: ทุกองค์ประกอบเท่ากับ 1]</span></h4>
+<p>ปรับน้ำหนักของ Exclusivity (exc), Purity (pur), Unfoldability (unf) และ Affinity (aff) ในคะแนนรวม ตัวอย่าง:</p>
+<pre>-weights exc=2,pur=2</pre>
+<p>ตัวอย่างนี้ให้น้ำหนัก Exclusivity และ Purity เป็นสองเท่าของเดิม ส่วน unf กับ aff ยังมีน้ำหนัก 1 คะแนนรวมคำนวณดังนี้:</p>
+<pre>Score = (w_exc*Exclus + w_pur*Purity + w_unf*UnFold + w_aff*Affini)
+        / (w_exc + w_pur + w_unf + w_aff)</pre>
+<p>น้ำหนักเป็นศูนย์ได้ แต่เป็นค่าลบไม่ได้ และต้องมีอย่างน้อยหนึ่งองค์ประกอบที่น้ำหนักมากกว่าศูนย์ องค์ประกอบที่ น้ำหนักศูนย์ยังถูกคำนวณตามปกติ เพียงแต่ไม่ส่งผลต่อ Score การเพิ่มน้ำหนักเปลี่ยนลำดับคะแนน ไม่ใช่การก รองโพรบที่ได้คะแนนองค์ประกอบนั้นต่ำ</p>
+<h4 class="option" id="opt-mm"><code>-mm, -mismatch-cutoff</code> <span class="opt-type">[จำนวนเต็ม; ค่าเริ่มต้น: ปัดลงของ k/10]</span></h4>
+<p>กำหนดจำนวนเบสที่แตกต่างกันสูงสุดในการค้นหาลำดับที่คล้ายกับโพรบในจีโนมควบคุม เพื่อใช้คำนวณ Purity ค่าที่สูงขึ้นตรวจพบลำดับคล้ายได้มากขึ้น แต่อาจเพิ่มเวลาและหน่วยความจำอย่างมาก เกณฑ์นี้ต้องน้อยกว่า ความยาวโพรบ</p>
+<h3 id="sec-5-4">5.4 การกรองโพรบที่เป็นไปได้ (Candidate filtering)</h3>
+<p>NPSeeker กรองโพรบก่อนเข้าสู่ขั้นตอนเปรียบเทียบกับจีโนมควบคุมที่ใช้ทรัพยากรมากกว่า หากกำหนดเกณฑ์ เข้มงวดเกินไป อาจไม่เหลือโพรบผ่านการกรอง จึงอาจต้องผ่อนปรนค่าต่อไปนี้</p>
+<h4 class="option" id="opt-max-homopolymer"><code>-max-homopolymer</code> <span class="opt-type">[จำนวนเต็ม; ค่าเริ่มต้น: 3]</span></h4>
+<p>Homopolymer คือช่วงที่นิวคลีโอไทด์ชนิดเดียวกันเรียงต่อกัน เช่น AAAA ตัวเลือกนี้กำหนดจำนวนเบสซ้ำติดกัน สูงสุดที่อนุญาต ค่าเริ่มต้น 3 ยอมรับ AAA แต่ตัดโพรบที่มี AAAA หรือยาวกว่า การเพิ่มเกณฑ์ทำให้เก็บโพรบที่มี เบสซ้ำมากขึ้น</p>
+<h4 class="option" id="opt-c"><code>-c, -min-complexity</code> <span class="opt-type">[จำนวน 0 ถึง 1; ค่าเริ่มต้น: 0.5]</span></h4>
+<p>กำหนดคะแนนความซับซ้อนของลำดับขั้นต่ำ หากมีสัดส่วนของนิวคลีโอไทด์ทั้งสี่ชนิดสมดุลกัน คะแนนจะสูงขึ้น โพรบต้องได้คะแนนสูงกว่าเกณฑ์จึงจะผ่าน</p>
+<h4 class="option" id="opt-e"><code>-e, -min-entropy</code> <span class="opt-type">[จำนวน 0 ถึง 2; ค่าเริ่มต้น: 1.5]</span></h4>
+<p>กำหนดคะแนน entropy ของลำดับขั้นต่ำ ซึ่งใช้วัดความหลากหลายของลำดับ รูปแบบซ้ำ เช่น ACACAC มี entropy ต่ำ โพรบต้องได้คะแนนสูงกว่าเกณฑ์จึงจะผ่าน โพรบสั้นมีคะแนนสูงสุดที่เป็นไปได้ของ complexity และ entropy ต่ำกว่า หากระบุเกณฑ์ที่สูงกว่าค่าสูงสุดของความยาวที่เลือก NPSeeker จะแจ้งข้อผิดพลาด พร้อมค่าสูงสุดที่ทำได้</p>
+<h4 class="option" id="opt-prefilter"><code>-prefilter</code> <span class="opt-type">[T หรือ F; ค่าเริ่มต้น: T]</span></h4>
+<p>กำหนดว่าจะกรองโพรบตาม Unfoldability ก่อนตรวจจีโนมควบคุมหรือไม่ T ตัดโพรบที่ได้คะแนนต่ำกว่า <a href="#opt-min-unfold"><code>-min-unfold</code></a> เพื่อลดงานเปรียบเทียบ ส่วน F ข้ามการกรองขั้นต้นนี้ แต่โปรแกรมยังคำนวณคะแนน Unfoldability ให้ทุกโพรบ</p>
+<h4 class="option" id="opt-min-unfold"><code>-min-unfold</code> <span class="opt-type">[จำนวน 0 ถึง 100; ค่าเริ่มต้น: 75]</span></h4>
+<p>กำหนดเกณฑ์คะแนน Unfoldability ที่ใช้ในการกรองขั้นต้น การลดค่านี้ช่วยเก็บโพรบที่อาจพับตัวเองได้มาก ขึ้น แต่อาจเพิ่มงานในขั้นต่อไป หากโพรบในชุดหนึ่งไม่มีรายการใดผ่านเกณฑ์ NPSeeker จะข้ามการกรองขั้น ต้นสำหรับชุดนั้น ตัวอย่างเช่น โพรบของแบคทีเรียแกรมบวกที่ทดลองในบทความมีคะแนน Unfoldability เท่ากับ 72.54 จึงต้องใช้ <a href="#opt-min-unfold"><code>-min-unfold</code></a> 70 เพื่อทำซ้ำการจัดอันดับ (<a href="#ch-8">บทที่ 8</a>)</p>
+<h3 id="sec-5-5">5.5 ตัวเลือกขั้นสูง (Advanced)</h3>
+<p>ค่าเริ่มต้นเหมาะสมกับการใช้งานส่วนใหญ่</p>
+<h4 class="option" id="opt-b"><code>-b, -batch-size</code> <span class="opt-type">[จำนวนเต็ม; ค่าเริ่มต้น: 1e7]</span></h4>
+<p>กำหนดจำนวน k-mer ที่เป็นไปได้ที่โหลดและกรองต่อชุด เมื่อ k = 25 แต่ละรายการใช้หน่วยความจำ ประมาณ 170 ไบต์ ดังนั้นค่าเริ่มต้น 10 ล้านรายการใช้ประมาณ 1.58 GiB เพิ่มจากงบประมาณ <a href="#opt-m"><code>-m</code></a> หากเครื่องมีหน่วยความจำน้อย ให้ลดค่านี้ แต่ชุดที่เล็กลงอาจทำให้การวิเคราะห์ช้าลง</p>
+<h4 class="option" id="opt-s"><code>-s, -min-subseq</code> <span class="opt-type">[จำนวนเต็ม; ค่าเริ่มต้น: 7]</span></h4>
+<p>กำหนดความยาวขั้นต่ำของชิ้นส่วนโพรบที่นำมาคำนวณคะแนน Purity ใช้ร่วมกับ <a href="#opt-subseq-step"><code>-subseq-step</code></a></p>
+<h4 class="option" id="opt-subseq-step"><code>-subseq-step</code> <span class="opt-type">[จำนวนเต็ม; ค่าเริ่มต้น: ปัดขึ้นของ k/10]</span></h4>
+<p>กำหนดขนาดที่ลดลงของความยาวชิ้นส่วนในแต่ละรอบของการคำนวณ Purity ตัวอย่างเช่น เมื่อ k = 25 ค่าเริ่มต้นเท่ากับ 3 จึงตรวจความยาว 22, 19, 16, 13, 10 และ 7 การลดค่าช่วงนี้ทำให้ตรวจหลาย ความยาวขึ้น และเพิ่มปริมาณงานเปรียบเทียบ</p>
+<h4 class="option" id="opt-tmp-dir"><code>-tmp-dir</code> <span class="opt-type">[โฟลเดอร์; ค่าเริ่มต้น: โฟลเดอร์ชั่วคราวของระบบ]</span></h4>
+<p>กำหนดที่เก็บไฟล์ระหว่างประมวลผล NPSeeker จะสร้างโฟลเดอร์ย่อยของตัวเองที่นี่ และลบเมื่อทำงานเสร็จ ตามปกติหรือถูกขัดจังหวะด้วย Ctrl-C หากดิสก์ระบบมีพื้นที่ไม่พอ ให้เลือกโฟลเดอร์บนดิสก์อื่น</p>
+<h3 id="sec-5-6">5.6 ส่วนติดต่อแบบกราฟิกและวิธีใช้ (Graphical interface)</h3>
+<table>
+<tr><td><code>--gui</code></td><td>เปิดส่วนติดต่อแบบกราฟิกในเครื่อง แทนการวิเคราะห์จากบรรทัดคำสั่งโดยตรง</td></tr>
+<tr><td><code>-gui-port</code> [จำนวนเต็ม] ค่าเริ่มต้น: เลือกให้อัตโนมัติ</td><td>พอร์ตที่รับการเชื่อมต่อ (เลขหลัง : ใน URL)</td></tr>
+<tr><td><code>--no-browser</code></td><td>แสดง URL โดยไม่เปิดเบราว์เซอร์</td></tr>
+<tr><td><code>--tab</code></td><td>เปิดส่วนติดต่อในแท็บของเบราว์เซอร์</td></tr>
+<tr><td><code>-h</code></td><td>แสดงวิธีใช้อย่างย่อ</td></tr>
+<tr><td><code>-help</code> [KEYWORD]</td><td>แสดงวิธีใช้ทั้งหมด หรือเฉพาะตัวเลือกหรือหมวด</td></tr>
+</table>
+<p><code>--gui</code> ใช้ร่วมกับ <code>-gui-port</code>, <code>--no-browser</code> และ <code>--tab</code> เท่านั้น ให้ตั้งค่าการวิเคราะห์ เช่น <a href="#opt-k"><code>-k</code></a> ภายในส่วนติดต่อ หากป้อนพร้อม <code>--gui</code> ในบรรทัดคำสั่ง โปรแกรมจะแจ้งข้อผิดพลาด ดูรายละเอียดใน<a href="#ch-6">บทที่ 6</a></p>
+<h2 id="ch-6">6. ส่วนติดต่อแบบกราฟิก</h2>
+<p>NPSeeker เปิดเว็บเซิร์ฟเวอร์ขนาดเล็กบนคอมพิวเตอร์ของคุณ โดยเข้าถึงได้เฉพาะเครื่องนั้น (127.0.0.1) และใช้เว็บเบราว์เซอร์เป็นส่วนติดต่อ ตัวโปรแกรม NPSeeker เป็นผู้ประมวลผลข้อมูล ไฟล์จีโนมจะไม่ถูกอัปโหลดไปยังเว็บไซต์ภายนอก เมื่อใช้การตั้งค่าเดียวกัน ส่วนติดต่อแบบกราฟิกกับบรรทัด คำสั่งจะให้ผลลัพธ์เหมือนกัน</p>
+<h3 id="sec-6-1">6.1 เปิดโปรแกรมและเชื่อมต่อ</h3>
+<ul>
+<li>Windows: ดับเบิลคลิก <code>npseeker.exe</code> ใน <code>bin/</code> หรือใช้ <code>.\bin\npseeker.exe</code> <code>--gui</code> ผ่าน Command Prompt โปรแกรมจะเปิดหน้าต่างคอนโซลสีดำที่แสดงข้อความการทำงาน ให้เปิดหน้าต่างนี้ค้าง ไว้ระหว่างใช้ส่วนติดต่อ</li>
+<li>macOS, Linux: ใช้คำสั่ง <code>./bin/npseeker</code> <code>--gui</code> ในเทอร์มินัล</li>
+</ul>
+<p>โดยปกติ NPSeeker จะเปิดเบราว์เซอร์อัตโนมัติ และแสดง URL ของส่วนติดต่อด้วย เช่น:</p>
+<pre>http://127.0.0.1:53817/?t=1a2b3c...</pre>
+<p>ข้อความหลัง ?t= คือโทเคนสำหรับเข้าถึงเซสชันปัจจุบัน หากเบราว์เซอร์ไม่เปิดอัตโนมัติ ให้คัดลอก URL ทั้งหมดไปวางในเบราว์เซอร์ อย่าแชร์ URL นี้โดยไม่จำเป็น เพราะมีโทเคนสำหรับเข้าใช้งาน</p>
+<p>ค่าเริ่มต้นจะเปิดส่วนติดต่อในหน้าต่างแยก เบราว์เซอร์ Edge และ Chrome ใช้หน้าต่างลักษณะคล้ายแอปโดย ไม่มีแถบที่อยู่ ส่วน Firefox เปิดหน้าต่างใหม่ หากต้องการให้เปิดเป็นแท็บในเบราว์เซอร์เริ่มต้น ให้ใช้ <code>--tab</code></p>
+<h3 id="sec-6-2">6.2 หน้าหลักของส่วนติดต่อ</h3>
+<table>
+<tr><td>Design</td><td>เลือกจีโนม Target และ Control รวมถึงโฟลเดอร์ผลลัพธ์ (ไม่บังคับ) และความยาวโพรบ เลือกได้ทั้งโฟลเดอร์หรือ ไฟล์ FASTA รายไฟล์ รวมถึงไฟล์บีบอัดจากหลายตำแหน่ง "Tick all" เลือกไฟล์ทั้งหมดในโฟลเดอร์ ส่วน "Pick folder" และ "Pick files" เปิดหน้าต่างเลือกไฟล์ ของระบบปฏิบัติการ ขยายตัวเลือกเพิ่มเติมเมื่อต้องการ ช่องที่เว้นว่างจะใช้ค่าเริ่มต้น "Check" ตรวจสอบข้อมูล และการตั้งค่า ส่วน "Go" เริ่มวิเคราะห์</td></tr>
+<tr><td>Run</td><td>แสดงขั้นตอนปัจจุบัน ความคืบหน้า และบันทึกการทำงาน "Cancel" ใช้หยุดการวิเคราะห์</td></tr>
+<tr><td>Results</td><td>ดูโพรบที่จัดอันดับ ลำดับเบส และคะแนนต่าง ๆ คลิกหัวคอลัมน์เพื่อจัดเรียง โดยคอลัมน์ Rank เก็บอันดับเดิมจาก NPSeeker คลิกโพรบเพื่อดู ลำดับคู่สมแบบย้อนกลับและอุณหภูมิหลอมเหลว หรือคัดลอกลำดับ ดาวน์โหลดไฟล์ทีละไฟล์หรือรวมเป็น ZIP</td></tr>
+<tr><td>Help</td><td>อ่านคู่มือและเปลี่ยนภาษา</td></tr>
+<tr><td>About</td><td>ดูข้อมูลโปรแกรม บทความ ผู้เขียน และการติดต่อ</td></tr>
+</table>
+<p>หน้า Results ยังมีลิงก์ไปยังบริการภายนอกสองรายการ:</p>
+<ul>
+<li>BLAST at NCBI: เปิด NCBI BLAST พร้อมลำดับโพรบที่เลือก เพื่อค้นหาลำดับคล้ายกันในสิ่งมีชีวิตอื่น</li>
+<li>Fold at UNAFold: ส่งลำดับไปยัง UNAFold (mfold) เพื่อทำนายการพับตัวของ DNA โดยใช้ การตั้งค่าเริ่มต้นในแบบฟอร์มบนเว็บไซต์ (37 °C, 1 M Na+)</li>
+</ul>
+<div class="note"><p>บริการทั้งสองต้องเชื่อมต่ออินเทอร์เน็ตและส่งลำดับโพรบที่เลือกไปยังเว็บไซต์ภายนอก หากเป็นลำดับที่ยัง ไม่เผยแพร่ ให้ตรวจสอบก่อนว่าการส่งข้อมูลดังกล่าวเหมาะสมหรือได้รับอนุญาต</p></div>
+<p>หากไม่กำหนดโฟลเดอร์ผลลัพธ์ ส่วนติดต่อแบบกราฟิกจะเก็บผลไว้ชั่วคราวในดิสก์ของเครื่อง และลบเมื่อออก จากส่วนติดต่อ ต้องดาวน์โหลดไฟล์ที่ต้องการเก็บก่อนออกจากโปรแกรม</p>
+<h3 id="sec-6-3">6.3 ปิดหน้าเว็บ ออกจากโปรแกรม และเก็บผลลัพธ์</h3>
+<ul>
+<li>"Close" ปิดเฉพาะหน้าเว็บเบราว์เซอร์ แต่ NPSeeker ยังทำงานอยู่ หากต้องการกลับไปใช้งาน ให้เปิด URL ที่แสดงในคอนโซลอีกครั้ง</li>
+<li>"Exit" ปิดส่วนติดต่อและหยุดการวิเคราะห์ที่ยังดำเนินอยู่ การปิดหน้าต่างคอนโซลหรือกด Ctrl-C จะออกจากโปรแกรมเช่นกัน</li>
+<li>หากปิดหน้าเว็บทั้งหมดไว้นานเกินห้านาทีและไม่มีการวิเคราะห์อยู่ NPSeeker จะปิดตัวเองโดยอัตโนมัติ และลบผลลัพธ์ชั่วคราวที่ยังไม่ได้ดาวน์โหลด</li>
+</ul>
+<p>เมื่อคลิก "Exit" หรือ "Close" ส่วนติดต่อจะขอให้ยืนยัน และแจ้งเตือนหากมีงานที่กำลังทำหรือมีผลลัพธ์ ชั่วคราวที่ยังไม่ได้ดาวน์โหลด</p>
+<p>หากกำหนดโฟลเดอร์ผลลัพธ์ไว้แล้ว ไฟล์จะคงอยู่ในโฟลเดอร์นั้น เมื่อสั่งวิเคราะห์ใหม่โดยใช้โฟลเดอร์เดิม โปรแกรมจะแทนที่ไฟล์ผลลัพธ์ NPSeeker เดิม แต่ไม่ลบไฟล์อื่น</p>
+<p>สามารถเลือกธีม Auto, Dark หรือ Light หากเลือก Auto ส่วนติดต่อจะใช้รูปลักษณ์สว่างหรือมืดตาม การตั้งค่าระบบปฏิบัติการ</p>
+<h3 id="sec-6-4">6.4 ใช้ส่วนติดต่อบนเซิร์ฟเวอร์ระยะไกล</h3>
+<p>หาก NPSeeker ทำงานบนเซิร์ฟเวอร์ระยะไกล สามารถใช้ส่วนติดต่อผ่านเบราว์เซอร์บนเครื่องของคุณโดย สร้าง SSH tunnel ซึ่งเป็นการเชื่อมต่อแบบเข้ารหัสที่ส่งต่อพอร์ตในเครื่องไปยังเซิร์ฟเวอร์ เริ่มจากเปิด NPSeeker บนเซิร์ฟเวอร์พร้อมกำหนดพอร์ต:</p>
+<pre>./bin/npseeker --gui --no-browser -gui-port 53817</pre>
+<p>จากนั้นเปิดเทอร์มินัลบนคอมพิวเตอร์ของคุณ แล้วสร้าง SSH tunnel:</p>
+<pre>ssh -L 53817:127.0.0.1:53817 username@server</pre>
+<p>เปิดการเชื่อมต่อ SSH ค้างไว้ แล้วป้อน URL ทั้งหมดที่ NPSeeker แสดงบนเซิร์ฟเวอร์ในเบราว์เซอร์ของ เครื่องคุณ หากต้องการเปลี่ยนพอร์ตฝั่งเครื่องตัวเอง เช่น:</p>
+<pre>ssh -L 9000:127.0.0.1:53817 username@server</pre>
+<p>ให้เปลี่ยนส่วนต้นของ URL เป็น <a href="http://127.0.0.1:9000/">http://127.0.0.1:9000/</a> และเก็บโทเคน ?t= เดิมไว้</p>
+<div class="note"><p>เมื่อใช้ผ่านเซิร์ฟเวอร์ระยะไกล ส่วนติดต่อจะเรียกดูไฟล์บนเซิร์ฟเวอร์ ไม่ใช่ในคอมพิวเตอร์ของคุณ "Pick folder" และ "Pick files" ก็เปิดหน้าต่างเลือกไฟล์บนเซิร์ฟเวอร์ หากเซิร์ฟเวอร์ไม่มีเด สก์ท็อปแบบกราฟิก จะใช้หน้าต่างเหล่านี้ไม่ได้ ให้ใช้ตัวเรียกดูไฟล์ที่มีอยู่ภายในส่วนติดต่อแทน</p></div>
+<h3 id="sec-6-5">6.5 ที่เก็บไฟล์การตั้งค่า</h3>
+<p>NPSeeker เก็บโฟลเดอร์ที่เคยใช้ล่าสุดใน <code>recent.txt</code> และตำแหน่งที่เลือกล่าสุดใน <code>lastpick.txt</code> เพื่ออำนวยความสะดวกในครั้งถัดไป ไฟล์ขนาดเล็กสองไฟล์นี้อยู่ที่:</p>
+<table>
+<tr><td>Linux</td><td><code>~/.config/npseeker/</code></td></tr>
+<tr><td>macOS</td><td><code>~/Library/Application Support/npseeker/</code></td></tr>
+<tr><td>Windows</td><td><code>%AppData%\npseeker\</code></td></tr>
+</table>
+<p>ไฟล์ระหว่างประมวลผลอยู่ในโฟลเดอร์ชั่วคราวของระบบหรือพาธที่ระบุด้วย <a href="#opt-tmp-dir"><code>-tmp-dir</code></a> ไม่ได้อยู่ในโฟลเดอร์ ตั้งค่าข้างต้น</p>
+<h2 id="ch-7">7. ประสิทธิภาพและการแก้ไขปัญหา</h2>
+<h3 id="sec-7-1">7.1 หน่วยความจำ เวลา และไฟล์ชั่วคราว</h3>
+<ul>
+<li>หน่วยความจำ: <a href="#opt-m"><code>-m</code></a> จำกัดหน่วยความจำสำหรับขั้นตอนคำนวณหลัก แต่การโหลดโพรบทีละชุดตาม <a href="#opt-b"><code>-b</code></a> และข้อมูลอื่นขณะทำงานต้องใช้หน่วยความจำเพิ่มเติม หากหน่วยความจำไม่เพียงพอ ให้ลดทั้ง <a href="#opt-m"><code>-m</code></a> และ <a href="#opt-b"><code>-b</code></a></li>
+<li>เธรด: <a href="#opt-t"><code>-t</code></a> 0 ใช้ฮาร์ดแวร์เธรดทั้งหมด หากใช้คอมพิวเตอร์ทำงานอื่นด้วย ให้ลดค่านี้</li>
+<li>เวลา: ขึ้นกับขนาดจีโนม จำนวนโพรบที่พบร่วมกัน ค่า <a href="#opt-mm"><code>-mm</code></a> หน่วยความจำ ฮาร์ดแวร์ และความเร็วดิสก์ การเพิ่ม k ไม่จำเป็นต้องทำให้งานช้าลง ใช้ <a href="#opt-v"><code>-v</code></a> เพื่อตรวจเวลาของแต่ละขั้นตอน</li>
+<li>ไฟล์ชั่วคราว: NPSeeker สร้างไฟล์ระหว่างวิเคราะห์ ขนาดไฟล์ขึ้นกับข้อมูลและงบประมาณหน่วยความจำ หากให้งบประมาณหน่วยความจำน้อยลง โดยทั่วไปจะต้องมีพื้นที่ดิสก์ชั่วคราวมากขึ้น ควรตรวจสอบพื้นที่ว่าง โปรแกรมจะลบไฟล์ชั่วคราวเมื่อทำงานเสร็จตามปกติ หรือถูกขัดจังหวะด้วย Ctrl-C</li>
+</ul>
+<h3 id="sec-7-2">7.2 ข้อความผิดพลาดที่พบบ่อย</h3>
+<p>ข้อความเมื่อระบุตัวเลือกหรือพารามิเตอร์ไม่ถูกต้องขึ้นต้นด้วย "npseeker:" ส่วนข้อผิดพลาดเกี่ยวกับข้อมูล เข้า ผลลัพธ์ หรือการทำงานขึ้นต้นด้วย "Error:" ตัวอย่างต่อไปนี้แสดงปัญหาที่พบบ่อยและวิธีแก้ไข หากข้อความใช้ control แทน target แสดงว่าปัญหาเกิดกับข้อมูลกลุ่มควบคุม</p>
+<ul>
+<li><code class="message">Error: target: no FASTA file (*.fasta, *.fna or *.fa) in the folder ...</code><br>ไม่พบไฟล์นามสกุล FASTA ที่รองรับในโฟลเดอร์ หากเป็นไฟล์บีบอัดให้ใช้รายการไฟล์ (<a href="#sec-2-2">หัวข้อ 2.2</a>)</li>
+<li><code class="message">Error: target: "..." is not found</code><br>พาธไม่ถูกต้อง โดยพาธสัมพัทธ์อ้างอิงจากโฟลเดอร์ที่เรียกโปรแกรม</li>
+<li><code class="message">Error: target: "..." is not a FASTA file: ...</code><br>รูปแบบไฟล์ไม่ใช่ FASTA ที่ถูกต้อง รายละเอียดสาเหตุอยู่หลังเครื่องหมาย :</li>
+<li><code class="message">Error: target: the FASTA file "...", listed in "...", is not found</code><br>ไม่พบไฟล์ที่ระบุไว้ในรายการไฟล์</li>
+<li><code class="message">Error: target and control: ...; a genome cannot be both a target and a control</code><br>มีไฟล์เดียวกันอยู่ทั้งในกลุ่มเป้าหมายและกลุ่มควบคุม</li>
+<li><code class="message">Error: -o: the folder "..." already exists and is not empty; give -w ...</code><br>โฟลเดอร์ผลลัพธ์มีไฟล์อยู่แล้ว ให้เลือกโฟลเดอร์ใหม่ หรือใช้ <a href="#opt-w"><code>-w</code></a> เมื่อแน่ใจว่าสามารถแทนที่ผลเดิมได้</li>
+<li><code class="message">npseeker: option -mm: must be less than the probe length (-k)</code><br>ค่า <a href="#opt-mm"><code>-mm</code></a> ต้องน้อยกว่าความยาวโพรบ</li>
+<li><code class="message">npseeker: option -c: no probe of 8 nt has a complexity score above 0.431 ...</code><br>เกณฑ์สูงกว่าคะแนนที่เป็นไปได้สำหรับความยาวโพรบที่เลือก (ตัวอย่างนี้สูงสุด 0.431) ให้ลดเกณฑ์ (<a href="#sec-5-4">หัวข้อ 5.4</a>)</li>
+<li><code class="message">Error: -tmp-dir: cannot create the folder "...": ...</code><br>โปรแกรมสร้างโฟลเดอร์ชั่วคราวไม่ได้ ให้ตรวจสอบพาธและสิทธิ์การเขียน</li>
+</ul>
+<h3 id="sec-7-3">7.3 เอาต์พุตมาตรฐานและเอาต์พุตข้อผิดพลาด</h3>
+<p>ข้อความในเทอร์มินัลมาจากช่องทางสองแบบ ได้แก่ standard output (stdout) และ standard error (stderr) โดยปกติทั้งสองแสดงบนหน้าจอ แต่จะต่างกันเมื่อเปลี่ยนปลายทางเอาต์พุตไปยังไฟล์ เช่น เติม &gt; <code>out.txt</code> ในคำสั่ง ข้อมูล stdout จะลงไฟล์ ส่วน stderr ยังแสดงบนหน้าจอ</p>
+<p>NPSeeker ส่งผลลัพธ์ บันทึกรายละเอียดจาก <a href="#opt-v"><code>-v</code></a> และข้อความผิดพลาดไปยัง stdout ส่วนข้อความที่ขึ้นต้น ด้วย Note: คำเตือนที่ขึ้นต้นด้วย Warning: และแถบความคืบหน้าไปยัง stderr จึงสามารถบันทึกผลลงไฟล์ โดยไม่ปะปนข้อความแสดงความคืบหน้า และยังเห็นคำเตือนบนหน้าจอ</p>
+<h3 id="sec-7-4">7.4 ไม่พบโพรบหรือประมวลผลช้า</h3>
+<p>หากไม่มีโพรบผ่านการกรอง NPSeeker จะแสดง:</p>
+<pre>Warning: no probe passed the filters; relax the thresholds
+         (-max-homopolymer, -c, -e, -min-unfold) to let probes pass.</pre>
+<p>ลองผ่อนปรน <a href="#opt-min-unfold"><code>-min-unfold</code></a>, <a href="#opt-c"><code>-c</code></a>, <a href="#opt-e"><code>-e</code></a> หรือ <a href="#opt-max-homopolymer"><code>-max-homopolymer</code></a> (<a href="#sec-5-4">หัวข้อ 5.4</a>) หากจีโนมเป้าหมายมี k-mer ร่วมกันน้อยมาก ให้ลองลด <a href="#opt-k"><code>-k</code></a> หรือปรับ <a href="#opt-min-shared"><code>-min-shared</code></a> และ <a href="#opt-mode"><code>-mode</code></a> (<a href="#ch-4">บทที่ 4</a>) ใช้ <a href="#opt-v"><code>-v</code></a> เพื่อดู จำนวนโพรบที่เหลือและเวลาที่ใช้ในแต่ละขั้นตอน</p>
+<p>หากประมวลผลช้าผิดปกติ ให้ตรวจสอบว่าหน่วยความจำที่ต้องใช้สำหรับ <a href="#opt-m"><code>-m</code></a>, การโหลดชุดโพรบตาม <a href="#opt-b"><code>-b</code></a> และงานอื่นไม่เกิน RAM ที่มี มิฉะนั้นระบบปฏิบัติการอาจย้ายข้อมูลจากหน่วยความจำไปยังดิสก์ ทำให้ช้าลงมาก หากกำหนด <a href="#opt-mm"><code>-mm</code></a> สูง ให้ลองใช้ค่าเริ่มต้นเพื่อเปรียบเทียบ สำหรับข้อมูลขนาดใหญ่ ควรตรวจความเร็วดิสก์และ พื้นที่ว่างในโฟลเดอร์ชั่วคราวด้วย</p>
+<h2 id="ch-8">8. ตัวอย่างการใช้งาน</h2>
+<p>ตัวอย่างเหล่านี้ใช้ไวยากรณ์ของ macOS และ Linux บน Windows ให้เปลี่ยน <code>./bin/npseeker</code> เป็น <code>.\bin\npseeker.exe</code> และใช้ <code>\</code> แทน <code>/</code> ในพาธ แต่ละตัวอย่างเรียกทำงานแยกกันได้ หาก <code>result/</code> มีผลลัพธ์จากครั้งก่อน ให้เปลี่ยนโฟลเดอร์ผลลัพธ์ หรือใช้ <a href="#opt-w"><code>-w</code></a> เมื่อยอมรับการแทนที่ผลเดิมเท่านั้น</p>
+<p>วิเคราะห์ข้อมูลตัวอย่างและบันทึกไว้ใน <code>result/</code>:</p>
+<pre>./bin/npseeker dat/sample/S.aureus/ dat/sample/yeast/ -o result/</pre>
+<p>อ่านจีโนมเป้าหมายจากรายการไฟล์และจัดกลุ่มตามลำดับในรายการ:</p>
+<pre>./bin/npseeker @target.list controls/ -cluster-order input -o result/</pre>
+<p>ออกแบบโพรบยาว 31 นิวคลีโอไทด์ด้วย 32 เธรดและหน่วยความจำ 16 GiB:</p>
+<pre>./bin/npseeker targets/ controls/ -k 31 -t 32 -m 16G -o result/</pre>
+<p>เพิ่มน้ำหนัก Exclusivity และ Purity ในคะแนนรวม:</p>
+<pre>./bin/npseeker targets/ controls/ -weights exc=2,pur=2 -o result/</pre>
+<p>ค้นหาโพรบแยกสำหรับจีโนมเป้าหมายหลายกลุ่ม:</p>
+<pre>./bin/npseeker targets/ controls/ -min-shared 20000 -mode multi -o result/</pre>
+<p>ทำซ้ำการจัดอันดับโพรบแบคทีเรียในตารางที่ 3 ของบทความ โดยใช้พารามิเตอร์ของงานวิจัยที่แตกต่างจากค่า เริ่มต้น (ชุดข้อมูลมีให้ดาวน์โหลดแยกต่างหาก ดูวิธีจัดวางใน<a href="#sec-0-2">หัวข้อที่ 0.2</a>):</p>
+<pre>./bin/npseeker dat/datasets/GP/ dat/datasets/GN/ -k 23 -min-unfold 70 \
+    -weights exc=2,pur=2 -o GP_probes/
+./bin/npseeker dat/datasets/GN/ dat/datasets/GP/ -k 23 -min-unfold 70 \
+    -weights exc=2,pur=2 -o GN_probes/</pre>
+<p>ค่า <a href="#opt-min-unfold"><code>-min-unfold</code></a> 70 ช่วยเก็บโพรบแบคทีเรียแกรมบวกที่ทดสอบในการทดลอง ซึ่งมีคะแนน Unfoldability 72.54 ตัวอักษร <code>\</code> ท้ายบรรทัดของคำสั่งใน macOS และ Linux หมายถึงคำสั่งยังต่อใน บรรทัดถัดไป บน Windows Command Prompt ใช้ ^ ส่วน PowerShell ใช้เครื่องหมาย backtick (`) หรือป้อนทั้งคำสั่งในบรรทัดเดียว</p>
+<p>ชุดข้อมูลในบทความส่วนหนึ่งมาจากฐานข้อมูลจีโนมของ ATCC (ATCC Genome Portal) ซึ่งข้อกำหนดการใช้งานไม่อนุญาตให้แจกจ่ายต่อ ดังนั้น <code>dat/datasets/</code> จึงมีข้อมูลที่สอดคล้องกันจาก NCBI แทน และไฟล์ <code>dat/datasets/sources.txt</code> แสดงการจับคู่แต่ละไฟล์กับชุดข้อมูลในบทความ เมื่อใช้ข้อมูลนี้ ลำดับเบสและอันดับของโพรบทั้งสองในตารางที่ 3 ตรงกับบทความทุกประการ แต่จำนวนตัวเลือก จำนวนครั้งที่พบ และคะแนนต่าง ๆ จะแตกต่างเล็กน้อย ในจำนวนนี้ S. enterica ATCC 43976 มีเพียงแอสเซมบลีที่ไม่สมบูรณ์ใน NCBI (ขาด 23S rRNA ไปบางส่วน) หากไม่เลือกจีโนมนี้เมื่อใช้ GN เป็นเป้าหมาย (ยกเลิกการเลือกในส่วนติดต่อแบบกราฟิก หรือใช้รายการไฟล์ <code>@dat/datasets/GN-without-43976.list</code> ในบรรทัดคำสั่ง) จำนวนตัวเลือกจะกลับเป็น 65 และโพรบ 8 อันดับแรกในตารางเสริม S3 ก็จะตรงกับบทความ</p>
+<p>บันทึกผลเป็นตารางข้อความที่อ่านง่าย และส่งออกโพรบมากขึ้น:</p>
+<pre>./bin/npseeker targets/ controls/ -format txt -top 1000 -o result/</pre>
+<h2 id="app-A">ภาคผนวก A  สรุปตัวเลือกทั้งหมด</h2>
+<table>
+<tr><th>ตัวเลือก</th><th>ค่าเริ่มต้น</th><th>ความหมาย (หัวข้อ)</th></tr>
+<tr><td><a href="#opt-k"><code>-k</code></a>, <a href="#opt-k"><code>-kmer</code></a></td><td>25</td><td>ความยาวโพรบ 5-256 (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-t"><code>-t</code></a>, <a href="#opt-t"><code>-threads</code></a></td><td>0</td><td>จำนวนเธรด (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-m"><code>-m</code></a>, <a href="#opt-m"><code>-memory</code></a></td><td>ครึ่งหนึ่งของ RAM สูงสุด 8G</td><td>งบประมาณหน่วยความจำ (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-o"><code>-o</code></a>, <a href="#opt-o"><code>-out-dir</code></a></td><td>ไม่บันทึกไฟล์</td><td>โฟลเดอร์ผลลัพธ์ (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-w"><code>-w</code></a>, <a href="#opt-w"><code>--overwrite</code></a></td><td>ปิด</td><td>แทนที่ผลเดิม (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-top"><code>-top</code></a></td><td>200</td><td>จำนวนโพรบที่ส่งออก (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-format"><code>-format</code></a></td><td>csv</td><td>รูปแบบ csv หรือ txt (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-v"><code>-v</code></a>, <a href="#opt-v"><code>--verbose</code></a></td><td>ปิด</td><td>บันทึกละเอียด (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-cluster-order"><code>-cluster-order</code></a></td><td>auto</td><td>ลำดับจัดกลุ่ม (<a href="#ch-4">4</a>, <a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-min-shared"><code>-min-shared</code></a></td><td>1</td><td>k-mer ร่วมขั้นต่ำ (<a href="#ch-4">4</a>, <a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-mode"><code>-mode</code></a></td><td>single</td><td>โหมด single/multi (<a href="#ch-4">4</a>, <a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-weights"><code>-weights</code></a></td><td>ทุกตัวเท่ากับ 1</td><td>น้ำหนักคะแนน (<a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-mm"><code>-mm</code></a>, <a href="#opt-mm"><code>-mismatch-cutoff</code></a></td><td>floor(k/10)</td><td>ความต่างเบสสูงสุด (<a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-max-homopolymer"><code>-max-homopolymer</code></a></td><td>3</td><td>เบสซ้ำติดกันสูงสุด (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-c"><code>-c</code></a>, <a href="#opt-c"><code>-min-complexity</code></a></td><td>0.5</td><td>เกณฑ์ complexity (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-e"><code>-e</code></a>, <a href="#opt-e"><code>-min-entropy</code></a></td><td>1.5</td><td>เกณฑ์ entropy (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-prefilter"><code>-prefilter</code></a></td><td>T</td><td>กรองขั้นต้น (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-min-unfold"><code>-min-unfold</code></a></td><td>75</td><td>เกณฑ์ Unfoldability (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-b"><code>-b</code></a>, <a href="#opt-b"><code>-batch-size</code></a></td><td>1e7</td><td>จำนวนรายการต่อชุด (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-s"><code>-s</code></a>, <a href="#opt-s"><code>-min-subseq</code></a></td><td>7</td><td>ความยาวชิ้นส่วนขั้นต่ำ (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-subseq-step"><code>-subseq-step</code></a></td><td>ceiling(k/10)</td><td>ช่วงลดความยาว (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-tmp-dir"><code>-tmp-dir</code></a></td><td>โฟลเดอร์ชั่วคราว</td><td>ที่เก็บไฟล์ชั่วคราว (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><code>--gui</code></td><td>ปิด</td><td>ส่วนติดต่อแบบกราฟิก (<a href="#sec-5-6">5.6</a>, <a href="#ch-6">6</a>)</td></tr>
+<tr><td><code>-gui-port</code></td><td>อัตโนมัติ</td><td>พอร์ตส่วนติดต่อ (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>--no-browser</code></td><td>ปิด</td><td>ไม่เปิดเบราว์เซอร์ (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>--tab</code></td><td>ปิด</td><td>เปิดในแท็บ (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>-h</code></td><td colspan="2">วิธีใช้อย่างย่อ (<a href="#sec-0-6">0.6</a>, <a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>-help</code> [KEYWORD]</td><td colspan="2">วิธีใช้ทั้งหมด<code>/</code>เฉพาะ (<a href="#sec-0-6">0.6</a>, <a href="#sec-5-6">5.6</a>)</td></tr>
+</table>
+</main>
+</div>
+</body>
+</html>

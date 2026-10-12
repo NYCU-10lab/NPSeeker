@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="manual2html.py (from UserManual-pt-BR.txt; do not edit by hand)">
+<title>Manual do usuário do NPSeeker</title>
+<style>
+:root { color-scheme: light dark; --text: #1f2933; --bg: #ffffff; --muted: #6b7a88; --line: #d9dee3;
+        --code-bg: #f3f5f7; --nav-bg: #f4f6f8; --note-bg: #fff8e1; --note-line: #e0b84a; --accent: #1f6feb; }
+@media (prefers-color-scheme: dark) {
+  :root { --text: #e6edf3; --bg: #0f1419; --muted: #9aa7b4; --line: #333b44;
+          --code-bg: #1a2027; --nav-bg: #1a2027; --note-bg: #3a3218; --note-line: #b8932f; --accent: #58a6ff; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+       font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif; }
+.wrap { max-width: 1240px; margin: 0 auto; display: flex; gap: 2.5rem; padding: 0 1.25rem; }
+nav.toc { flex: 0 0 16rem; position: sticky; top: 0; align-self: flex-start; max-height: 100vh; overflow-y: auto;
+          padding: 1.5rem 0 3rem; font-size: .88rem; line-height: 1.45; }
+nav.toc a { display: block; padding: .2rem .5rem; color: var(--text); text-decoration: none; border-radius: 3px; }
+nav.toc a:hover { background: var(--nav-bg); color: var(--accent); }
+nav.toc a.sub { padding-left: 1.4rem; color: var(--muted); font-size: .84rem; }
+main { flex: 1; min-width: 0; padding: 1.5rem 0 5rem; }
+[id] { scroll-margin-top: 1rem; }
+a { color: var(--accent); }
+code, pre { font-family: ui-monospace, "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace; font-size: .92em; }
+code { white-space: nowrap; }
+code.message { white-space: normal; overflow-wrap: anywhere; }
+h1 { margin-top: 0; }
+h2 { border-bottom: 1px solid var(--line); padding-bottom: 4px; margin-top: 2em; }
+h4.option { margin: 1.4em 0 .4em; }
+.opt-type, .version, .toc-title { color: var(--muted); font-weight: normal; }
+.toc-title { text-transform: uppercase; letter-spacing: .06em; font-size: .78rem; margin: 0 0 .5rem; }
+pre { background: var(--code-bg); padding: 10px 12px; overflow-x: auto; border-radius: 4px; }
+table { border-collapse: collapse; margin: .6em 0; }
+th, td { text-align: left; vertical-align: top; padding: 3px 14px 3px 0; }
+td:first-child { white-space: nowrap; }
+th { border-bottom: 1px solid var(--line); }
+.note { background: var(--note-bg); border-left: 4px solid var(--note-line); padding: 2px 12px; margin: 1em 0; }
+.toc-head { display: flex; align-items: center; border-radius: 3px; }
+.toc-head:hover { background: var(--nav-bg); }
+.toc-head a { flex: 1; }
+nav.toc .toc-head a:hover { background: none; }
+.js .toc-subs { display: none; }
+.js .toc-ch.open .toc-subs { display: block; }
+.toc-toggle { flex: none; width: 26px; height: 24px; border: 0; background: none; padding: 0; cursor: pointer;
+              color: var(--muted); display: flex; align-items: center; justify-content: center; }
+.toc-toggle:hover { color: var(--accent); }
+.toc-toggle::before { content: ""; width: 6px; height: 6px; border-right: 1.5px solid currentColor;
+                      border-bottom: 1.5px solid currentColor; transform: rotate(-45deg); transition: transform .15s; }
+.toc-ch.open .toc-toggle::before { transform: rotate(45deg); }
+@media (max-width: 900px) {
+  .wrap { flex-direction: column; gap: 0; }
+  nav.toc { position: static; max-height: none; flex: none; border-bottom: 1px solid var(--line); }
+  .js nav.toc:not(.open) .toc-ch { display: none; }
+  .js .toc-title { cursor: pointer; font-size: .88rem; }
+  .js .toc-title::before { content: "\25B8  "; }
+  .js nav.toc.open .toc-title::before { content: "\25BE  "; }
+}
+</style>
+<script>
+document.documentElement.classList.add('js');
+document.addEventListener('DOMContentLoaded', function () {
+  var nav = document.querySelector('nav.toc');
+  if (!nav) return;
+  nav.querySelectorAll('.toc-ch').forEach(function (ch) {
+    if (!ch.querySelector('.toc-subs a')) return;
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'toc-toggle'; b.title = 'Show or hide the sections';
+    ch.firstElementChild.appendChild(b);
+  });
+  nav.querySelector('.toc-title').addEventListener('click', function () { nav.classList.toggle('open'); });
+  nav.addEventListener('click', function (e) {
+    var t = e.target.closest('.toc-toggle');
+    if (t) { t.closest('.toc-ch').classList.toggle('open'); return; }
+    var a = e.target.closest('a');
+    if (!a) return;
+    if (a.closest('.toc-ch')) a.closest('.toc-ch').classList.add('open');
+    nav.classList.remove('open');
+  });
+  var cur = Array.prototype.find.call(nav.querySelectorAll('a'), function (a) { return a.hash && a.hash === location.hash; });
+  if (cur && cur.closest('.toc-ch')) cur.closest('.toc-ch').classList.add('open');
+});
+</script>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc">
+<p class="toc-title">Sumário</p>
+<div class="toc-ch"><div class="toc-head"><a href="#intro-2">Apresentação do NPSeeker</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#intro-8">Sobre este manual</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-0">0. Primeiros passos</a></div><div class="toc-subs">
+<a href="#sec-0-1" class="sub">0.1 Baixar a versão adequada</a>
+<a href="#sec-0-2" class="sub">0.2 Descompactar o arquivo</a>
+<a href="#sec-0-3" class="sub">0.3 Verificar se o NPSeeker funciona</a>
+<a href="#sec-0-4" class="sub">0.4 Fazer a primeira análise pela interface gráfica</a>
+<a href="#sec-0-5" class="sub">0.5 Fazer a primeira análise pela linha de comando</a>
+<a href="#sec-0-6" class="sub">0.6 Consultar a ajuda integrada</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-1">1. Como o NPSeeker projeta e avalia sondas</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-2">2. Preparação dos genomas-alvo e de controle</a></div><div class="toc-subs">
+<a href="#sec-2-1" class="sub">2.1 Entradas por pasta</a>
+<a href="#sec-2-2" class="sub">2.2 Listas de arquivos</a>
+<a href="#sec-2-3" class="sub">2.3 Um único arquivo FASTA</a>
+<a href="#sec-2-4" class="sub">2.4 Conteúdo FASTA e validação das entradas</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-3">3. Interpretação dos resultados e seleção de sondas</a></div><div class="toc-subs">
+<a href="#sec-3-1" class="sub">3.1 Resultados exibidos na tela</a>
+<a href="#sec-3-2" class="sub">3.2 Arquivos de saída</a>
+<a href="#sec-3-3" class="sub">3.3 Como escolher as sondas</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-4">4. Agrupamento dos alvos e modos single e multi</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-5">5. Opções e parâmetros</a></div><div class="toc-subs">
+<a href="#sec-5-1" class="sub">5.1 Comprimento das sondas e recursos computacionais (General settings)</a>
+<a href="#sec-5-2" class="sub">5.2 Arquivos de saída e registro da execução (Output)</a>
+<a href="#sec-5-3" class="sub">5.3 Agrupamento e classificação (Target clustering, Probe ranking)</a>
+<a href="#sec-5-4" class="sub">5.4 Filtragem das sondas candidatas (Candidate filtering)</a>
+<a href="#sec-5-5" class="sub">5.5 Opções avançadas (Advanced)</a>
+<a href="#sec-5-6" class="sub">5.6 Interface gráfica e ajuda (Graphical interface)</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-6">6. Interface gráfica</a></div><div class="toc-subs">
+<a href="#sec-6-1" class="sub">6.1 Iniciar e acessar a interface</a>
+<a href="#sec-6-2" class="sub">6.2 Páginas principais</a>
+<a href="#sec-6-3" class="sub">6.3 Fechar a interface e preservar os resultados</a>
+<a href="#sec-6-4" class="sub">6.4 Acessar a interface em um servidor remoto</a>
+<a href="#sec-6-5" class="sub">6.5 Localização dos arquivos de configuração</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-7">7. Desempenho e solução de problemas</a></div><div class="toc-subs">
+<a href="#sec-7-1" class="sub">7.1 Memória, tempo de execução e arquivos temporários</a>
+<a href="#sec-7-2" class="sub">7.2 Mensagens de erro comuns</a>
+<a href="#sec-7-3" class="sub">7.3 Saída padrão e saída de erro padrão</a>
+<a href="#sec-7-4" class="sub">7.4 Nenhuma sonda encontrada ou execução lenta</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-8">8. Exemplos de uso</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#app-A">Apêndice A  Referência rápida das opções</a></div><div class="toc-subs">
+</div></div>
+</nav>
+<main>
+<h1>Manual do usuário do NPSeeker</h1>
+<p class="version">Versão 1.5.42</p>
+<h2 id="intro-2">Apresentação do NPSeeker</h2>
+<p>O NPSeeker (Nucleic Acid Probe Seeker) é um programa para projetar sondas de ácidos nucleicos a partir de sequências genômicas. Seu principal objetivo é selecionar sondas para biossensores, como os BioFETs (transistores de efeito de campo usados em biossensoriamento). Uma sonda de ácido nucleico é uma sequência curta de DNA capaz de se hibridizar ao DNA de um organismo que se deseja detectar ou identificar.</p>
+<p>O NPSeeker recebe dois conjuntos de genomas: os genomas-alvo (dos organismos a detectar) e os genomas de controle (dos organismos que não devem ser detectados). Primeiro, identifica sequências de DNA presentes em todos os genomas-alvo. Em seguida, avalia a semelhança dessas sequências com os controles, sua capacidade prevista de ligação ao alvo e sua tendência a se dobrar sobre si mesmas. Por fim, classifica as sondas candidatas conforme suas pontuações. O comprimento das sondas pode variar de 5 a 256 nucleotídeos.</p>
+<p>Publicação e contato:</p>
+<table>
+<tr><td>Artigo</td><td>NPSeeker: A BioFET-oriented Nucleic Acid Probe Design Algorithm for Efficient Species Identification and Classification</td></tr>
+<tr><td>Autores</td><td>Hao-Yu Peng, Hui Zhi Gan, et al.</td></tr>
+<tr><td>Site</td><td><a href="https://10lab.ceb.nycu.edu.tw/NPSeeker/">https://10lab.ceb.nycu.edu.tw/NPSeeker/</a></td></tr>
+<tr><td>GitHub</td><td><a href="https://github.com/NYCU-10lab/NPSeeker/">https://github.com/NYCU-10lab/NPSeeker/</a></td></tr>
+<tr><td>Contato</td><td><a href="mailto:WadeLo@nycu.edu.tw">WadeLo@nycu.edu.tw</a></td></tr>
+</table>
+<p>Se utilizar o NPSeeker em sua pesquisa, cite o artigo indicado acima.</p>
+<h2 id="intro-8">Sobre este manual</h2>
+<p>Se esta é sua primeira experiência com o NPSeeker, comece pelo <a href="#ch-0">capítulo 0</a>. Caso prefira a interface gráfica, depois de concluir as seções <a href="#sec-0-1">0.1</a> a <a href="#sec-0-3">0.3</a> você pode ir diretamente à <a href="#sec-0-4">seção 0.4</a>. O <a href="#ch-2">capítulo 2</a> explica como preparar seus próprios arquivos de genomas, enquanto o <a href="#ch-5">capítulo 5</a> apresenta os parâmetros do programa.</p>
+<p>O programa também oferece ajuda integrada: <code>-h</code> mostra as opções mais utilizadas, e <code>-help</code> apresenta todas as opções. Este manual complementa essa ajuda com instruções passo a passo, exemplos e orientações práticas. Está disponível em texto simples (<code>UserManual-pt-BR.txt</code>) e HTML (<code>UserManual-pt-BR.html</code>). Você também pode acessá<code>-lo</code> pela página Help da interface gráfica.</p>
+<h2 id="ch-0">0. Primeiros passos</h2>
+<div class="note"><p>Salvo indicação em contrário, os comandos deste manual seguem a sintaxe do macOS e do Linux. Quando necessário, são apresentadas as alternativas para Windows.</p></div>
+<p>Se você nunca utilizou um programa pela linha de comando, siga este capítulo na ordem apresentada.</p>
+<h3 id="sec-0-1">0.1 Baixar a versão adequada</h3>
+<p>Baixe no site do NPSeeker ou no GitHub o arquivo compactado correspondente ao seu sistema operacional. Há arquivos separados para Windows, macOS e Linux, cada um com executáveis para duas arquiteturas de processador:</p>
+<table>
+<tr><td>x86_64</td><td>Maioria dos processadores Intel e AMD</td></tr>
+<tr><td>arm64</td><td>Macs com chips Apple da série M e outros computadores ARM</td></tr>
+</table>
+<p>Se você não souber qual é a arquitetura do seu computador:</p>
+<ul>
+<li>Windows: Abra "Configurações -&gt; Sistema -&gt; Sobre". Em "Tipo de sistema", x64 corresponde a x86_64 e ARM64 corresponde a arm64.</li>
+<li>macOS: Abra "menu Apple -&gt; Sobre Este Mac". Macs com chips Apple da série M usam arm64; Macs com processadores Intel usam x86_64.</li>
+<li>Linux: Abra um terminal, digite uname <code>-m</code> e pressione Enter. O resultado será x86_64 ou aarch64 (equivalente a arm64).</li>
+</ul>
+<h3 id="sec-0-2">0.2 Descompactar o arquivo</h3>
+<p>Extraia o arquivo baixado para a pasta de sua preferência:</p>
+<ul>
+<li>Windows: Clique com o botão direito no arquivo compactado e escolha "Extrair tudo".</li>
+<li>macOS: Clique duas vezes no arquivo.</li>
+<li>Linux: Em um terminal, execute tar xzf seguido do nome do arquivo compactado.</li>
+</ul>
+<p>A pasta NPSeeker extraída contém:</p>
+<table>
+<tr><td><code>bin/</code></td><td>Executável x86_64: npseeker (<code>npseeker.exe</code> no Windows)</td></tr>
+<tr><td><code>bin.arm64/</code></td><td>Executável arm64</td></tr>
+<tr><td><code>doc/</code></td><td>Manuais do usuário</td></tr>
+<tr><td><code>dat/sample/</code></td><td>Dados de exemplo para a primeira execução</td></tr>
+</table>
+<p>Os genomas bacterianos usados no artigo do NPSeeker (Gram-negativas GN e Gram-positivas GP) são um download separado (NPSeeker-1.5.42-datasets.zip ou <code>.tar.gz</code>). Você pode extraí<code>-lo</code> e mover a pasta datasets que ele contém (em <code>NPSeeker/dat/</code>) para a pasta dat do programa, o que permite executar os exemplos de comandos do <a href="#ch-8">capítulo 8</a> exatamente como estão escritos.</p>
+<p>O NPSeeker não exige instalação nem conexão com a internet para análises locais. Os comandos deste manual usam o executável x86_64 da pasta <code>bin/</code>. Em computadores arm64, substitua bin por bin.arm64 nos comandos.</p>
+<h3 id="sec-0-3">0.3 Verificar se o NPSeeker funciona</h3>
+<p>Abra uma janela de linha de comando e entre na pasta do NPSeeker que você extraiu:</p>
+<ul>
+<li>Windows: Abra a pasta NPSeeker no Explorador de Arquivos. Digite cmd na barra de endereços e pressione Enter. O Prompt de Comando será aberto diretamente nessa pasta. Você também pode usar o PowerShell com os mesmos comandos.</li>
+<li>macOS: Abra o "Terminal" (Aplicativos -&gt; Utilitários). Digite cd seguido de um espaço, arraste a pasta NPSeeker para a janela do Terminal e pressione Enter.</li>
+<li>Linux: Abra um terminal e use cd para acessar a pasta NPSeeker.</li>
+</ul>
+<p>Em seguida, digite o comando correspondente ao seu sistema e pressione Enter:</p>
+<pre>Windows:          .\bin\npseeker.exe -h
+macOS, Linux:     ./bin/npseeker -h</pre>
+<p>Se o programa mostrar o logotipo, a sintaxe de uso e as principais opções, está pronto para ser utilizado.</p>
+<p>Na primeira execução, o sistema operacional pode exibir um aviso de segurança porque o executável baixado não possui assinatura digital.</p>
+<div class="note"><p>Antes de permitir a execução, confirme que o NPSeeker foi obtido do site ou do GitHub indicados em "Apresentação do NPSeeker". Não ignore alertas de segurança de programas de origem desconhecida.</p></div>
+<ul>
+<li>Windows: Pode aparecer uma janela azul do Microsoft Defender SmartScreen com o aviso "O Windows protegeu seu computador" e, inicialmente, apenas o botão "Não executar". Clique em "Mais informações" para visualizar o nome do aplicativo, o editor desconhecido e o botão "Executar assim mesmo". Clique neste último para iniciar o NPSeeker. Normalmente, essa confirmação é solicitada apenas uma vez para o mesmo executável. Os textos podem variar conforme a versão do Windows.</li>
+<li>macOS: O sistema pode bloquear um aplicativo que não foi autenticado pela Apple. No Terminal, execute xattr <code>-dr</code> com.apple.quarantine seguido do caminho da pasta NPSeeker (você pode arrastar a pasta para o Terminal para inserir o caminho). Como alternativa, tente abrir o NPSeeker e depois acesse "Ajustes do Sistema -&gt; Privacidade e Segurança" e escolha "Abrir Mesmo Assim" para npseeker.</li>
+<li>Linux: Normalmente, nenhuma etapa adicional é necessária. Se aparecer "permission denied", execute chmod +x <code>bin/npseeker</code> (ou chmod +x <code>bin.arm64/npseeker</code> no arm64) e tente novamente.</li>
+</ul>
+<h3 id="sec-0-4">0.4 Fazer a primeira análise pela interface gráfica</h3>
+<p>Se preferir não usar a linha de comando, o NPSeeker oferece uma interface acessível pelo navegador. No Windows, clique duas vezes em <code>npseeker.exe</code> na pasta <code>bin/</code>. No macOS ou Linux, digite no terminal:</p>
+<pre>./bin/npseeker --gui</pre>
+<p>A interface será aberta no navegador. Para testá<code>-la</code> com os dados incluídos, acesse a página Design:</p>
+<ul>
+<li>Target: Selecione <code>dat/sample/S.aureus/</code>, que contém um genoma da bactéria Staphylococcus aureus.</li>
+<li>Control: Selecione <code>dat/sample/yeast/</code>, que contém genomas de duas espécies de leveduras.</li>
+<li>Probe length: Mantenha o valor padrão de 25 e não altere os demais parâmetros.</li>
+<li>Clique em "Check" para validar os dados e os parâmetros. Depois, clique em "Go" para iniciar a análise.</li>
+<li>Quando a execução terminar, abra a página Results para examinar as sondas classificadas e suas pontuações. Baixe os arquivos que desejar guardar.</li>
+</ul>
+<p>A interface funciona em seu próprio computador e não envia os arquivos de genomas a um site externo. Consulte o <a href="#ch-6">capítulo 6</a> para conhecer suas páginas e saber como encerrá<code>-la</code>.</p>
+<h3 id="sec-0-5">0.5 Fazer a primeira análise pela linha de comando</h3>
+<p>Os mesmos dados de exemplo podem ser analisados diretamente pela linha de comando:</p>
+<pre>Windows:          .\bin\npseeker.exe dat\sample\S.aureus\ dat\sample\yeast\
+macOS, Linux:     ./bin/npseeker     dat/sample/S.aureus/ dat/sample/yeast/</pre>
+<p>A execução deve terminar em poucos segundos. A tela mostrará uma lista de sondas ordenadas por pontuação, semelhante a este trecho:</p>
+<pre>Best probes of cluster 0:
+Rank Probe                     Exclus Purity UnFold Affini  Score     Tm
+   1 CCGACTAACCCAGAGCGGACGAGCC  50.84  61.32 100.00  64.22  69.10  65.88
+   2 GACCCGACTAACCCAGAGCGGACGA  50.84  61.40 100.00  63.68  68.98  64.24
+...</pre>
+<p>Cada linha representa uma sonda candidata. Probe é sua sequência de DNA, e Score é a pontuação geral; as sondas com maiores pontuações aparecem primeiro. O <a href="#ch-3">capítulo 3</a> explica as outras colunas. Ao final da execução, uma mensagem Note lembra que é necessário usar <a href="#opt-o"><code>-o</code></a> para salvar os resultados completos em arquivos. Por exemplo:</p>
+<pre>./bin/npseeker dat/sample/S.aureus/ dat/sample/yeast/ -o result/</pre>
+<p>Os arquivos serão gravados em <code>result/</code> (<a href="#sec-3-2">seção 3.2</a>). Na próxima análise, escolha outra pasta de saída ou acrescente <a href="#opt-w"><code>-w</code></a> somente se quiser substituir os resultados anteriores. Para analisar seus próprios genomas, troque as duas pastas de exemplo pelos dados de alvo e controle (<a href="#ch-2">capítulo 2</a>).</p>
+<h3 id="sec-0-6">0.6 Consultar a ajuda integrada</h3>
+<pre>./bin/npseeker -h               Opções mais usadas
+./bin/npseeker -help            Todas as opções
+./bin/npseeker -help -mode      Ajuda sobre -mode (ou: -help mode)
+./bin/npseeker -help Output     Ajuda sobre a seção Output de -help
+./bin/npseeker -help target     Ajuda sobre target (ou control)</pre>
+<p>Se uma opção for inválida, o NPSeeker explica o problema, indica como consultar a ajuda correspondente e não inicia a análise.</p>
+<h2 id="ch-1">1. Como o NPSeeker projeta e avalia sondas</h2>
+<p>O NPSeeker recebe genomas-alvo e de controle e produz uma classificação de sondas candidatas. Os alvos são os organismos que você deseja detectar. Os controles são os organismos aos quais as sondas não devem se ligar, muitas vezes espécies próximas que poderiam ser confundidas com os alvos. A análise possui quatro etapas principais:</p>
+<ul>
+<li>Identificar sequências compartilhadas: O NPSeeker examina os genomas em busca de todas as sequências consecutivas de k nucleotídeos, chamadas k-mers. Por exemplo, os 3-mers de ACGTA são ACG, CGT e GTA. Todo k-mer presente em todos os genomas-alvo torna-se uma sonda candidata. Para detectar todos os alvos com uma única sonda, sua sequência precisa ser compartilhada por todos eles. Como o DNA possui duas fitas complementares, o NPSeeker considera um k-mer e seu complemento reverso como equivalentes.</li>
+<li>Filtrar candidatas: O programa descarta sequências pouco adequadas como sondas, por exemplo, aquelas com composição de bases muito desequilibrada, repetições longas da mesma base (como AAAA) ou tendência a se dobrar sobre si mesmas ou a se parear com outras cópias da sonda. Assim, evita cálculos mais caros com candidatas pouco promissoras.</li>
+<li>Examinar os controles: Para cada candidata restante, o NPSeeker procura nos genomas de controle correspondências exatas, correspondências aproximadas com poucas diferenças de bases e ocorrências de fragmentos mais curtos da sonda.</li>
+<li>Calcular e classificar as pontuações: O NPSeeker calcula quatro componentes para cada candidata e os combina em uma pontuação geral.</li>
+</ul>
+<table>
+<tr><td>Exclusivity</td><td>Presença nos alvos e baixa ocorrência nos controles</td></tr>
+<tr><td>Purity</td><td>Poucas sequências semelhantes ou fragmentos coincidentes nos controles, reduzindo o risco de ligação indesejada</td></tr>
+<tr><td>Unfoldability</td><td>Baixa tendência a se dobrar sobre si mesma, mantendo a sonda acessível para hibridização com o alvo</td></tr>
+<tr><td>Affinity</td><td>Força de ligação prevista a partir da energia livre de hibridização (energia liberada quando a sonda se liga ao alvo)</td></tr>
+</table>
+<p>Os quatro componentes e a pontuação geral variam de 0 a 100; valores maiores indicam propriedades previstas mais favoráveis. Por padrão, os quatro componentes têm o mesmo peso. Essas pontuações ajudam a priorizar candidatas para validação experimental; não representam sinais BioFET medidos nem garantem o desempenho em experimentos.</p>
+<p>Se os genomas-alvo forem muito diferentes e compartilharem poucos k-mers, o NPSeeker os divide em grupos e identifica candidatas para cada grupo separadamente. Consulte o <a href="#ch-4">capítulo 4</a> para saber como funcionam o agrupamento e os modos de saída. As equações das pontuações e os detalhes do algoritmo estão no artigo científico.</p>
+<h2 id="ch-2">2. Preparação dos genomas-alvo e de controle</h2>
+<p>Os dois primeiros argumentos na linha de comando indicam, nesta ordem, as entradas de alvo e controle. As opções vêm depois:</p>
+<pre>./bin/npseeker &lt;target&gt; &lt;control&gt; [options]</pre>
+<p>Prepare um arquivo FASTA para cada genoma. FASTA é um formato de texto simples para sequências de DNA, geralmente com extensão <code>.fasta</code>, <code>.fna</code> ou .fa. As entradas de alvo e controle podem ser especificadas independentemente como pastas, listas de arquivos ou arquivos FASTA individuais.</p>
+<h3 id="sec-2-1">2.1 Entradas por pasta</h3>
+<p>Ao receber uma pasta, o NPSeeker lê os arquivos terminados em <code>.fasta</code>, <code>.fna</code> ou <code>.fa</code> e considera cada arquivo um genoma. As extensões podem estar inteiramente em minúsculas ou em maiúsculas (por exemplo, <code>.FASTA</code>). As subpastas não são percorridas.</p>
+<pre>./bin/npseeker targets/ controls/</pre>
+<p>Arquivos compactados (<code>.gz</code>, <code>.zst</code>) dentro de uma pasta não são incluídos. Para utilizar arquivos FASTA compactados, informe-os por meio de uma lista de arquivos.</p>
+<h3 id="sec-2-2">2.2 Listas de arquivos</h3>
+<p>Uma lista de arquivos é um documento de texto simples que contém um caminho de arquivo FASTA por linha. Coloque @ antes do nome da lista para indicar ao NPSeeker que a entrada é uma lista:</p>
+<pre>./bin/npseeker @target.list @control.list</pre>
+<p>Por exemplo, o conteúdo de <code>target.list</code> pode ser:</p>
+<pre># Three target genomes
+genomes/strain_A.fasta
+genomes/strain_B.fna.gz
+/data/others/strain_C.fa</pre>
+<ul>
+<li>Linhas vazias e linhas iniciadas por # são ignoradas, permitindo a inclusão de comentários.</li>
+<li>Caminhos relativos são interpretados a partir da pasta na qual você executa o NPSeeker, e não da pasta que contém a lista.</li>
+<li>Os arquivos relacionados podem estar em pastas diferentes ou ser arquivos FASTA compactados com gzip (<code>.gz</code>) ou zstd (<code>.zst</code>).</li>
+<li>Com <a href="#opt-cluster-order"><code>-cluster-order</code></a> input, a ordem dos arquivos na lista determina a ordem de processamento durante o agrupamento (<a href="#ch-4">capítulo 4</a>).</li>
+</ul>
+<p>Um arquivo fornecido sem @ e cuja extensão não seja reconhecida como FASTA também é interpretado como uma lista. Mesmo assim, recomenda-se usar @ para deixar a intenção explícita.</p>
+<h3 id="sec-2-3">2.3 Um único arquivo FASTA</h3>
+<p>Se o conjunto de alvos ou controles contiver apenas um genoma, você pode informar diretamente o arquivo FASTA correspondente. Arquivos FASTA compactados também são aceitos:</p>
+<pre>./bin/npseeker strain_A.fasta controls/</pre>
+<h3 id="sec-2-4">2.4 Conteúdo FASTA e validação das entradas</h3>
+<ul>
+<li>Um arquivo FASTA pode conter vários registros de sequência, como cromossomos e plasmídeos. Todos os registros do mesmo arquivo são tratados como um único genoma.</li>
+<li>O NPSeeker aceita A, C, G e T, tanto em maiúsculas quanto em minúsculas. Outras letras, como N, interrompem a sequência; k-mers que atravessam essas posições são excluídos.</li>
+<li>O programa verifica se os arquivos de entrada estão no formato FASTA e interrompe a execução com uma mensagem de erro se algum arquivo não existir ou for inválido (<a href="#sec-7-2">seção 7.2</a>).</li>
+<li>Um mesmo arquivo não pode estar nas entradas de alvo e controle ao mesmo tempo. Se isso ocorrer, o NPSeeker informa a duplicação e interrompe a análise.</li>
+</ul>
+<div class="note"><p>A escolha dos genomas-alvo e de controle afeta diretamente a classificação das sondas. Os controles devem incluir organismos que poderiam ser confundidos com os alvos na aplicação pretendida, em vez de uma seleção arbitrária de espécies sem relação com eles.</p></div>
+<h2 id="ch-3">3. Interpretação dos resultados e seleção de sondas</h2>
+<h3 id="sec-3-1">3.1 Resultados exibidos na tela</h3>
+<p>Sem <a href="#opt-o"><code>-o</code></a>, o NPSeeker mostra na tela as primeiras <a href="#opt-top"><code>-top</code></a> sondas (200 por padrão), com as colunas Rank, Probe, os quatro componentes de pontuação, Score e Tm. Com <a href="#opt-o"><code>-o</code></a>, os resultados detalhados são gravados em arquivos, e a tela passa a listar os arquivos gerados. Acrescente <a href="#opt-v"><code>-v</code></a> para acompanhar os parâmetros e o tempo gasto em cada etapa do processamento.</p>
+<h3 id="sec-3-2">3.2 Arquivos de saída</h3>
+<p>Por exemplo, <a href="#opt-o"><code>-o</code></a> <code>result/</code> salva os resultados em arquivos CSV (valores separados por vírgulas), o formato padrão:</p>
+<table>
+<tr><td><code>cluster_N_probes.csv</code></td><td>Sondas candidatas classificadas; N é o número do grupo, começando em 0</td></tr>
+<tr><td><code>cluster.csv</code></td><td>Grupo atribuído a cada genoma</td></tr>
+<tr><td><code>flag.csv</code></td><td>Parâmetros utilizados na análise</td></tr>
+</table>
+<p>Use <a href="#opt-format"><code>-format</code></a> txt para produzir tabelas alinhadas por espaços, mais fáceis de ler diretamente. Os arquivos CSV são convenientes para planilhas, como o Excel, e para outros programas. A quantidade de arquivos de sondas depende do modo single ou multi (<a href="#ch-4">capítulo 4</a>).</p>
+<p>As colunas de <code>cluster_N_probes.csv</code> são:</p>
+<table>
+<tr><td>Rank</td><td>Posição da sonda na classificação</td></tr>
+<tr><td>Probe</td><td>Sequência da sonda, no sentido 5' para 3'</td></tr>
+<tr><td>Tgt</td><td>Ocorrências nos genomas-alvo</td></tr>
+<tr><td>Ctl</td><td>Ocorrências exatas nos genomas de controle; quanto menos, melhor</td></tr>
+<tr><td>Exclus</td><td>Pontuação Exclusivity, calculada a partir de Tgt e Ctl</td></tr>
+<tr><td>MMs</td><td>Pontuação de correspondências aproximadas nos controles; quanto menor, melhor</td></tr>
+<tr><td>Subseq</td><td>Pontuação de fragmentos menores encontrados nos controles; quanto menor, melhor</td></tr>
+<tr><td>Purity</td><td>Pontuação Purity, calculada a partir de MMs e Subseq</td></tr>
+<tr><td>SelfAn</td><td>Tendência a se dobrar sobre si mesma (self-annealing); quanto menor, melhor</td></tr>
+<tr><td>Dimer</td><td>Tendência a se parear com outra cópia (dimer); quanto menor, melhor</td></tr>
+<tr><td>UnFold</td><td>Pontuação Unfoldability, calculada a partir de SelfAn e Dimer</td></tr>
+<tr><td>Affini</td><td>Pontuação Affinity, baseada na energia livre de ligação</td></tr>
+<tr><td>Score</td><td>Média ponderada dos quatro componentes de pontuação</td></tr>
+<tr><td>Tm</td><td>Temperatura de fusão (°C), na qual metade dos dúplex sonda-alvo está dissociada; não entra no cálculo de Score</td></tr>
+</table>
+<p>Exclus, Purity, UnFold, Affini e Score variam de 0 a 100; quanto maior o valor, melhor. Quando os alvos são divididos em vários grupos, Tgt também inclui correspondências aproximadas em genomas-alvo de outros grupos. Por isso, essa coluna nem sempre representa somente ocorrências exatas.</p>
+<p>O arquivo <code>cluster.csv</code> contém três colunas: Group (target ou control), Cluster (número do grupo de um alvo; vazio para controles) e File (nome do arquivo). O arquivo <code>flag.csv</code> contém Option e Value, permitindo conferir os parâmetros usados na análise.</p>
+<p>Se a pasta de saída não existir, o NPSeeker a criará. Uma pasta existente, mas vazia, também é aceita. Se a pasta já contiver arquivos, o programa interrompe a execução para não substituí<code>-los</code>. Utilize <a href="#opt-w"><code>-w</code></a> somente quando desejar substituir resultados anteriores: o NPSeeker exclui seus arquivos de resultados anteriores (cluster_N_probes, cluster e flag), mas preserva arquivos não relacionados. Antes de usar <a href="#opt-w"><code>-w</code></a>, confira se os resultados antigos não serão mais necessários.</p>
+<h3 id="sec-3-3">3.3 Como escolher as sondas</h3>
+<p>Score é um bom ponto de partida, mas a seleção das sondas não deve depender apenas da pontuação geral. Dependendo da aplicação, considere também:</p>
+<ul>
+<li>Ctl: Um valor maior que zero indica que existe uma sequência idêntica em um genoma de controle. A sonda pode, portanto, se ligar a um organismo não alvo e produzir reatividade cruzada.</li>
+<li>Tgt: Um número maior de ocorrências pode favorecer a intensidade do sinal, mas também pode indicar uma região repetitiva. Tgt não prevê diretamente a intensidade do sinal.</li>
+<li>Purity e UnFold: Esses componentes ajudam a comparar os riscos de ligação indesejada e de dobramento da sonda sobre si mesma.</li>
+<li>Tm: Se o ensaio exigir determinada temperatura ou combinar várias sondas, compare suas temperaturas de fusão. De preferência, sondas usadas no mesmo ensaio devem apresentar valores de Tm próximos.</li>
+</ul>
+<p>Você também pode pesquisar sequências semelhantes em outros organismos usando o NCBI BLAST ou avaliar possíveis estruturas de dobramento da sonda com o UNAFold (mfold). A página Results oferece links para ambos os serviços, mas eles enviam a sequência da sonda selecionada a um site externo (<a href="#sec-6-2">seção 6.2</a>). A adequação da sonda a uma plataforma BioFET específica precisa, em qualquer caso, ser verificada nas condições experimentais pretendidas.</p>
+<h2 id="ch-4">4. Agrupamento dos alvos e modos single e multi</h2>
+<p>Quando há poucos k-mers em comum entre todos os genomas-alvo, o NPSeeker divide os alvos em grupos (clusters). Os genomas são examinados um a um. Um genoma só é acrescentado ao grupo atual se o número de k-mers compartilhados por todos os integrantes, incluindo o novo genoma, continuar sendo pelo menos <a href="#opt-min-shared"><code>-min-shared</code></a>. Caso contrário, o genoma é reservado para outro grupo. Esses grupos são formados para descobrir sondas candidatas; não representam classificações evolutivas ou filogenéticas.</p>
+<p>A opção <a href="#opt-cluster-order"><code>-cluster-order</code></a> controla a ordem de análise dos genomas-alvo:</p>
+<ul>
+<li>auto (padrão): Define uma ordem determinística com base na semelhança de k-mers entre os genomas. Para um mesmo conjunto de genomas, mudar a ordem dos arquivos de entrada não altera os grupos formados.</li>
+<li>input: Mantém a ordem informada pelo usuário, por exemplo, a ordem de uma lista de arquivos. Use esta opção quando quiser que determinado genoma de referência seja o ponto de partida do primeiro grupo.</li>
+</ul>
+<p>O valor padrão de <a href="#opt-min-shared"><code>-min-shared</code></a> é 1: um genoma pode entrar no grupo desde que permaneça pelo menos um k-mer compartilhado por todos os integrantes. Assim, os alvos frequentemente formam um único grupo. Aumentar esse limite pode produzir mais grupos e alterar as sondas candidatas disponíveis em cada um.</p>
+<p>Se houver mais de um grupo de alvos, <a href="#opt-mode"><code>-mode</code></a> determina como as candidatas serão classificadas e salvas:</p>
+<ul>
+<li>single (padrão): Reúne as candidatas de todos os grupos em uma única classificação e conserva apenas as <a href="#opt-top"><code>-top</code></a> primeiras sondas no arquivo <code>cluster_0_probes.csv</code>. Muitas das candidatas mais bem classificadas podem vir do mesmo grupo.</li>
+<li>multi: Classifica as candidatas de cada grupo separadamente e conserva até <a href="#opt-top"><code>-top</code></a> sondas por grupo em <code>cluster_0_probes.csv</code>, <code>cluster_1_probes.csv</code> e assim por diante. Use este modo quando precisar de candidatas para cada grupo de alvos.</li>
+</ul>
+<p>No modo multi, a escolha de sondas em cada grupo permite obter um conjunto de candidatas que, do ponto de vista computacional, cobre todos os grupos de alvos. A capacidade real de detecção ainda precisa de validação experimental. Consulte <code>cluster.csv</code> para saber quais genomas pertencem a cada grupo. Se nenhuma candidata de determinado grupo passar pelos filtros, o NPSeeker emitirá um aviso e salvará os resultados dos demais grupos.</p>
+<h2 id="ch-5">5. Opções e parâmetros</h2>
+<p>Coloque as opções depois das entradas target e control. As opções que exigem um valor devem ser seguidas de um espaço e desse valor (por exemplo, <a href="#opt-k"><code>-k</code></a> 31). Opções de ativação, como <a href="#opt-v"><code>-v</code></a>, <a href="#opt-w"><code>-w</code></a> e <code>--gui</code>, não recebem valores. Algumas opções possuem nomes curtos e longos (por exemplo, <a href="#opt-k"><code>-k</code></a> e <a href="#opt-k"><code>-kmer</code></a>); ambos são aceitos. Valores numéricos podem usar notação científica: 1e7 corresponde a 10.000.000. Na linha de comando, use ponto como separador decimal, por exemplo <a href="#opt-c"><code>-c</code></a> 0.5, mesmo que em português seja comum escrever 0,5. As seções a seguir acompanham as categorias da saída de <code>-help</code>; o nome entre parênteses em cada título é a categoria correspondente. O <a href="#app-A">Apêndice A</a> reúne as opções para consulta rápida.</p>
+<h3 id="sec-5-1">5.1 Comprimento das sondas e recursos computacionais (General settings)</h3>
+<h4 class="option" id="opt-k"><code>-k, -kmer</code> <span class="opt-type">[inteiro, de 5 a 256; padrão: 25]</span></h4>
+<p>Define o comprimento da sonda em nucleotídeos. Escolha um valor apropriado para o ensaio. Conforme k aumenta, genomas-alvo divergentes têm menos chance de compartilhar sequências idênticas desse comprimento, e pode ser necessário formar mais grupos. O tempo de execução depende principalmente do tamanho dos genomas e da quantidade de candidatas: sondas mais longas não tornam necessariamente a análise mais lenta (consulte a Figura 4 do artigo).</p>
+<h4 class="option" id="opt-t"><code>-t, -threads</code> <span class="opt-type">[inteiro; padrão: 0]</span></h4>
+<p>Define o número de threads de processamento. O valor 0 utiliza todos os threads de hardware disponíveis. Reduza esse número se o computador também precisar ser usado para outras tarefas.</p>
+<h4 class="option" id="opt-m"><code>-m, -memory</code> <span class="opt-type">[tamanho; padrão: metade da memória física, até o limite de 8G]</span></h4>
+<p>Define o orçamento de memória para as principais etapas de processamento, por exemplo <a href="#opt-m"><code>-m</code></a> 8G ou <a href="#opt-m"><code>-m</code></a> 512M. Se a unidade for omitida, o valor será interpretado em GiB. Um orçamento menor aumenta a quantidade de processamento em lotes e pode tornar a análise mais lenta, mas não altera os resultados. A memória usada para carregar lotes de candidatas (<a href="#opt-b"><code>-b</code></a>) e outros dados de execução é adicional a esse orçamento (<a href="#sec-5-5">seção 5.5</a>).</p>
+<h3 id="sec-5-2">5.2 Arquivos de saída e registro da execução (Output)</h3>
+<h4 class="option" id="opt-o"><code>-o, -out-dir</code> <span class="opt-type">[pasta; padrão: não salvar arquivos]</span></h4>
+<p>Especifica a pasta na qual os resultados serão salvos (<a href="#sec-3-2">seção 3.2</a>). Sem <a href="#opt-o"><code>-o</code></a>, os resultados são exibidos na tela com menos colunas. Use uma pasta de saída se quiser guardar, comparar ou reproduzir uma análise posteriormente.</p>
+<h4 class="option" id="opt-w"><code>-w, --overwrite</code></h4>
+<p>Permite reutilizar uma pasta <a href="#opt-o"><code>-o</code></a> que não esteja vazia. Os arquivos de resultados anteriores do NPSeeker nessa pasta são removidos antes da gravação dos novos; os demais arquivos são preservados (<a href="#sec-3-2">seção 3.2</a>).</p>
+<h4 class="option" id="opt-top"><code>-top</code> <span class="opt-type">[inteiro; padrão: 200]</span></h4>
+<p>Define a quantidade de sondas mais bem classificadas a serem apresentadas em cada classificação. Aumente o valor para examinar mais candidatas. Valores muito altos podem gerar arquivos maiores e exigir mais memória e tempo; escolha uma quantidade adequada à sua necessidade.</p>
+<h4 class="option" id="opt-format"><code>-format</code> <span class="opt-type">[csv ou txt; padrão: csv]</span></h4>
+<p>Controla o formato dos resultados. csv usa valores separados por vírgulas, apropriados para planilhas e outros programas; txt gera uma tabela alinhada por espaços para leitura direta.</p>
+<h4 class="option" id="opt-v"><code>-v, --verbose</code></h4>
+<p>Mostra informações adicionais, incluindo as entradas, os parâmetros, as etapas de processamento e o tempo gasto em cada uma. É útil para investigar problemas ou acompanhar análises longas. As análises iniciadas pela interface gráfica sempre usam registros detalhados.</p>
+<h3 id="sec-5-3">5.3 Agrupamento e classificação (Target clustering, Probe ranking)</h3>
+<h4 class="option" id="opt-cluster-order"><code>-cluster-order</code> <span class="opt-type">[auto ou input; padrão: auto]</span></h4>
+<p>Controla a ordem de processamento dos genomas-alvo durante o agrupamento. auto não depende da ordem dos arquivos de entrada; input segue a ordem informada. Consulte o <a href="#ch-4">capítulo 4</a> para detalhes e exemplos de uso.</p>
+<h4 class="option" id="opt-min-shared"><code>-min-shared</code> <span class="opt-type">[inteiro; padrão: 1]</span></h4>
+<p>Define a quantidade mínima de k-mers que precisam permanecer compartilhados por todos os genomas de um grupo. Aumentar esse limite geralmente produz mais grupos, mas não garante que todos terão sondas adequadas (<a href="#ch-4">capítulo 4</a>).</p>
+<h4 class="option" id="opt-mode"><code>-mode</code> <span class="opt-type">[single ou multi; padrão: single]</span></h4>
+<p>Os modos só diferem quando os alvos formam vários grupos. single reúne as candidatas de todos os grupos em uma única classificação; multi gera classificações separadas para cada grupo. Consulte o <a href="#ch-4">capítulo 4</a> antes de escolher o modo.</p>
+<h4 class="option" id="opt-weights"><code>-weights</code> <span class="opt-type">[pares KEY=WEIGHT separados por vírgulas; padrão: 1 por componente]</span></h4>
+<p>Altera o peso de cada componente na pontuação geral: exclusividade (exc), pureza (pur), baixa tendência ao dobramento (unf) e afinidade (aff). Por exemplo:</p>
+<pre>-weights exc=2,pur=2</pre>
+<p>Isso atribui o dobro do peso a exclusividade e pureza, mantendo os pesos de unf e aff em 1. A pontuação geral é calculada por:</p>
+<pre>Score = (w_exc*Exclus + w_pur*Purity + w_unf*UnFold + w_aff*Affini)
+        / (w_exc + w_pur + w_unf + w_aff)</pre>
+<p>Os pesos podem ser zero, mas não negativos; pelo menos um deles deve ser positivo. Um componente com peso zero ainda é calculado, mas não contribui para Score. Aumentar um peso altera a classificação, mas não elimina as candidatas que tiverem pontuação baixa nesse componente.</p>
+<h4 class="option" id="opt-mm"><code>-mm, -mismatch-cutoff</code> <span class="opt-type">[inteiro; padrão: parte inteira de k/10]</span></h4>
+<p>Define o número máximo de diferenças de nucleotídeos permitido ao buscar correspondências aproximadas da sonda nos genomas de controle para o cálculo de Purity. Um limite maior pode revelar mais correspondências aproximadas, mas também aumentar bastante o tempo de execução e o uso de memória. Esse limite deve ser menor que o comprimento da sonda.</p>
+<h3 id="sec-5-4">5.4 Filtragem das sondas candidatas (Candidate filtering)</h3>
+<p>O NPSeeker filtra as candidatas antes de executar as comparações mais custosas com os genomas de controle. Se os critérios forem muito rigorosos, nenhuma candidata poderá ser aprovada. Nesse caso, você pode flexibilizar um ou mais dos limites abaixo.</p>
+<h4 class="option" id="opt-max-homopolymer"><code>-max-homopolymer</code> <span class="opt-type">[inteiro; padrão: 3]</span></h4>
+<p>Um homopolímero é uma sequência de nucleotídeos idênticos, como AAAA. Esta opção estabelece o comprimento máximo permitido para essas repetições: o valor padrão 3 aceita AAA, mas rejeita candidatas com AAAA ou sequências mais longas da mesma base. Aumentar o limite mantém mais candidatas com bases repetidas.</p>
+<h4 class="option" id="opt-c"><code>-c, -min-complexity</code> <span class="opt-type">[número de 0 a 1; padrão: 0.5]</span></h4>
+<p>Define a pontuação mínima de complexidade da sequência. Sequências com proporções mais equilibradas dos quatro nucleotídeos recebem pontuações maiores. Para passar pelo filtro, a candidata precisa ter pontuação acima desse limite.</p>
+<h4 class="option" id="opt-e"><code>-e, -min-entropy</code> <span class="opt-type">[número de 0 a 2; padrão: 1.5]</span></h4>
+<p>Define a pontuação mínima de entropia da sequência. A entropia indica a diversidade de nucleotídeos; padrões repetitivos, como ACACAC, apresentam baixa entropia. Para passar pelo filtro, a candidata precisa superar esse limite. Sondas mais curtas têm pontuações máximas possíveis menores de complexidade e entropia. Se um limite especificado exceder o máximo possível para o comprimento escolhido, o NPSeeker emitirá um erro e informará o valor máximo.</p>
+<h4 class="option" id="opt-prefilter"><code>-prefilter</code> <span class="opt-type">[T ou F; padrão: T]</span></h4>
+<p>Determina se as candidatas serão filtradas pela pontuação Unfoldability antes da busca nos genomas de controle. T elimina as candidatas com pontuação inferior a <a href="#opt-min-unfold"><code>-min-unfold</code></a>, reduzindo a quantidade de comparações. F desativa essa filtragem antecipada, mas a pontuação Unfoldability continua sendo calculada para cada candidata.</p>
+<h4 class="option" id="opt-min-unfold"><code>-min-unfold</code> <span class="opt-type">[número de 0 a 100; padrão: 75]</span></h4>
+<p>Define o limite de Unfoldability utilizado na filtragem antecipada. Reduzi-lo preserva mais candidatas com possível tendência ao dobramento, podendo aumentar o trabalho nas comparações posteriores. Se nenhuma candidata de um lote alcançar o limite, o NPSeeker desativa a pré<code>-filtragem</code> apenas para aquele lote. Por exemplo, a sonda para bactérias Gram-positivas avaliada experimentalmente no artigo tem Unfoldability de 72,54; utilize <a href="#opt-min-unfold"><code>-min-unfold</code></a> 70 para reproduzir sua classificação (<a href="#ch-8">capítulo 8</a>).</p>
+<h3 id="sec-5-5">5.5 Opções avançadas (Advanced)</h3>
+<p>Os valores padrão são apropriados para a maioria das aplicações.</p>
+<h4 class="option" id="opt-b"><code>-b, -batch-size</code> <span class="opt-type">[inteiro; padrão: 1e7]</span></h4>
+<p>Define quantos k-mers candidatos são carregados e filtrados por vez. Com k = 25, cada candidata ocupa aproximadamente 170 bytes. Assim, o lote padrão de 10 milhões de candidatas requer cerca de 1,58 GiB, além do orçamento de memória definido por <a href="#opt-m"><code>-m</code></a>. Reduza este valor em computadores com pouca memória disponível; lotes menores podem aumentar o tempo de execução.</p>
+<h4 class="option" id="opt-s"><code>-s, -min-subseq</code> <span class="opt-type">[inteiro; padrão: 7]</span></h4>
+<p>Define o comprimento mínimo dos fragmentos de sonda considerados no cálculo de Purity. Funciona em conjunto com <a href="#opt-subseq-step"><code>-subseq-step</code></a>.</p>
+<h4 class="option" id="opt-subseq-step"><code>-subseq-step</code> <span class="opt-type">[inteiro; padrão: arredondamento de k/10 para cima]</span></h4>
+<p>Define quanto o comprimento dos fragmentos diminui a cada etapa do cálculo de Purity. Por exemplo, para k = 25, o passo padrão é 3, portanto os comprimentos analisados são 22, 19, 16, 13, 10 e 7. Um passo menor examina mais comprimentos de fragmentos e aumenta o trabalho de comparação.</p>
+<h4 class="option" id="opt-tmp-dir"><code>-tmp-dir</code> <span class="opt-type">[pasta; padrão: pasta temporária do sistema]</span></h4>
+<p>Define o local dos arquivos intermediários. O NPSeeker cria sua própria subpasta nesse local e a remove quando a execução termina normalmente ou é interrompida com Ctrl-C. Se o disco do sistema tiver pouco espaço livre, escolha uma pasta em outro disco.</p>
+<h3 id="sec-5-6">5.6 Interface gráfica e ajuda (Graphical interface)</h3>
+<table>
+<tr><td><code>--gui</code></td><td>Inicia a interface gráfica local em vez de executar diretamente uma análise pela linha de comando</td></tr>
+<tr><td><code>-gui-port</code> [inteiro]</td><td>Porta de acesso à interface (número após os dois-pontos na URL); padrão: escolhida automaticamente</td></tr>
+<tr><td><code>--no-browser</code></td><td>Mostra a URL da interface sem abrir o navegador</td></tr>
+<tr><td><code>--tab</code></td><td>Abre a interface em uma aba do navegador</td></tr>
+<tr><td><code>-h</code></td><td>Mostra a ajuda resumida</td></tr>
+<tr><td><code>-help</code> [KEYWORD]</td><td>Mostra toda a ajuda ou a ajuda de uma opção ou seção</td></tr>
+</table>
+<p><code>--gui</code> só pode ser combinada com <code>-gui-port</code>, <code>--no-browser</code> e <code>--tab</code>. Ajuste parâmetros de análise, como <a href="#opt-k"><code>-k</code></a>, dentro da interface; informá<code>-los</code> na linha de comando junto com <code>--gui</code> causa um erro. Consulte o <a href="#ch-6">capítulo 6</a>.</p>
+<h2 id="ch-6">6. Interface gráfica</h2>
+<p>O NPSeeker inicia um pequeno servidor web em seu computador, acessível somente nesse computador (127.0.0.1), e utiliza o navegador como interface. O próprio NPSeeker executa a análise: seus arquivos genômicos não são enviados para um site externo. Com os mesmos parâmetros, a interface gráfica e a linha de comando produzem resultados idênticos.</p>
+<h3 id="sec-6-1">6.1 Iniciar e acessar a interface</h3>
+<ul>
+<li>Windows: Clique duas vezes em <code>npseeker.exe</code> na pasta <code>bin/</code> ou execute <code>.\bin\npseeker.exe</code> <code>--gui</code> pelo Prompt de Comando. O programa abre uma janela de console (janela de texto que mostra suas mensagens). Mantenha essa janela aberta enquanto utilizar a interface.</li>
+<li>macOS, Linux: Execute <code>./bin/npseeker</code> <code>--gui</code> em um terminal.</li>
+</ul>
+<p>Normalmente, o NPSeeker abre o navegador automaticamente e também mostra o endereço da interface no terminal, por exemplo:</p>
+<pre>http://127.0.0.1:53817/?t=1a2b3c...</pre>
+<p>A parte após ?t= é um token de acesso exclusivo da sessão atual. Se o navegador não abrir, copie a URL completa e cole-a na barra de endereços. Como o endereço contém um token de acesso, evite compartilhá<code>-lo</code> desnecessariamente.</p>
+<p>Por padrão, a interface abre em uma janela separada. Navegadores como Edge e Chrome usam uma janela em estilo de aplicativo, sem barra de endereços; o Firefox abre uma nova janela. Use <code>--tab</code> para abrir a interface em uma aba do navegador padrão.</p>
+<h3 id="sec-6-2">6.2 Páginas principais</h3>
+<table>
+<tr><td>Design</td><td>Selecione os genomas Target e Control, uma pasta de saída opcional e o comprimento da sonda. É possível escolher pastas ou arquivos FASTA individuais, inclusive arquivos compactados de diferentes locais. "Tick all" seleciona todos os arquivos de uma pasta; "Pick folder" e "Pick files" abrem as caixas de seleção de arquivos do sistema operacional. Expanda as opções adicionais quando necessário; campos vazios usam os valores padrão. "Check" valida os dados e parâmetros, e "Go" inicia a análise.</td></tr>
+<tr><td>Run</td><td>Mostra a etapa atual, o progresso e o registro da execução. "Cancel" interrompe a análise.</td></tr>
+<tr><td>Results</td><td>Permite consultar as sondas classificadas, suas sequências e pontuações. Clique no cabeçalho de uma coluna para ordenar os dados; Rank conserva a classificação original do NPSeeker. Clique em uma sonda para visualizar seu complemento reverso, a temperatura de fusão ou copiar a sequência. Baixe os arquivos individualmente ou todos em um arquivo zip.</td></tr>
+<tr><td>Help</td><td>Apresenta o manual do usuário e permite trocar de idioma.</td></tr>
+<tr><td>About</td><td>Mostra informações sobre o programa, o artigo, os autores e os contatos.</td></tr>
+</table>
+<p>A página Results também oferece links para dois serviços externos:</p>
+<ul>
+<li>BLAST at NCBI: Abre o NCBI BLAST com a sequência da sonda selecionada para procurar sequências semelhantes em outros organismos.</li>
+<li>Fold at UNAFold: Envia a sequência ao UNAFold (mfold) para prever estruturas de dobramento do DNA, usando os valores padrão do formulário do site (37 °C, 1 M Na+).</li>
+</ul>
+<div class="note"><p>Esses dois serviços exigem conexão com a internet e transmitem a sequência da sonda selecionada para um site externo. Antes de usá<code>-los</code> com sequências ainda não publicadas, verifique se seu compartilhamento é apropriado.</p></div>
+<p>Se nenhuma pasta de saída for especificada, a interface gráfica guarda temporariamente os resultados no disco local. Esses arquivos são apagados quando a interface é encerrada. Baixe os arquivos que desejar conservar antes de sair.</p>
+<h3 id="sec-6-3">6.3 Fechar a interface e preservar os resultados</h3>
+<ul>
+<li>"Close" fecha apenas a página do navegador; o NPSeeker continua funcionando. Para voltar à interface, abra novamente a URL mostrada no console.</li>
+<li>"Exit" encerra a interface e interrompe qualquer análise ainda em andamento. Fechar a janela do console ou pressionar Ctrl-C também encerra o programa.</li>
+<li>Se todas as páginas da interface permanecerem fechadas por mais de cinco minutos, sem uma análise em execução, o NPSeeker será encerrado automaticamente. Os resultados temporários ainda não baixados serão apagados.</li>
+</ul>
+<p>A interface solicita confirmação ao clicar em "Exit" ou "Close" e avisa quando há uma análise em andamento ou resultados temporários que ainda não foram baixados.</p>
+<p>Se você informou uma pasta de saída, os resultados permanecem nela. Executar outra análise com a mesma pasta substitui os arquivos de resultados anteriores do NPSeeker, mas preserva os arquivos não relacionados.</p>
+<p>Você pode selecionar Auto, Dark ou Light como tema da interface. Auto acompanha a aparência clara ou escura do sistema operacional.</p>
+<h3 id="sec-6-4">6.4 Acessar a interface em um servidor remoto</h3>
+<p>Se o NPSeeker estiver sendo executado em um servidor remoto, você poderá acessar sua interface pelo navegador do seu computador usando um túnel SSH (uma conexão criptografada que encaminha uma porta local ao servidor). Primeiro, inicie o NPSeeker no servidor e especifique uma porta:</p>
+<pre>./bin/npseeker --gui --no-browser -gui-port 53817</pre>
+<p>Depois, no seu próprio computador, abra um terminal e estabeleça o túnel SSH:</p>
+<pre>ssh -L 53817:127.0.0.1:53817 username@server</pre>
+<p>Mantenha a conexão SSH aberta. No navegador local, informe a URL completa exibida pelo NPSeeker no servidor. Você também pode escolher outra porta local, por exemplo:</p>
+<pre>ssh -L 9000:127.0.0.1:53817 username@server</pre>
+<p>Nesse caso, substitua o endereço base por <a href="http://127.0.0.1:9000/">http://127.0.0.1:9000/</a>, mantendo o token de acesso original ?t=.</p>
+<div class="note"><p>No acesso remoto, a interface mostra os arquivos do servidor, não os do seu computador. "Pick folder" e "Pick files" também abrem caixas de seleção no servidor. Se ele não tiver ambiente gráfico, essas caixas não estarão disponíveis; utilize o navegador de arquivos integrado à interface do NPSeeker.</p></div>
+<h3 id="sec-6-5">6.5 Localização dos arquivos de configuração</h3>
+<p>Para facilitar o uso em sessões futuras, o NPSeeker guarda as pastas usadas recentemente em <code>recent.txt</code> e o último local selecionado em <code>lastpick.txt</code>. Esses pequenos arquivos ficam em:</p>
+<table>
+<tr><td>Linux</td><td><code>~/.config/npseeker/</code></td></tr>
+<tr><td>macOS</td><td><code>~/Library/Application Support/npseeker/</code></td></tr>
+<tr><td>Windows</td><td><code>%AppData%\npseeker\</code></td></tr>
+</table>
+<p>Os arquivos intermediários criados durante a análise ficam na pasta temporária do sistema ou no local definido por <a href="#opt-tmp-dir"><code>-tmp-dir</code></a>, não nas pastas de configuração acima.</p>
+<h2 id="ch-7">7. Desempenho e solução de problemas</h2>
+<h3 id="sec-7-1">7.1 Memória, tempo de execução e arquivos temporários</h3>
+<ul>
+<li>Memória: <a href="#opt-m"><code>-m</code></a> limita a memória usada pelas principais etapas de processamento. Os lotes de candidatas carregados com <a href="#opt-b"><code>-b</code></a> e outros dados de execução exigem memória adicional. Se houver pouca memória disponível, reduza tanto <a href="#opt-m"><code>-m</code></a> quanto <a href="#opt-b"><code>-b</code></a>.</li>
+<li>Threads: <a href="#opt-t"><code>-t</code></a> 0 utiliza todos os threads de hardware disponíveis. Reduza esse número se o computador também estiver executando outras tarefas.</li>
+<li>Tempo: A duração depende do tamanho dos genomas, da quantidade de candidatas compartilhadas, de <a href="#opt-mm"><code>-mm</code></a>, da memória disponível, do hardware e da velocidade do disco. Aumentar k não necessariamente torna a análise mais lenta. Use <a href="#opt-v"><code>-v</code></a> para verificar o tempo gasto em cada etapa.</li>
+<li>Arquivos temporários: O NPSeeker cria arquivos intermediários durante a análise. Seu tamanho depende dos dados e do orçamento de memória; um orçamento menor geralmente exige mais espaço temporário em disco. Garanta espaço livre suficiente. Os arquivos temporários são removidos após a conclusão normal ou a interrupção com Ctrl-C.</li>
+</ul>
+<h3 id="sec-7-2">7.2 Mensagens de erro comuns</h3>
+<p>Mensagens referentes a opções ou parâmetros inválidos começam com "npseeker:". Erros de entrada, saída ou execução começam com "Error:". Veja alguns problemas comuns e como resolvê<code>-los</code>. Se target for substituído por control, o erro se refere à entrada de controle.</p>
+<ul>
+<li><code class="message">Error: target: no FASTA file (*.fasta, *.fna or *.fa) in the folder ...</code><br>A pasta não contém arquivos com as extensões FASTA reconhecidas. Para arquivos compactados, use uma lista de arquivos (<a href="#sec-2-2">seção 2.2</a>).</li>
+<li><code class="message">Error: target: "..." is not found</code><br>O caminho está incorreto. Lembre-se de que caminhos relativos começam na pasta em que o NPSeeker foi executado.</li>
+<li><code class="message">Error: target: "..." is not a FASTA file: ...</code><br>O arquivo não possui formato FASTA válido; o texto após os dois-pontos explica o problema.</li>
+<li><code class="message">Error: target: the FASTA file "...", listed in "...", is not found</code><br>Um arquivo indicado na lista não foi encontrado.</li>
+<li><code class="message">Error: target and control: ...; a genome cannot be both a target and a control</code><br>O mesmo arquivo aparece nos dois conjuntos de entrada.</li>
+<li><code class="message">Error: -o: the folder "..." already exists and is not empty; give -w ...</code><br>A pasta de saída não está vazia. Escolha outra pasta ou acrescente <a href="#opt-w"><code>-w</code></a> caso seja seguro substituir os resultados anteriores.</li>
+<li><code class="message">npseeker: option -mm: must be less than the probe length (-k)</code><br>O limite de diferenças de bases deve ser menor que o comprimento da sonda.</li>
+<li><code class="message">npseeker: option -c: no probe of 8 nt has a complexity score above 0.431 ...</code><br>O limite escolhido ultrapassa a maior pontuação possível para esse comprimento de sonda (0.431 neste exemplo). Reduza o limite (<a href="#sec-5-4">seção 5.4</a>).</li>
+<li><code class="message">Error: -tmp-dir: cannot create the folder "...": ...</code><br>O NPSeeker não conseguiu criar a pasta temporária. Verifique o caminho e as permissões de escrita.</li>
+</ul>
+<h3 id="sec-7-3">7.3 Saída padrão e saída de erro padrão</h3>
+<p>O texto exibido no terminal passa por dois fluxos distintos: saída padrão (stdout) e saída de erro padrão (stderr). Normalmente, ambos aparecem na tela. A diferença fica evidente ao redirecionar a saída para um arquivo, por exemplo, acrescentando &gt; <code>out.txt</code> ao comando: stdout será gravado nesse arquivo, enquanto stderr continuará aparecendo na tela.</p>
+<p>O NPSeeker escreve os resultados, os registros detalhados de <a href="#opt-v"><code>-v</code></a> e as mensagens de erro em stdout. Notas iniciadas por Note:, avisos iniciados por Warning: e barras de progresso são enviados a stderr. Dessa forma, o arquivo redirecionado fica livre das mensagens de progresso, mas os avisos continuam visíveis no terminal.</p>
+<h3 id="sec-7-4">7.4 Nenhuma sonda encontrada ou execução lenta</h3>
+<p>Se nenhuma candidata passar pelos filtros, o NPSeeker mostrará:</p>
+<pre>Warning: no probe passed the filters; relax the thresholds
+         (-max-homopolymer, -c, -e, -min-unfold) to let probes pass.</pre>
+<p>Experimente flexibilizar <a href="#opt-min-unfold"><code>-min-unfold</code></a>, <a href="#opt-c"><code>-c</code></a>, <a href="#opt-e"><code>-e</code></a> ou <a href="#opt-max-homopolymer"><code>-max-homopolymer</code></a> (<a href="#sec-5-4">seção 5.4</a>). Se os genomas-alvo compartilharem poucos k-mers, tente diminuir <a href="#opt-k"><code>-k</code></a> ou ajustar <a href="#opt-min-shared"><code>-min-shared</code></a> e <a href="#opt-mode"><code>-mode</code></a> (<a href="#ch-4">capítulo 4</a>). Use <a href="#opt-v"><code>-v</code></a> para verificar quantas candidatas permanecem e quanto tempo cada etapa consome.</p>
+<p>Se a análise estiver inesperadamente lenta, verifique se a memória exigida por <a href="#opt-m"><code>-m</code></a>, pelos lotes de candidatas (<a href="#opt-b"><code>-b</code></a>) e pelas demais tarefas cabe na memória física disponível. Caso contrário, o sistema operacional poderá transferir dados da memória para o disco, reduzindo muito o desempenho. Se <a href="#opt-mm"><code>-mm</code></a> estiver alto, compare a execução com seu valor padrão. Em conjuntos de dados grandes, confira também a velocidade do disco e o espaço livre na pasta temporária.</p>
+<h2 id="ch-8">8. Exemplos de uso</h2>
+<p>Os exemplos abaixo usam a sintaxe do macOS e do Linux. No Windows, substitua <code>./bin/npseeker</code> por <code>.\bin\npseeker.exe</code> e use <code>\</code> no lugar de <code>/</code> nos caminhos de arquivos. Cada exemplo pode ser executado separadamente. Se <code>result/</code> já contiver arquivos de uma execução anterior, escolha outra pasta de saída ou acrescente <a href="#opt-w"><code>-w</code></a> somente se pretender substituir os resultados anteriores do NPSeeker.</p>
+<p>Análise básica, salvando os resultados em <code>result/</code>:</p>
+<pre>./bin/npseeker dat/sample/S.aureus/ dat/sample/yeast/ -o result/</pre>
+<p>Ler os alvos de uma lista de arquivos e agrupá<code>-los</code> na ordem indicada:</p>
+<pre>./bin/npseeker @target.list controls/ -cluster-order input -o result/</pre>
+<p>Projetar sondas de 31 nucleotídeos com 32 threads e 16 GiB de memória:</p>
+<pre>./bin/npseeker targets/ controls/ -k 31 -t 32 -m 16G -o result/</pre>
+<p>Dar maior peso a exclusividade e pureza na pontuação geral:</p>
+<pre>./bin/npseeker targets/ controls/ -weights exc=2,pur=2 -o result/</pre>
+<p>Buscar sondas candidatas separadamente para vários grupos de alvos:</p>
+<pre>./bin/npseeker targets/ controls/ -min-shared 20000 -mode multi -o result/</pre>
+<p>Reproduzir a classificação das sondas bacterianas da Tabela 3 do artigo, usando os parâmetros do estudo em vez de todos os padrões (os conjuntos de dados são um download separado; veja a <a href="#sec-0-2">seção 0.2</a>):</p>
+<pre>./bin/npseeker dat/datasets/GP/ dat/datasets/GN/ -k 23 -min-unfold 70 \
+    -weights exc=2,pur=2 -o GP_probes/
+./bin/npseeker dat/datasets/GN/ dat/datasets/GP/ -k 23 -min-unfold 70 \
+    -weights exc=2,pur=2 -o GN_probes/</pre>
+<p>O parâmetro <a href="#opt-min-unfold"><code>-min-unfold</code></a> 70 permite incluir a sonda para bactérias Gram-positivas avaliada experimentalmente, cuja pontuação Unfoldability é 72,54. Nos comandos acima, <code>\</code> ao final da linha indica a continuação do comando no macOS e no Linux. No Prompt de Comando do Windows, use ^; no PowerShell, use o acento grave (`). Outra opção é digitar o comando inteiro em uma única linha.</p>
+<p>Parte do conjunto de dados usado no artigo vem do ATCC Genome Portal, cujos termos de uso não permitem a redistribuição. Por isso, a pasta <code>dat/datasets/</code> contém dados correspondentes do NCBI; o arquivo <code>dat/datasets/sources.txt</code> relaciona cada arquivo ao conjunto de dados do artigo. Com esses dados, as sequências e as posições das duas sondas da Tabela 3 são reproduzidas exatamente, mas o número de candidatas, as contagens de ocorrências e as pontuações diferem ligeiramente. Um desses genomas, S. enterica ATCC 43976, só tem no NCBI uma montagem incompleta (falta parte do seu rRNA 23S). Se ele for deixado de fora quando GN for o alvo (desmarque-o na interface gráfica ou use a lista de arquivos <code>@dat/datasets/GN-without-43976.list</code> na linha de comando), o número de candidatas volta a 65, e as 8 primeiras sondas da Tabela Suplementar S3 também coincidem com as do artigo.</p>
+<p>Salvar os resultados como tabelas legíveis e incluir mais sondas candidatas:</p>
+<pre>./bin/npseeker targets/ controls/ -format txt -top 1000 -o result/</pre>
+<h2 id="app-A">Apêndice A  Referência rápida das opções</h2>
+<table>
+<tr><th>Opção</th><th>Padrão</th><th>Finalidade (seção)</th></tr>
+<tr><td><a href="#opt-k"><code>-k</code></a>, <a href="#opt-k"><code>-kmer</code></a></td><td>25</td><td>Comprimento, 5 a 256 nt (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-t"><code>-t</code></a>, <a href="#opt-t"><code>-threads</code></a></td><td>0</td><td>Threads de processamento (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-m"><code>-m</code></a>, <a href="#opt-m"><code>-memory</code></a></td><td>Metade da RAM, até 8G</td><td>Orçamento de memória (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-o"><code>-o</code></a>, <a href="#opt-o"><code>-out-dir</code></a></td><td>Não salvar</td><td>Pasta de saída (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-w"><code>-w</code></a>, <a href="#opt-w"><code>--overwrite</code></a></td><td>Desativado</td><td>Substituir resultados (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-top"><code>-top</code></a></td><td>200</td><td>Sondas por classificação (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-format"><code>-format</code></a></td><td>csv</td><td>Saída csv ou txt (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-v"><code>-v</code></a>, <a href="#opt-v"><code>--verbose</code></a></td><td>Desativado</td><td>Registro detalhado (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-cluster-order"><code>-cluster-order</code></a></td><td>auto</td><td>Ordem dos genomas (<a href="#ch-4">4</a>, <a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-min-shared"><code>-min-shared</code></a></td><td>1</td><td>Mínimo de k-mers comuns (<a href="#ch-4">4</a>, <a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-mode"><code>-mode</code></a></td><td>single</td><td>Modos single ou multi (<a href="#ch-4">4</a>, <a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-weights"><code>-weights</code></a></td><td>Todos 1</td><td>Pesos das pontuações (<a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-mm"><code>-mm</code></a>, <a href="#opt-mm"><code>-mismatch-cutoff</code></a></td><td>floor(k/10)</td><td>Máximo de diferenças (<a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-max-homopolymer"><code>-max-homopolymer</code></a></td><td>3</td><td>Máximo de bases repetidas (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-c"><code>-c</code></a>, <a href="#opt-c"><code>-min-complexity</code></a></td><td>0.5</td><td>Complexidade mínima (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-e"><code>-e</code></a>, <a href="#opt-e"><code>-min-entropy</code></a></td><td>1.5</td><td>Entropia mínima (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-prefilter"><code>-prefilter</code></a></td><td>T</td><td>Filtragem antecipada (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-min-unfold"><code>-min-unfold</code></a></td><td>75</td><td>Limite de Unfoldability (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-b"><code>-b</code></a>, <a href="#opt-b"><code>-batch-size</code></a></td><td>1e7</td><td>Candidatas por lote (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-s"><code>-s</code></a>, <a href="#opt-s"><code>-min-subseq</code></a></td><td>7</td><td>Menor comprimento (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-subseq-step"><code>-subseq-step</code></a></td><td>ceiling(k/10)</td><td>Passo do comprimento (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-tmp-dir"><code>-tmp-dir</code></a></td><td>Pasta temporária</td><td>Arquivos intermediários (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><code>--gui</code></td><td>Desativado</td><td>Interface gráfica (<a href="#sec-5-6">5.6</a>, <a href="#ch-6">6</a>)</td></tr>
+<tr><td><code>-gui-port</code></td><td>Automática</td><td>Porta da interface (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>--no-browser</code></td><td>Desativado</td><td>Não abrir navegador (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>--tab</code></td><td>Desativado</td><td>Abrir em aba (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>-h</code></td><td colspan="2">Ajuda resumida (<a href="#sec-0-6">0.6</a>, <a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>-help</code> [KEYWORD]</td><td colspan="2">Ajuda detalhada (<a href="#sec-0-6">0.6</a>, <a href="#sec-5-6">5.6</a>)</td></tr>
+</table>
+</main>
+</div>
+</body>
+</html>

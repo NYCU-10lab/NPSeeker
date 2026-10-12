@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="manual2html.py (from UserManual-zh-TW.txt; do not edit by hand)">
+<title>NPSeeker 使用說明</title>
+<style>
+:root { color-scheme: light dark; --text: #1f2933; --bg: #ffffff; --muted: #6b7a88; --line: #d9dee3;
+        --code-bg: #f3f5f7; --nav-bg: #f4f6f8; --note-bg: #fff8e1; --note-line: #e0b84a; --accent: #1f6feb; }
+@media (prefers-color-scheme: dark) {
+  :root { --text: #e6edf3; --bg: #0f1419; --muted: #9aa7b4; --line: #333b44;
+          --code-bg: #1a2027; --nav-bg: #1a2027; --note-bg: #3a3218; --note-line: #b8932f; --accent: #58a6ff; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+       font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif; }
+.wrap { max-width: 1240px; margin: 0 auto; display: flex; gap: 2.5rem; padding: 0 1.25rem; }
+nav.toc { flex: 0 0 16rem; position: sticky; top: 0; align-self: flex-start; max-height: 100vh; overflow-y: auto;
+          padding: 1.5rem 0 3rem; font-size: .88rem; line-height: 1.45; }
+nav.toc a { display: block; padding: .2rem .5rem; color: var(--text); text-decoration: none; border-radius: 3px; }
+nav.toc a:hover { background: var(--nav-bg); color: var(--accent); }
+nav.toc a.sub { padding-left: 1.4rem; color: var(--muted); font-size: .84rem; }
+main { flex: 1; min-width: 0; padding: 1.5rem 0 5rem; }
+[id] { scroll-margin-top: 1rem; }
+a { color: var(--accent); }
+code, pre { font-family: ui-monospace, "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace; font-size: .92em; }
+code { white-space: nowrap; }
+code.message { white-space: normal; overflow-wrap: anywhere; }
+h1 { margin-top: 0; }
+h2 { border-bottom: 1px solid var(--line); padding-bottom: 4px; margin-top: 2em; }
+h4.option { margin: 1.4em 0 .4em; }
+.opt-type, .version, .toc-title { color: var(--muted); font-weight: normal; }
+.toc-title { text-transform: uppercase; letter-spacing: .06em; font-size: .78rem; margin: 0 0 .5rem; }
+pre { background: var(--code-bg); padding: 10px 12px; overflow-x: auto; border-radius: 4px; }
+table { border-collapse: collapse; margin: .6em 0; }
+th, td { text-align: left; vertical-align: top; padding: 3px 14px 3px 0; }
+td:first-child { white-space: nowrap; }
+th { border-bottom: 1px solid var(--line); }
+.note { background: var(--note-bg); border-left: 4px solid var(--note-line); padding: 2px 12px; margin: 1em 0; }
+.toc-head { display: flex; align-items: center; border-radius: 3px; }
+.toc-head:hover { background: var(--nav-bg); }
+.toc-head a { flex: 1; }
+nav.toc .toc-head a:hover { background: none; }
+.js .toc-subs { display: none; }
+.js .toc-ch.open .toc-subs { display: block; }
+.toc-toggle { flex: none; width: 26px; height: 24px; border: 0; background: none; padding: 0; cursor: pointer;
+              color: var(--muted); display: flex; align-items: center; justify-content: center; }
+.toc-toggle:hover { color: var(--accent); }
+.toc-toggle::before { content: ""; width: 6px; height: 6px; border-right: 1.5px solid currentColor;
+                      border-bottom: 1.5px solid currentColor; transform: rotate(-45deg); transition: transform .15s; }
+.toc-ch.open .toc-toggle::before { transform: rotate(45deg); }
+@media (max-width: 900px) {
+  .wrap { flex-direction: column; gap: 0; }
+  nav.toc { position: static; max-height: none; flex: none; border-bottom: 1px solid var(--line); }
+  .js nav.toc:not(.open) .toc-ch { display: none; }
+  .js .toc-title { cursor: pointer; font-size: .88rem; }
+  .js .toc-title::before { content: "\25B8  "; }
+  .js nav.toc.open .toc-title::before { content: "\25BE  "; }
+}
+</style>
+<script>
+document.documentElement.classList.add('js');
+document.addEventListener('DOMContentLoaded', function () {
+  var nav = document.querySelector('nav.toc');
+  if (!nav) return;
+  nav.querySelectorAll('.toc-ch').forEach(function (ch) {
+    if (!ch.querySelector('.toc-subs a')) return;
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'toc-toggle'; b.title = 'Show or hide the sections';
+    ch.firstElementChild.appendChild(b);
+  });
+  nav.querySelector('.toc-title').addEventListener('click', function () { nav.classList.toggle('open'); });
+  nav.addEventListener('click', function (e) {
+    var t = e.target.closest('.toc-toggle');
+    if (t) { t.closest('.toc-ch').classList.toggle('open'); return; }
+    var a = e.target.closest('a');
+    if (!a) return;
+    if (a.closest('.toc-ch')) a.closest('.toc-ch').classList.add('open');
+    nav.classList.remove('open');
+  });
+  var cur = Array.prototype.find.call(nav.querySelectorAll('a'), function (a) { return a.hash && a.hash === location.hash; });
+  if (cur && cur.closest('.toc-ch')) cur.closest('.toc-ch').classList.add('open');
+});
+</script>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc">
+<p class="toc-title">目錄</p>
+<div class="toc-ch"><div class="toc-head"><a href="#intro-2">關於 NPSeeker</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#intro-8">關於本書</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-0">0. 快速開始</a></div><div class="toc-subs">
+<a href="#sec-0-1" class="sub">0.1 下載適合的版本</a>
+<a href="#sec-0-2" class="sub">0.2 解壓縮與資料夾內容</a>
+<a href="#sec-0-3" class="sub">0.3 確認程式能執行</a>
+<a href="#sec-0-4" class="sub">0.4 用網頁介面計算</a>
+<a href="#sec-0-5" class="sub">0.5 用命令列計算</a>
+<a href="#sec-0-6" class="sub">0.6 查閱程式說明</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-1">1. NPSeeker 如何設計與評分探針</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-2">2. 準備目標與對照基因體</a></div><div class="toc-subs">
+<a href="#sec-2-1" class="sub">2.1 資料夾</a>
+<a href="#sec-2-2" class="sub">2.2 清單檔</a>
+<a href="#sec-2-3" class="sub">2.3 單一 FASTA 檔</a>
+<a href="#sec-2-4" class="sub">2.4 FASTA 檔的內容與檢查</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-3">3. 閱讀結果與挑選探針</a></div><div class="toc-subs">
+<a href="#sec-3-1" class="sub">3.1 畫面上的結果</a>
+<a href="#sec-3-2" class="sub">3.2 結果檔</a>
+<a href="#sec-3-3" class="sub">3.3 怎麼挑探針</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-4">4. 目標分群與 single, multi 模式</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-5">5. 選項與參數</a></div><div class="toc-subs">
+<a href="#sec-5-1" class="sub">5.1 探針長度與計算資源 (General settings)</a>
+<a href="#sec-5-2" class="sub">5.2 輸出與紀錄 (Output)</a>
+<a href="#sec-5-3" class="sub">5.3 分群與排名 (Target clustering, Probe ranking)</a>
+<a href="#sec-5-4" class="sub">5.4 候選過濾 (Candidate filtering)</a>
+<a href="#sec-5-5" class="sub">5.5 進階選項 (Advanced)</a>
+<a href="#sec-5-6" class="sub">5.6 網頁介面與說明 (Graphical interface)</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-6">6. 網頁介面</a></div><div class="toc-subs">
+<a href="#sec-6-1" class="sub">6.1 啟動與連線</a>
+<a href="#sec-6-2" class="sub">6.2 主要頁面</a>
+<a href="#sec-6-3" class="sub">6.3 Close, Exit 與結果的保存</a>
+<a href="#sec-6-4" class="sub">6.4 在遠端伺服器上操作</a>
+<a href="#sec-6-5" class="sub">6.5 設定檔的位置</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-7">7. 效能與問題排除</a></div><div class="toc-subs">
+<a href="#sec-7-1" class="sub">7.1 記憶體、時間與暫存檔</a>
+<a href="#sec-7-2" class="sub">7.2 常見的錯誤訊息</a>
+<a href="#sec-7-3" class="sub">7.3 畫面上的兩種訊息</a>
+<a href="#sec-7-4" class="sub">7.4 沒有候選探針或執行很慢</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-8">8. 常用範例</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#app-A">附錄 A  選項一覽</a></div><div class="toc-subs">
+</div></div>
+</nav>
+<main>
+<h1>NPSeeker 使用說明</h1>
+<p class="version">版本 1.5.42</p>
+<h2 id="intro-2">關於 NPSeeker</h2>
+<p>NPSeeker (Nucleic Acid Probe Seeker) 是從基因體序列設計核酸探針的程式, 主要用來替 BioFET (生物場效電晶體) 這類生物晶片挑選探針。核酸探針是一小段 DNA 序列, 能與目標生物的 DNA 結合, 用來偵測或辨識生物。</p>
+<p>使用者給 NPSeeker 兩組基因體: 目標 (要偵測到的組別) 與對照 (不該偵測到的組別)。NPSeeker 先找出每一個目標都有的 DNA 片段, 再評估它們與對照有多像、與目標結合得多穩、會不會自己摺起來, 最後依分數排名列出候選探針。探針的長度可以設定, 5 到 256 個鹼基。</p>
+<p>本軟體對應的研究論文與聯絡資訊:</p>
+<table>
+<tr><td>論文</td><td>NPSeeker: A BioFET-oriented Nucleic Acid Probe Design Algorithm for Efficient Species Identification and Classification</td></tr>
+<tr><td>作者</td><td>Hao-Yu Peng, Hui Zhi Gan, et al.</td></tr>
+<tr><td>網站</td><td><a href="https://10lab.ceb.nycu.edu.tw/NPSeeker/">https://10lab.ceb.nycu.edu.tw/NPSeeker/</a></td></tr>
+<tr><td>GitHub</td><td><a href="https://github.com/NYCU-10lab/NPSeeker/">https://github.com/NYCU-10lab/NPSeeker/</a></td></tr>
+<tr><td>聯絡</td><td><a href="mailto:WadeLo@nycu.edu.tw">WadeLo@nycu.edu.tw</a></td></tr>
+</table>
+<p>使用本軟體進行研究時, 敬請引用上述論文。</p>
+<h2 id="intro-8">關於本書</h2>
+<p>第一次使用, 請從<a href="#ch-0">第 0 章</a>開始。只想用網頁介面的話, 讀完 <a href="#sec-0-1">0.1</a> 到 <a href="#sec-0-3">0.3</a> 節之後, 可以直接跳到 <a href="#sec-0-4">0.4 節</a>。要準備自己的資料時, 看<a href="#ch-2">第 2 章</a>; 要調整參數時, 看<a href="#ch-5">第 5 章</a>。</p>
+<p>程式本身也有說明: <code>-h</code> 列出常用的選項, <code>-help</code> 列出全部的選項, 內容與本書一致; 本書多了操作步驟、例子與建議。本書有純文字版 (<code>UserManual-zh-TW.txt</code>) 與網頁版 (<code>UserManual-zh-TW.html</code>), 內容相同; 網頁介面的 Help 頁也可以閱讀本書。</p>
+<h2 id="ch-0">0. 快速開始</h2>
+<div class="note"><p>本書的指令以 macOS 與 Linux 的寫法為主。Windows 的寫法不同時, 會另外列出。</p></div>
+<p>沒有用命令列跑過程式的話, 請照著這一章一步一步做。</p>
+<h3 id="sec-0-1">0.1 下載適合的版本</h3>
+<p>從 NPSeeker 網站或 GitHub 下載自己作業系統的壓縮檔, 共有三種: Windows, macOS, Linux。每個壓縮檔裡都有兩種處理器架構的執行檔:</p>
+<table>
+<tr><td>x86_64</td><td>一般的 Intel 與 AMD 處理器</td></tr>
+<tr><td>arm64</td><td>Apple M 系列晶片的 Mac, 以及使用 ARM 處理器的電腦</td></tr>
+</table>
+<p>不知道自己的電腦是哪一種時:</p>
+<ul>
+<li>Windows: 打開「設定 -&gt; 系統 -&gt; 關於」, 「系統類型」寫 x64 的是 x86_64, 寫 ARM64 的是 arm64。</li>
+<li>macOS: 打開「蘋果選單 -&gt; 關於這台 Mac」, 「晶片」寫 Apple M1、M2 等的是 arm64,「處理器」寫 Intel 的是 x86_64。</li>
+<li>Linux: 打開終端機, 輸入 uname <code>-m</code> 再按 Enter; 印出 x86_64 的是 x86_64, 印出 aarch64 的是 arm64。</li>
+</ul>
+<h3 id="sec-0-2">0.2 解壓縮與資料夾內容</h3>
+<p>把壓縮檔解開到任何一個資料夾:</p>
+<ul>
+<li>Windows: 在壓縮檔上按滑鼠右鍵, 選「解壓縮全部」。</li>
+<li>macOS: 在壓縮檔上雙按滑鼠左鍵。</li>
+<li>Linux: 在終端機執行 tar xzf 加壓縮檔的檔名。</li>
+</ul>
+<p>解開後是一個 NPSeeker 資料夾, 裡面有:</p>
+<table>
+<tr><td><code>bin/</code></td><td>x86_64 的執行檔 npseeker (Windows 是 <code>npseeker.exe</code>)</td></tr>
+<tr><td><code>bin.arm64/</code></td><td>arm64 的執行檔</td></tr>
+<tr><td><code>doc/</code></td><td>使用說明</td></tr>
+<tr><td><code>dat/sample/</code></td><td>第一次計算用的範例資料</td></tr>
+</table>
+<p>論文用的細菌基因體 (革蘭氏陰性菌 <code>GN/</code> 與陽性菌 <code>GP/</code>) 要另外下載 (NPSeeker-1.5.42-datasets.zip 或 <code>.tar.gz</code>)。可以把它解開, 再把裡面的 datasets 資料夾 (在 <code>NPSeeker/dat/</code> 底下) 搬進程式的 <code>dat/</code> 資料夾裡, 就能直接照<a href="#ch-8">第 8 章</a>的指令範例來測試。</p>
+<p>NPSeeker 不必安裝, 計算時也不需要網路。本書的指令以 <code>bin/</code> 裡的 x86_64 執行檔為例; arm64 的電腦請把指令裡的 bin 換成 bin.arm64。</p>
+<h3 id="sec-0-3">0.3 確認程式能執行</h3>
+<p>先打開命令列視窗, 並切換到 NPSeeker 資料夾:</p>
+<ul>
+<li>Windows: 在檔案總管打開 NPSeeker 資料夾, 在網址列輸入 cmd 再按 Enter, 就會開啟一個位置在這個資料夾的「命令提示字元」。PowerShell 也可以, 指令相同。</li>
+<li>macOS: 打開「終端機」(應用程式 -&gt; 工具程式), 輸入 cd 加一個空格, 把 NPSeeker 資料夾拖進視窗, 再按 Enter。</li>
+<li>Linux: 打開終端機, 用 cd 切換到 NPSeeker 資料夾。</li>
+</ul>
+<p>然後輸入下面的指令, 再按 Enter:</p>
+<pre>Windows:          .\bin\npseeker.exe -h
+macOS, Linux:     ./bin/npseeker -h</pre>
+<p>畫面印出 NPSeeker 的標誌、用法與常用選項, 就表示程式可以用了。</p>
+<p>從網路下載、沒有數位簽章的程式, 第一次執行時, 作業系統會跳出安全警告。</p>
+<div class="note"><p>請先確認程式是從 NPSeeker 網站或 GitHub (「關於 NPSeeker」列出的網址) 下載的, 再照下面的方法放行。來源不明的程式不要放行。</p></div>
+<ul>
+<li>Windows: 會出現藍色的「Windows 已保護您的電腦」視窗, 說 Microsoft Defender SmartScreen 已防止無法辨識的應用程式啟動, 視窗裡只有「不要執行」一個按鈕。這時先按說明文字下方的「其他資訊」, 視窗會多列出應用程式的名稱與「發行者: 不明的發行者」, 並多出「仍要執行」按鈕; 按「仍要執行」就會啟動。同一個執行檔只會問一次。</li>
+<li>macOS: 系統不讓沒有經過 Apple 認證的程式執行。在終端機執行一次 xattr <code>-dr</code> com.apple.quarantine 加 NPSeeker 資料夾的路徑 (可以把資料夾拖進終端機視窗), 之後就不會再擋。也可以先執行一次, 被擋之後打開「系統設定 -&gt; 隱私權與安全性」, 在下方找到關於 npseeker 的訊息, 按「強制打開」。</li>
+<li>Linux: 沒有這一步。若出現 permission denied, 執行 chmod +x <code>bin/npseeker</code> (arm64 是 <code>bin.arm64/npseeker</code>) 加上執行權限, 再試一次。</li>
+</ul>
+<h3 id="sec-0-4">0.4 用網頁介面計算</h3>
+<p>不想用命令列的話, 可以改用網頁介面, 在瀏覽器裡操作。Windows 在 bin 資料夾的 <code>npseeker.exe</code> 上雙按滑鼠左鍵; macOS 與 Linux 在終端機輸入:</p>
+<pre>./bin/npseeker --gui</pre>
+<p>瀏覽器會打開 NPSeeker 的介面。第一次可以用附的範例資料試試看, 在 Design 頁:</p>
+<ul>
+<li>Target: 選 <code>dat/sample/S.aureus/</code> 資料夾, 裡面是金黃色葡萄球菌的基因體。</li>
+<li>Control: 選 <code>dat/sample/yeast/</code> 資料夾, 裡面是兩種酵母菌的基因體。</li>
+<li>Probe length: 保留預設的 25, 其他設定也先不改。</li>
+<li>按 "Check" 檢查資料與設定, 再按 "Go" 開始計算。</li>
+<li>算完後, 到 Results 頁看探針與分數, 並下載要留下的結果。</li>
+</ul>
+<p>網頁介面在自己的電腦上執行, 不會連到外部網站。各頁的功能與關閉的方法見<a href="#ch-6">第 6 章</a>。</p>
+<h3 id="sec-0-5">0.5 用命令列計算</h3>
+<p>同一組範例資料, 也可以直接從命令列算:</p>
+<pre>Windows:          .\bin\npseeker.exe dat\sample\S.aureus\ dat\sample\yeast\
+macOS, Linux:     ./bin/npseeker     dat/sample/S.aureus/ dat/sample/yeast/</pre>
+<p>幾秒內就會算完, 畫面上是依分數排名的探針 (只列出一部分):</p>
+<pre>Best probes of cluster 0:
+Rank Probe                     Exclus Purity UnFold Affini  Score     Tm
+   1 CCGACTAACCCAGAGCGGACGAGCC  50.84  61.32 100.00  64.22  69.10  65.88
+   2 GACCCGACTAACCCAGAGCGGACGA  50.84  61.40 100.00  63.68  68.98  64.24
+...</pre>
+<p>每一列是一條候選探針。Probe 是探針的序列, Score 是總分, 由高到低排列; 其他欄的意思在<a href="#ch-3">第 3 章</a>。最後的 Note 提醒: 要把完整的結果存成檔案, 請加上 <a href="#opt-o"><code>-o</code></a> 指定一個輸出資料夾:</p>
+<pre>./bin/npseeker dat/sample/S.aureus/ dat/sample/yeast/ -o result/</pre>
+<p>結果檔會存在 <code>result/</code> 資料夾 (<a href="#sec-3-2">3.2 節</a>)。之後再用同一個已經有東西的資料夾時, 請換一個新的名稱, 或確定舊結果可以覆蓋後再加 <a href="#opt-w"><code>-w</code></a>。換成自己的資料時, 把這兩個資料夾換成自己的目標與對照即可 (<a href="#ch-2">第 2 章</a>)。</p>
+<h3 id="sec-0-6">0.6 查閱程式說明</h3>
+<pre>./bin/npseeker -h               常用的選項
+./bin/npseeker -help            全部的選項
+./bin/npseeker -help -mode      只看 -mode (減號可以省略: -help mode)
+./bin/npseeker -help Output     只看 Output 這一組選項 (各組名稱見第 5 章)
+./bin/npseeker -help target     只看 target 的說明 (target 或 control)</pre>
+<p>選項寫錯時, 程式會指出哪裡寫錯、怎麼查說明, 不會開始計算。</p>
+<h2 id="ch-1">1. NPSeeker 如何設計與評分探針</h2>
+<p>NPSeeker 給它的是目標與對照的基因體, 它給出的是候選探針與排名。目標是探針要偵測到的生物, 對照是探針不該偵測到的生物 (通常是容易混淆的近親)。計算分成四步:</p>
+<ul>
+<li>找共同的序列: 把基因體的序列從頭到尾, 每次取連續 k 個鹼基, 取到的每一小段叫做一個 k-mer。例如 ACGTA 的 3-mer 有 ACG, CGT, GTA。NPSeeker 找出每一個目標都有的 k-mer, 當作候選; 只有大家都有的序列, 一條探針才能偵測到每一個目標。DNA 是兩股互相配對的鏈, 一段序列與它在另一股上的配對序列 (反向互補序列) 當成同一個 k-mer。</li>
+<li>過濾候選: 先去掉不適合當探針的序列, 例如鹼基組成太單調、同一種鹼基連成太長的一串 (例如 AAAA), 以及容易自己摺起來或與另一條相同的探針黏在一起的。這樣後面比較花時間的步驟, 就不必浪費在這些候選上。</li>
+<li>檢查對照: 把留下的候選拿到每一個對照基因體裡找, 看有沒有一模一樣的序列、只差幾個鹼基的相似序列, 以及候選的較短片段出現了多少次。</li>
+<li>評分排名: 依下面四項分數算出總分, 再排序。</li>
+</ul>
+<table>
+<tr><td>Exclusivity</td><td>專一性: 出現在目標, 而很少出現在對照</td></tr>
+<tr><td>Purity</td><td>純度: 對照裡的相似序列與較短片段少, 不容易黏錯地方</td></tr>
+<tr><td>Unfoldability</td><td>不摺疊性: 不容易自己摺起來, 保持能與目標結合的狀態</td></tr>
+<tr><td>Affinity</td><td>親和性: 與目標 DNA 結合得夠穩, 由結合時釋放的能量 (自由能) 算出</td></tr>
+</table>
+<p>四項分數與總分都是 0 到 100, 越高越好。總分是四項分數的加權平均, 預設四項一樣重。這些分數是用來挑出值得做實驗驗證的候選, 不是 BioFET 訊號強度的實測值, 也不保證實驗結果。</p>
+<p>目標彼此差異太大、共同的 k-mer 太少時, NPSeeker 會把目標分成幾群, 每一群各自找候選。分群與輸出的方式見<a href="#ch-4">第 4 章</a>; 評分的公式與演算法的細節見研究論文。</p>
+<h2 id="ch-2">2. 準備目標與對照基因體</h2>
+<p>指令的前兩項依序是目標 (target) 與對照 (control), 選項寫在它們後面:</p>
+<pre>./bin/npseeker &lt;target&gt; &lt;control&gt; [選項]</pre>
+<p>每一個基因體請準備成一個 FASTA 檔。FASTA 是存放 DNA 序列的文字檔格式, 副檔名通常是 <code>.fasta</code>, <code>.fna</code>, <code>.fa</code>。目標與對照各自可以用資料夾、清單檔或單一檔案指定。</p>
+<h3 id="sec-2-1">2.1 資料夾</h3>
+<p>給一個資料夾時, 程式讀取裡面所有副檔名是 <code>.fasta</code>, <code>.fna</code>, <code>.fa</code> 的檔案, 每個檔案當成一個基因體。副檔名全部小寫或全部大寫都可以 (例如 <code>.FASTA</code>); 子資料夾裡的檔案不會讀取。</p>
+<pre>./bin/npseeker targets/ controls/</pre>
+<p>資料夾裡的壓縮檔 (<code>.gz</code>, <code>.zst</code>) 不會讀取。要用壓縮檔時, 請改用清單檔。</p>
+<h3 id="sec-2-2">2.2 清單檔</h3>
+<p>清單檔是一個文字檔, 每一列寫一個 FASTA 檔的路徑。在檔名前加 @, 表示它是清單檔:</p>
+<pre>./bin/npseeker @target.list @control.list</pre>
+<p>例如 <code>target.list</code> 的內容可以是:</p>
+<pre># 三個目標基因體
+genomes/strain_A.fasta
+genomes/strain_B.fna.gz
+/data/others/strain_C.fa</pre>
+<ul>
+<li>空白列與 # 開頭的列會略過, 可以拿來寫註解。</li>
+<li>相對路徑從執行指令時所在的資料夾算起, 不是從清單檔所在的資料夾算起。</li>
+<li>列出的檔案可以來自不同的資料夾, 也可以是 gzip (<code>.gz</code>) 或 zstd (<code>.zst</code>) 壓縮過的 FASTA 檔。</li>
+<li>給 <a href="#opt-cluster-order"><code>-cluster-order</code></a> input 時, 清單裡的順序就是分群時處理的順序 (<a href="#ch-4">第 4 章</a>)。</li>
+</ul>
+<p>沒有加 @ 的檔案若不是 FASTA 檔, 也會被當成清單檔讀; 加上 @ 可以避免誤會, 建議都加。</p>
+<h3 id="sec-2-3">2.3 單一 FASTA 檔</h3>
+<p>目標或對照只有一個基因體時, 可以直接給那一個檔案 (壓縮過的也可以):</p>
+<pre>./bin/npseeker strain_A.fasta controls/</pre>
+<h3 id="sec-2-4">2.4 FASTA 檔的內容與檢查</h3>
+<ul>
+<li>一個 FASTA 檔可以有好幾筆序列 (例如染色體與質體), 全部算同一個基因體。</li>
+<li>序列只看 A, C, G, T, 大小寫都可以。遇到其他字母 (例如 N) 時, 序列就在那裡斷開, 跨過它的 k-mer 不算。</li>
+<li>程式會先檢查每個輸入檔是不是 FASTA 格式; 找不到檔案或格式不對時, 會報錯並停止 (<a href="#sec-7-2">7.2 節</a>)。</li>
+<li>同一個檔案不能同時當目標與對照; 程式發現時會列出重複的檔案並停止。</li>
+</ul>
+<div class="note"><p>目標與對照怎麼選, 直接影響排名。對照最好包含實際應用時容易混淆的生物, 而不是隨意挑幾個其他物種。</p></div>
+<h2 id="ch-3">3. 閱讀結果與挑選探針</h2>
+<h3 id="sec-3-1">3.1 畫面上的結果</h3>
+<p>沒有給 <a href="#opt-o"><code>-o</code></a> 時, 程式把前 <a href="#opt-top"><code>-top</code></a> 名 (預設 200) 的探針印在畫面上, 欄位有 Rank, Probe, 四項分數, Score 與 Tm。給了 <a href="#opt-o"><code>-o</code></a> 時, 完整的結果寫進檔案, 畫面上只列出存了哪些檔。加上 <a href="#opt-v"><code>-v</code></a> 可以另外看到設定與每個步驟花的時間。</p>
+<h3 id="sec-3-2">3.2 結果檔</h3>
+<p>給 <a href="#opt-o"><code>-o</code></a> <code>result/</code> 時, 預設存成 CSV 檔 (以逗號分隔各欄的文字檔):</p>
+<table>
+<tr><td><code>cluster_N_probes.csv</code></td><td>候選探針的排名; N 是群的編號, 從 0 開始</td></tr>
+<tr><td><code>cluster.csv</code></td><td>每個基因體屬於哪一群</td></tr>
+<tr><td><code>flag.csv</code></td><td>這一次計算用的設定</td></tr>
+</table>
+<p><a href="#opt-format"><code>-format</code></a> txt 改存成以空格對齊的表格, 方便直接閱讀; CSV 方便用試算表 (例如 Excel) 或其他程式處理。single 與 multi 模式存的檔案數不同, 見<a href="#ch-4">第 4 章</a>。</p>
+<p><code>cluster_N_probes.csv</code> 各欄的意思:</p>
+<table>
+<tr><td>Rank</td><td>排名</td></tr>
+<tr><td>Probe</td><td>探針的序列 (從 5' 端寫到 3' 端)</td></tr>
+<tr><td>Tgt</td><td>在目標基因體裡出現的次數</td></tr>
+<tr><td>Ctl</td><td>在對照基因體裡出現 (一模一樣) 的次數; 越少越好</td></tr>
+<tr><td>Exclus</td><td>專一性分數, 由 Tgt 與 Ctl 算出</td></tr>
+<tr><td>MMs</td><td>對照裡只差幾個鹼基的相似序列的計分; 越少越好</td></tr>
+<tr><td>Subseq</td><td>探針的較短片段在對照裡出現的計分; 越少越好</td></tr>
+<tr><td>Purity</td><td>純度分數, 由 MMs 與 Subseq 算出</td></tr>
+<tr><td>SelfAn</td><td>自己摺起來 (self-annealing) 的程度; 越少越好</td></tr>
+<tr><td>Dimer</td><td>與另一條相同的探針黏在一起 (dimer) 的程度; 越少越好</td></tr>
+<tr><td>UnFold</td><td>不摺疊性分數, 由 SelfAn 與 Dimer 算出</td></tr>
+<tr><td>Affini</td><td>親和性分數, 由結合的自由能算出</td></tr>
+<tr><td>Score</td><td>四項分數的加權平均</td></tr>
+<tr><td>Tm</td><td>熔解溫度 (°C): 探針與目標結合的雙股有一半分開的溫度; 不算進總分</td></tr>
+</table>
+<p>Exclus, Purity, UnFold, Affini 與 Score 都是 0 到 100, 越高越好。目標分成幾群時, Tgt 也會加上在其他群的目標裡只差幾個鹼基的相似序列, 所以不一定全是一模一樣的出現次數。</p>
+<p><code>cluster.csv</code> 有三欄: Group (target 或 control)、Cluster (目標屬於第幾群; 對照是空的) 與 File (檔名)。<code>flag.csv</code> 有兩欄: Option 與 Value, 可以用來確認這一次的設定。</p>
+<p>輸出資料夾不存在時會自動建立; 已經存在但是空的, 也可以直接用。資料夾裡已經有東西時, 程式會報錯, 不會覆蓋。確定要覆蓋時加上 <a href="#opt-w"><code>-w</code></a>: 程式先刪掉資料夾裡之前的 NPSeeker 結果檔 (cluster_N_probes, cluster, flag), 其他檔案保留。覆蓋前請確定不再需要舊的結果。</p>
+<h3 id="sec-3-3">3.3 怎麼挑探針</h3>
+<p>Score 可以當作初步的排名, 但不要只看總分。依用途還可以看:</p>
+<ul>
+<li>Ctl: 大於 0 表示對照裡有一模一樣的序列, 探針可能也會黏到對照的生物 (交叉反應), 要特別留意。</li>
+<li>Tgt: 次數多的探針, 訊號可能比較強, 但也可能落在重複的區域; 不能直接當作訊號強度。</li>
+<li>Purity 與 UnFold: 用來比較黏錯地方與自己摺起來的風險。</li>
+<li>Tm: 實驗有溫度的限制, 或同一次實驗要用好幾條探針時, 比較它們的 Tm; 同一次實驗用的探針, Tm 最好相近。</li>
+</ul>
+<p>需要時, 再用 NCBI BLAST 查探針在其他物種裡有沒有相似的序列, 或用 UNAFold (mfold) 看它可能的摺疊結構。網頁介面的結果頁有這兩個連結, 但會把探針序列送到外部網站 (<a href="#sec-6-2">6.2 節</a>)。探針是否適合某一個 BioFET 平台, 最後仍要依實際的實驗條件確認。</p>
+<h2 id="ch-4">4. 目標分群與 single, multi 模式</h2>
+<p>所有目標共同的 k-mer 不夠時, NPSeeker 會把目標分成幾群。分群的方法是: 一個一個取基因體, 若它加入後, 這一群所有成員共同的 k-mer 仍有 <a href="#opt-min-shared"><code>-min-shared</code></a> 個以上, 就加入這一群; 否則留給下一群。這些群是為了找候選而做的分組, 不代表演化或親緣上的分類。</p>
+<p><a href="#opt-cluster-order"><code>-cluster-order</code></a> 決定分群時取基因體的順序:</p>
+<ul>
+<li>auto (預設): 依基因體彼此共有的 k-mer 決定順序; 輸入檔的排列不同, 同一組資料也會分出同樣的群。</li>
+<li>input: 照輸入的順序 (清單檔列出的順序)。想讓某個參考基因體當第一群的核心時使用。</li>
+</ul>
+<p><a href="#opt-min-shared"><code>-min-shared</code></a> 預設是 1, 表示加入後至少還有一個整群共有的 k-mer, 所以通常只有一群。調高時群數會變多, 每一群的候選也會跟著變。</p>
+<p>分成幾群時, 用 <a href="#opt-mode"><code>-mode</code></a> 決定探針怎麼輸出:</p>
+<ul>
+<li>single (預設): 各群的候選合在一起排名, 只取總分的前 <a href="#opt-top"><code>-top</code></a> 名, 全部存在 <code>cluster_0_probes.csv</code>。排在前面的候選, 可能大多來自同一群。</li>
+<li>multi: 各群分開排名, 各取前 <a href="#opt-top"><code>-top</code></a> 名, 存成 <code>cluster_0_probes.csv</code>, <code>cluster_1_probes.csv</code> 等。適合替不同的目標群各挑探針。</li>
+</ul>
+<p>用 multi 從每一群各挑幾條, 合起來就是涵蓋所有目標群的一組探針; 但這是計算上的涵蓋, 實際偵測的效果仍要做實驗驗證。每一群有哪些基因體, 看 <code>cluster.csv</code>。某一群沒有探針通過過濾時, 程式會印出警告, 其他群的結果照樣存檔。</p>
+<h2 id="ch-5">5. 選項與參數</h2>
+<p>選項寫在 target 與 control 後面。選項的值寫在選項後面, 中間空一格 (例如 <a href="#opt-k"><code>-k</code></a> 31); 開關 (例如 <a href="#opt-v"><code>-v</code></a>, <a href="#opt-w"><code>-w</code></a>, <code>--gui</code>) 不接值。有些選項有短名與長名 (例如 <a href="#opt-k"><code>-k</code></a> 與 <a href="#opt-k"><code>-kmer</code></a>), 兩者相同。數字可以寫成科學記號, 例如 1e7 是 10,000,000。以下依程式說明 (<code>-help</code>) 的分組說明, 各節標題後的括號是組名; 全部選項的一覽表在<a href="#app-A">附錄 A</a>。</p>
+<h3 id="sec-5-1">5.1 探針長度與計算資源 (General settings)</h3>
+<h4 class="option" id="opt-k"><code>-k, -kmer</code> <span class="opt-type">[整數, 5 到 256, 預設 25]</span></h4>
+<p>探針的長度 (鹼基數), 依實驗平台的需求設定。k 越長, 差異大的目標之間越不容易有完全相同的長序列, 可能要分成更多群。計算時間主要看資料與候選的多寡, k 增加不一定比較慢 (論文的 Figure 4)。</p>
+<h4 class="option" id="opt-t"><code>-t, -threads</code> <span class="opt-type">[整數, 預設 0]</span></h4>
+<p>同時計算的執行緒數。0 表示用上全部的處理器執行緒。與其他工作共用電腦時, 可以設少一點。</p>
+<h4 class="option" id="opt-m"><code>-m, -memory</code> <span class="opt-type">[大小, 預設為電腦記憶體的一半, 最多 8G]</span></h4>
+<p>主要計算步驟可以用的記憶體, 例如 <a href="#opt-m"><code>-m</code></a> 8G 或 <a href="#opt-m"><code>-m</code></a> 512M (沒寫單位時是 G)。給得少時, 程式會分批計算, 只是比較慢, 結果完全相同。讀入候選的批次 (<a href="#opt-b"><code>-b</code></a>) 與其他執行時需要的記憶體不算在內 (<a href="#sec-5-5">5.5 節</a>)。</p>
+<h3 id="sec-5-2">5.2 輸出與紀錄 (Output)</h3>
+<h4 class="option" id="opt-o"><code>-o, -out-dir</code> <span class="opt-type">[資料夾, 預設不存檔]</span></h4>
+<p>結果檔存放的資料夾 (<a href="#sec-3-2">3.2 節</a>)。沒有給時, 結果只印在畫面上, 欄位比較少。要留下結果, 日後分析、比較或重做計算, 建議給輸出資料夾。</p>
+<h4 class="option" id="opt-w"><code>-w, --overwrite</code></h4>
+<p><a href="#opt-o"><code>-o</code></a> 的資料夾已經有東西時, 先刪掉裡面之前的 NPSeeker 結果檔, 再寫入新的; 其他檔案保留 (<a href="#sec-3-2">3.2 節</a>)。</p>
+<h4 class="option" id="opt-top"><code>-top</code> <span class="opt-type">[整數, 預設 200]</span></h4>
+<p>每一群輸出幾條探針 (排名前幾名)。想多看一些候選時調高, 但數字太大會讓結果檔變大, 也可能用到更多記憶體與時間; 依實際需要設定。</p>
+<h4 class="option" id="opt-format"><code>-format</code> <span class="opt-type">[csv 或 txt, 預設 csv]</span></h4>
+<p>結果檔的格式: csv (以逗號分隔, 方便匯入試算表或給其他程式處理) 或 txt (以空格對齊的表格, 方便直接閱讀)。</p>
+<h4 class="option" id="opt-v"><code>-v, --verbose</code></h4>
+<p>詳細模式: 另外印出輸入、設定、每個計算步驟與它花的時間。追查問題, 或想知道大型計算進行到哪裡時很有用。從網頁介面開始的計算, 一律是詳細模式。</p>
+<h3 id="sec-5-3">5.3 分群與排名 (Target clustering, Probe ranking)</h3>
+<h4 class="option" id="opt-cluster-order"><code>-cluster-order</code> <span class="opt-type">[auto 或 input, 預設 auto]</span></h4>
+<p>分群時取目標基因體的順序。auto 不受輸入順序影響; input 照使用者給的順序。分群的方法與用途見<a href="#ch-4">第 4 章</a>。</p>
+<h4 class="option" id="opt-min-shared"><code>-min-shared</code> <span class="opt-type">[整數, 預設 1]</span></h4>
+<p>一群目標至少要共同擁有幾個 k-mer。調高時群數通常會變多, 但不保證每一群都找得到合適的探針 (<a href="#ch-4">第 4 章</a>)。</p>
+<h4 class="option" id="opt-mode"><code>-mode</code> <span class="opt-type">[single 或 multi, 預設 single]</span></h4>
+<p>只有分成幾群時才有差別: single 把各群的候選合在一起排名, multi 各群分開排名。怎麼選見<a href="#ch-4">第 4 章</a>。</p>
+<h4 class="option" id="opt-weights"><code>-weights</code> <span class="opt-type">[KEY=WEIGHT, 以逗號分隔, 預設四項都是 1]</span></h4>
+<p>調整專一性 (exc)、純度 (pur)、不摺疊性 (unf) 與親和性 (aff) 在總分裡的比重, 例如:</p>
+<pre>-weights exc=2,pur=2</pre>
+<p>表示專一性與純度各給兩倍的比重, 沒列出的 unf 與 aff 維持 1。總分這樣計算:</p>
+<pre>Score = (w_exc*Exclus + w_pur*Purity + w_unf*UnFold + w_aff*Affini)
+        / (w_exc + w_pur + w_unf + w_aff)</pre>
+<p>權重可以是 0, 但不能是負數, 也不能全部是 0。權重是 0 的項目照樣計算, 只是不算進總分。加重某一項只是改變排名的比重, 不會把那一項分數低的候選剔除。</p>
+<h4 class="option" id="opt-mm"><code>-mm, -mismatch-cutoff</code> <span class="opt-type">[整數, 預設為探針長度除以 10, 無條件捨去]</span></h4>
+<p>評純度時, 對照裡的序列與探針最多可以差幾個鹼基, 還算是相似序列。調高時會找到更多相似序列, 但比對的時間與記憶體可能大幅增加。必須小於探針長度。</p>
+<h3 id="sec-5-4">5.4 候選過濾 (Candidate filtering)</h3>
+<p>候選先經過下面幾道過濾, 再做比較花時間的對照比對。門檻太嚴時, 可能一條探針都找不到; 這時可以逐一放寬下面的設定。</p>
+<h4 class="option" id="opt-max-homopolymer"><code>-max-homopolymer</code> <span class="opt-type">[整數, 預設 3]</span></h4>
+<p>同聚物 (homopolymer) 是同一種鹼基連成的一串, 例如 AAAA。這個選項是同聚物最長可以多長: 預設 3 表示 AAA 可以留下, 含有 AAAA 或更長一串的候選就去掉。調高會留下更多含長串相同鹼基的候選。</p>
+<h4 class="option" id="opt-c"><code>-c, -min-complexity</code> <span class="opt-type">[小數, 0 到 1, 預設 0.5]</span></h4>
+<p>序列複雜度的下限。四種鹼基用得越平均, 複雜度越高; 高於門檻的候選才留下。</p>
+<h4 class="option" id="opt-e"><code>-e, -min-entropy</code> <span class="opt-type">[小數, 0 到 2, 預設 1.5]</span></h4>
+<p>序列的熵 (entropy) 的下限。熵衡量序列有多「亂」: 一直重複同樣花樣的序列 (例如 ACACAC) 熵很低。高於門檻的候選才留下。探針短時, 複雜度與熵能達到的最高值也比較低; 設定的門檻超過這個長度能達到的最高值時, 程式會報錯, 並告訴您最高值是多少。</p>
+<h4 class="option" id="opt-prefilter"><code>-prefilter</code> <span class="opt-type">[T 或 F, 預設 T]</span></h4>
+<p>要不要依不摺疊性先篩候選。T 先去掉不摺疊性低於 <a href="#opt-min-unfold"><code>-min-unfold</code></a> 的候選, 減少後面比對的量; F 不先篩, 但每個候選照樣計算不摺疊性分數。</p>
+<h4 class="option" id="opt-min-unfold"><code>-min-unfold</code> <span class="opt-type">[小數, 0 到 100, 預設 75]</span></h4>
+<p>先篩用的不摺疊性門檻。調低會留下更多容易摺疊的候選, 後面比對的量也可能增加。某一批候選全都低於門檻時, 程式會略過這一批的先篩。例如論文實驗用的陽性菌探針, 不摺疊性分數是 72.54; 要重現那個排名, 需要把 <a href="#opt-min-unfold"><code>-min-unfold</code></a> 調成 70 (<a href="#ch-8">第 8 章</a>)。</p>
+<h3 id="sec-5-5">5.5 進階選項 (Advanced)</h3>
+<p>一般使用時, 保留預設值即可。</p>
+<h4 class="option" id="opt-b"><code>-b, -batch-size</code> <span class="opt-type">[整數, 預設 1e7]</span></h4>
+<p>每次讀入、過濾的候選 k-mer 數。k = 25 時, 每個候選大約占 170 位元組, 預設的 1e7 (一千萬) 個候選大約需要 1.58 GiB, 不算在 <a href="#opt-m"><code>-m</code></a> 裡。電腦記憶體少時可以調低, 但批次變多, 時間也可能變長。</p>
+<h4 class="option" id="opt-s"><code>-s, -min-subseq</code> <span class="opt-type">[整數, 預設 7]</span></h4>
+<p>評純度時看的探針片段, 最短幾個鹼基; 與 <a href="#opt-subseq-step"><code>-subseq-step</code></a> 一起使用。</p>
+<h4 class="option" id="opt-subseq-step"><code>-subseq-step</code> <span class="opt-type">[整數, 預設為探針長度除以 10, 無條件進位]</span></h4>
+<p>評純度時, 片段長度每次減少多少。例如 k = 25 時預設是 3, 看長度 22, 19, 16, 13, 10, 7 的片段。數字越小, 看的片段長度越多, 比對的時間也越長。</p>
+<h4 class="option" id="opt-tmp-dir"><code>-tmp-dir</code> <span class="opt-type">[資料夾, 預設為系統的暫存資料夾]</span></h4>
+<p>計算中間檔案的存放位置。NPSeeker 在這裡建立自己的暫存資料夾, 正常結束或按 Ctrl-C 中斷時會刪掉。系統磁碟的空間不夠時, 可以改到其他磁碟。</p>
+<h3 id="sec-5-6">5.6 網頁介面與說明 (Graphical interface)</h3>
+<table>
+<tr><td><code>--gui</code></td><td>在本機啟動網頁介面, 不直接在命令列計算</td></tr>
+<tr><td><code>-gui-port</code> [整數]</td><td>介面使用的連接埠 (網址裡冒號後的數字), 預設由系統挑選</td></tr>
+<tr><td><code>--no-browser</code></td><td>只印出介面的網址, 不自動打開瀏覽器</td></tr>
+<tr><td><code>--tab</code></td><td>改在預設瀏覽器的分頁打開</td></tr>
+<tr><td><code>-h</code></td><td>簡短的說明</td></tr>
+<tr><td><code>-help</code> [KEYWORD]</td><td>完整的說明, 或只看某個選項、某一組選項</td></tr>
+</table>
+<p><code>--gui</code> 只能與 <code>-gui-port</code>, <code>--no-browser</code>, <code>--tab</code> 一起用; 計算的參數 (例如 <a href="#opt-k"><code>-k</code></a>) 要在介面裡設定, 寫在命令列會報錯。網頁介面的細節見<a href="#ch-6">第 6 章</a>。</p>
+<h2 id="ch-6">6. 網頁介面</h2>
+<p>NPSeeker 在自己的電腦上開一個只有本機連得到的網頁伺服器 (網址是 127.0.0.1), 讓您用瀏覽器操作。計算仍由 NPSeeker 自己執行, 基因體不會上傳到外部網站。設定相同時, 網頁介面與命令列算出的結果完全相同。</p>
+<h3 id="sec-6-1">6.1 啟動與連線</h3>
+<ul>
+<li>Windows: 在 bin 資料夾的 <code>npseeker.exe</code> 上雙按滑鼠左鍵, 或在命令提示字元執行 <code>.\bin\npseeker.exe</code> <code>--gui</code>。程式會開一個黑色的主控台視窗 (印出程式訊息的文字視窗); 使用介面期間, 請讓它保持開啟。</li>
+<li>macOS, Linux: 在終端機執行 <code>./bin/npseeker</code> <code>--gui</code>。</li>
+</ul>
+<p>程式會自動打開瀏覽器, 並印出介面的網址, 例如:</p>
+<pre>http://127.0.0.1:53817/?t=1a2b3c...</pre>
+<p>網址裡 ?t= 後面是這一次的存取碼。瀏覽器沒有自動打開時, 把完整的網址複製到瀏覽器即可。網址裡有存取碼, 不要隨意轉傳給別人。</p>
+<p>介面預設開在獨立的視窗: Edge, Chrome 這類瀏覽器會開成沒有網址列的應用程式視窗, Firefox 則開新視窗。加上 <code>--tab</code> 改在預設瀏覽器的分頁打開。</p>
+<h3 id="sec-6-2">6.2 主要頁面</h3>
+<table>
+<tr><td>Design</td><td>選擇 Target, Control, 輸出資料夾與探針長度。可以直接選資料夾, 也可以勾選檔案, 把不同位置的 FASTA 檔 (含壓縮檔) 加進來。"Tick all" 勾選資料夾裡的全部檔案; "Pick folder", "Pick files" 用作業系統的選擇視窗。其他設定可以展開來看, 空白的欄位表示用預設值。"Check" 只檢查輸入與設定, "Go" 開始計算。</td></tr>
+<tr><td>Run</td><td>顯示目前的步驟、進度與執行紀錄。"Cancel" 中止計算。</td></tr>
+<tr><td>Results</td><td>看排名、探針序列與各項分數。按欄名可以排序, Rank 仍是原本的排名。按探針可以看它的反向互補序列與熔解溫度, 也可以複製。結果檔可以一個一個下載, 也可以打包成一個 zip 檔下載。</td></tr>
+<tr><td>Help</td><td>閱讀使用說明, 可以切換語言 (會記住上次選的; 預設英文)。</td></tr>
+<tr><td>About</td><td>程式、論文、作者與聯絡資訊。</td></tr>
+</table>
+<p>Results 頁另有兩個外部網站的連結:</p>
+<ul>
+<li>BLAST at NCBI: 用選取的探針序列打開 NCBI BLAST, 查其他物種裡有沒有相似的序列。</li>
+<li>Fold at UNAFold: 把序列送到 UNAFold (mfold) 預測 DNA 的摺疊; 用該網站表單的預設條件 (37 °C, 1 M Na+)。</li>
+</ul>
+<div class="note"><p>這兩個功能需要網路, 而且會把選取的探針序列送到外部網站。序列還沒公開時, 請先確定可以使用外部服務。</p></div>
+<p>沒有指定輸出資料夾時, 網頁介面把結果暫存在系統磁碟; 介面結束後, 暫存的結果會刪掉。要留下結果, 請在結束介面前下載。</p>
+<h3 id="sec-6-3">6.3 Close, Exit 與結果的保存</h3>
+<ul>
+<li>"Close" 只關掉瀏覽器的頁面, NPSeeker 繼續執行。需要時, 再打開主控台印出的網址, 就能回到介面。</li>
+<li>"Exit" 結束介面, 並中止進行中的計算。關掉主控台視窗或按 Ctrl-C 也會結束。</li>
+<li>所有介面頁面都關掉超過 5 分鐘, 而且沒有計算在進行時, 程式會自動結束; 還沒下載的暫存結果也會一起刪掉。</li>
+</ul>
+<p>按 "Exit" 或 "Close" 時, 介面會先問一次; 計算還在進行, 或有還沒下載的暫存結果時, 會一併列出來提醒。</p>
+<p>有指定輸出資料夾時, 結果存在那裡。再次用同一個資料夾時, 會取代之前的 NPSeeker 結果檔, 其他檔案保留。</p>
+<p>介面的顏色可以切換 Auto, Dark, Light。Auto 跟著作業系統的深色或淺色設定。</p>
+<h3 id="sec-6-4">6.4 在遠端伺服器上操作</h3>
+<p>NPSeeker 裝在遠端的伺服器上時, 可以透過 SSH 通道 (把本機的連接埠轉到伺服器上的加密連線), 在自己電腦的瀏覽器操作。先在伺服器上啟動程式, 並指定連接埠:</p>
+<pre>./bin/npseeker --gui --no-browser -gui-port 53817</pre>
+<p>再從自己的電腦打開終端機, 建立 SSH 通道:</p>
+<pre>ssh -L 53817:127.0.0.1:53817 帳號@伺服器</pre>
+<p>SSH 連線保持開啟時, 在自己電腦的瀏覽器輸入伺服器印出的完整網址。本機的連接埠也可以換成別的數字, 例如 ssh -L 9000:127.0.0.1:53817; 這時網址要改成 <a href="http://127.0.0.1:9000/">http://127.0.0.1:9000/</a>, 後面保留原本的 ?t= 存取碼。</p>
+<div class="note"><p>遠端使用時, 介面看到的是伺服器上的檔案。"Pick folder", "Pick files" 的選擇視窗也會開在伺服器上, 伺服器沒有圖形桌面時用不了; 這時請用介面裡的檔案瀏覽功能。</p></div>
+<h3 id="sec-6-5">6.5 設定檔的位置</h3>
+<p>程式會記住最近用過的資料夾 (<code>recent.txt</code>)、上次選擇的位置 (<code>lastpick.txt</code>)、介面的配色 (<code>theme.txt</code>) 與 Help 頁的語言 (<code>help-lang.txt</code>), 下次使用時比較方便。這幾個小檔案放在:</p>
+<table>
+<tr><td>Linux</td><td><code>~/.config/npseeker/</code></td></tr>
+<tr><td>macOS</td><td><code>~/Library/Application Support/npseeker/</code></td></tr>
+<tr><td>Windows</td><td><code>%AppData%\npseeker\</code></td></tr>
+</table>
+<p>計算中間檔案放在系統的暫存資料夾, 或 <a href="#opt-tmp-dir"><code>-tmp-dir</code></a> 指定的位置, 不在這裡。</p>
+<h2 id="ch-7">7. 效能與問題排除</h2>
+<h3 id="sec-7-1">7.1 記憶體、時間與暫存檔</h3>
+<ul>
+<li>記憶體: <a href="#opt-m"><code>-m</code></a> 管主要計算步驟的記憶體, 但 <a href="#opt-b"><code>-b</code></a> 讀入的候選與其他執行時的資料也要用記憶體。記憶體不夠時, 可以把 <a href="#opt-m"><code>-m</code></a> 與 <a href="#opt-b"><code>-b</code></a> 都調低。</li>
+<li>執行緒: <a href="#opt-t"><code>-t</code></a> 0 用上全部的處理器執行緒。與其他工作共用電腦時, 可以設少一點。</li>
+<li>時間: 受基因體大小、共同候選的多寡、<a href="#opt-mm"><code>-mm</code></a>、記憶體、硬體與磁碟速度影響。k 增加不一定比較慢; 加 <a href="#opt-v"><code>-v</code></a> 可以看每個步驟花的時間。</li>
+<li>暫存檔: 計算時會產生暫存檔, 大小看資料與記憶體而定 (記憶體給得少時, 暫存檔比較多)。請留足夠的磁碟空間; 正常結束或按 Ctrl-C 中斷時, 暫存檔會刪掉。</li>
+</ul>
+<h3 id="sec-7-2">7.2 常見的錯誤訊息</h3>
+<p>選項或參數寫錯時, 訊息以 npseeker: 開頭; 輸入、輸出或執行時出錯, 訊息以 Error: 開頭。下面是常見的例子與處理方法 (target 也可能是 control, 表示出問題的是對照):</p>
+<ul>
+<li><code class="message">Error: target: no FASTA file (*.fasta, *.fna or *.fa) in the folder ...</code><br>資料夾裡沒有這三種副檔名的檔案。壓縮檔請改用清單檔 (<a href="#sec-2-2">2.2 節</a>)。</li>
+<li><code class="message">Error: target: "..." is not found</code><br>路徑寫錯, 或相對路徑不是從目前的資料夾算起。</li>
+<li><code class="message">Error: target: "..." is not a FASTA file: ...</code><br>檔案不是 FASTA 格式; 冒號後面寫了檢查到的問題。</li>
+<li><code class="message">Error: target: the FASTA file "...", listed in "...", is not found</code><br>清單檔列出的檔案有一個找不到。</li>
+<li><code class="message">Error: target and control: ...; a genome cannot be both a target and a control</code><br>同一個檔案同時出現在目標與對照。</li>
+<li><code class="message">Error: -o: the folder "..." already exists and is not empty; give -w ...</code><br>輸出資料夾裡已經有東西。請換一個資料夾, 或確定可以覆蓋後加 <a href="#opt-w"><code>-w</code></a>。</li>
+<li><code class="message">npseeker: option -mm: must be less than the probe length (-k)</code><br><a href="#opt-mm"><code>-mm</code></a> 要小於探針長度。</li>
+<li><code class="message">npseeker: option -c: no probe of 8 nt has a complexity score above 0.431 ...</code><br>門檻超過這個探針長度能達到的最高值 (這裡是 0.431); 請調低 (<a href="#sec-5-4">5.4 節</a>)。</li>
+<li><code class="message">Error: -tmp-dir: cannot create the folder "...": ...</code><br>無法建立暫存資料夾; 請檢查路徑與寫入權限。</li>
+</ul>
+<h3 id="sec-7-3">7.3 畫面上的兩種訊息</h3>
+<p>畫面上的訊息其實走兩個管道: 標準輸出 (stdout) 與標準錯誤 (stderr)。平常兩者都顯示在畫面上, 看不出差別; 只有把輸出存成檔案時 (例如在指令最後加 &gt; <code>out.txt</code>) 才分得出來: 存進檔案的只有標準輸出, 標準錯誤仍然顯示在畫面上。</p>
+<p>NPSeeker 把計算的結果、<a href="#opt-v"><code>-v</code></a> 的執行紀錄與錯誤訊息寫到標準輸出; 開頭是 Note: 或 Warning: 的提醒與警告, 以及進度條, 寫到標準錯誤。所以把輸出存成檔案時, 檔案裡是乾淨的結果, 提醒與進度仍然看得到。</p>
+<h3 id="sec-7-4">7.4 沒有候選探針或執行很慢</h3>
+<p>沒有任何候選通過過濾時, 程式會印出:</p>
+<pre>Warning: no probe passed the filters; relax the thresholds
+         (-max-homopolymer, -c, -e, -min-unfold) to let probes pass.</pre>
+<p>可以依序放寬 <a href="#opt-min-unfold"><code>-min-unfold</code></a>, <a href="#opt-c"><code>-c</code></a>, <a href="#opt-e"><code>-e</code></a> 與 <a href="#opt-max-homopolymer"><code>-max-homopolymer</code></a> (<a href="#sec-5-4">5.4 節</a>)。如果各目標共同的 k-mer 本來就很少, 可以試著縮短 <a href="#opt-k"><code>-k</code></a>, 或調整 <a href="#opt-min-shared"><code>-min-shared</code></a> 與 <a href="#opt-mode"><code>-mode</code></a> (<a href="#ch-4">第 4 章</a>)。加 <a href="#opt-v"><code>-v</code></a> 可以看每個步驟留下多少候選、花了多少時間。</p>
+<p>計算很慢時, 先確認 <a href="#opt-m"><code>-m</code></a> 加上 <a href="#opt-b"><code>-b</code></a> 需要的記憶體沒有超過電腦可用的記憶體; 超過時, 系統會把記憶體的內容搬到磁碟上暫放, 速度會慢很多。<a href="#opt-mm"><code>-mm</code></a> 設得很高時, 可以先改回預設值比較看看。資料集很大時, 也要留意磁碟的速度與暫存資料夾的空間。</p>
+<h2 id="ch-8">8. 常用範例</h2>
+<p>下面的範例用 macOS 與 Linux 的寫法。Windows 請把 <code>./bin/npseeker</code> 換成 <code>.\bin\npseeker.exe</code>, 路徑裡的 <code>/</code> 換成 <code>\</code>。每個範例都可以單獨執行; <code>result/</code> 已經有之前的結果時, 請換一個輸出資料夾, 或確定可以覆蓋後加上 <a href="#opt-w"><code>-w</code></a>。</p>
+<p>基本的計算, 結果存到 <code>result/</code>:</p>
+<pre>./bin/npseeker dat/sample/S.aureus/ dat/sample/yeast/ -o result/</pre>
+<p>用清單檔指定目標, 並照清單的順序分群:</p>
+<pre>./bin/npseeker @target.list controls/ -cluster-order input -o result/</pre>
+<p>設計長度 31 的探針, 用 32 個執行緒與 16 GiB 的記憶體:</p>
+<pre>./bin/npseeker targets/ controls/ -k 31 -t 32 -m 16G -o result/</pre>
+<p>加重專一性與純度在總分裡的比重:</p>
+<pre>./bin/npseeker targets/ controls/ -weights exc=2,pur=2 -o result/</pre>
+<p>替幾個目標群分別找候選探針:</p>
+<pre>./bin/npseeker targets/ controls/ -min-shared 20000 -mode multi -o result/</pre>
+<p>重現論文 Table 3 的細菌探針排名 (用研究時的參數, 不是全部用預設值; 資料集要另外下載, 放法見 <a href="#sec-0-2">0.2 節</a>):</p>
+<pre>./bin/npseeker dat/datasets/GP/ dat/datasets/GN/ -k 23 -min-unfold 70 \
+    -weights exc=2,pur=2 -o GP_probes/
+./bin/npseeker dat/datasets/GN/ dat/datasets/GP/ -k 23 -min-unfold 70 \
+    -weights exc=2,pur=2 -o GN_probes/</pre>
+<p>其中 <a href="#opt-min-unfold"><code>-min-unfold</code></a> 70 是為了留下不摺疊性分數 72.54 的實驗用陽性菌探針。上面的指令在 macOS 與 Linux 用 <code>\</code> 接到下一列; Windows 的命令提示字元改用 ^, PowerShell 改用反引號 `, 或全部寫成同一列。</p>
+<p>論文的資料集有一部分取自 ATCC 的基因體資料庫 (ATCC Genome Portal), ATCC 的使用條款不允許轉散布, 所以 <code>dat/datasets/</code> 附的是 NCBI 上的對應資料, 兩者的逐檔對照見 <code>dat/datasets/sources.txt</code>。用這份資料, Table 3 兩條探針的序列與排名都與論文相同, 但候選的總數、出現次數與各項分數會略有不同。其中 S. enterica ATCC 43976 在 NCBI 只有不完整的組裝 (缺了 23S rRNA 的一段)。以 GN 為目標時不選這個基因體 (網頁介面裡取消勾選; 命令列改用清單檔 <code>@dat/datasets/GN-without-43976.list</code>), 候選數就會恢復為 65, 補充資料 Table S3 的前 8 名也與論文相同。</p>
+<p>改存成方便閱讀的表格, 並多輸出一些探針:</p>
+<pre>./bin/npseeker targets/ controls/ -format txt -top 1000 -o result/</pre>
+<h2 id="app-A">附錄 A  選項一覽</h2>
+<table>
+<tr><th>選項</th><th>預設</th><th>用途 (章節)</th></tr>
+<tr><td><a href="#opt-k"><code>-k</code></a>, <a href="#opt-k"><code>-kmer</code></a></td><td>25</td><td>探針長度, 5 到 256 (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-t"><code>-t</code></a>, <a href="#opt-t"><code>-threads</code></a></td><td>0</td><td>同時計算的執行緒數 (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-m"><code>-m</code></a>, <a href="#opt-m"><code>-memory</code></a></td><td>電腦記憶體的一半, 最多 8G</td><td>記憶體 (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-o"><code>-o</code></a>, <a href="#opt-o"><code>-out-dir</code></a></td><td>不存檔</td><td>輸出資料夾 (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-w"><code>-w</code></a>, <a href="#opt-w"><code>--overwrite</code></a></td><td>關</td><td>覆蓋舊的結果 (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-top"><code>-top</code></a></td><td>200</td><td>輸出的探針數 (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-format"><code>-format</code></a></td><td>csv</td><td>csv 或 txt (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-v"><code>-v</code></a>, <a href="#opt-v"><code>--verbose</code></a></td><td>關</td><td>詳細模式 (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-cluster-order"><code>-cluster-order</code></a></td><td>auto</td><td>auto 或 input (<a href="#ch-4">4</a>, <a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-min-shared"><code>-min-shared</code></a></td><td>1</td><td>共同 k-mer 的門檻 (<a href="#ch-4">4</a>, <a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-mode"><code>-mode</code></a></td><td>single</td><td>single 或 multi (<a href="#ch-4">4</a>, <a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-weights"><code>-weights</code></a></td><td>四項都是 1</td><td>評分的權重 (<a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-mm"><code>-mm</code></a>, <a href="#opt-mm"><code>-mismatch-cutoff</code></a></td><td>k/10, 無條件捨去</td><td>相似序列的錯配上限 (<a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-max-homopolymer"><code>-max-homopolymer</code></a></td><td>3</td><td>同聚物的最長長度 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-c"><code>-c</code></a>, <a href="#opt-c"><code>-min-complexity</code></a></td><td>0.5</td><td>複雜度的下限 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-e"><code>-e</code></a>, <a href="#opt-e"><code>-min-entropy</code></a></td><td>1.5</td><td>熵的下限 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-prefilter"><code>-prefilter</code></a></td><td>T</td><td>要不要依不摺疊性先篩 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-min-unfold"><code>-min-unfold</code></a></td><td>75</td><td>不摺疊性的門檻 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-b"><code>-b</code></a>, <a href="#opt-b"><code>-batch-size</code></a></td><td>1e7</td><td>每批的候選數 (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-s"><code>-s</code></a>, <a href="#opt-s"><code>-min-subseq</code></a></td><td>7</td><td>最短的片段長度 (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-subseq-step"><code>-subseq-step</code></a></td><td>k/10, 無條件進位</td><td>片段長度的間隔 (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-tmp-dir"><code>-tmp-dir</code></a></td><td>系統的暫存資料夾</td><td>暫存檔的位置 (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><code>--gui</code></td><td>關</td><td>網頁介面 (<a href="#sec-5-6">5.6</a>, <a href="#ch-6">6</a>)</td></tr>
+<tr><td><code>-gui-port</code></td><td>系統挑選</td><td>網頁介面的連接埠 (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>--no-browser</code></td><td>關</td><td>不自動打開瀏覽器 (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>--tab</code></td><td>關</td><td>在瀏覽器的分頁打開 (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>-h</code></td><td colspan="2">簡短的說明 (<a href="#sec-0-6">0.6</a>, <a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>-help</code> [KEYWORD]</td><td colspan="2">完整或指定的說明 (<a href="#sec-0-6">0.6</a>, <a href="#sec-5-6">5.6</a>)</td></tr>
+</table>
+</main>
+</div>
+</body>
+</html>

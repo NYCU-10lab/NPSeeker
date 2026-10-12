@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="manual2html.py (from UserManual-ko.txt; do not edit by hand)">
+<title>NPSeeker 사용자 설명서</title>
+<style>
+:root { color-scheme: light dark; --text: #1f2933; --bg: #ffffff; --muted: #6b7a88; --line: #d9dee3;
+        --code-bg: #f3f5f7; --nav-bg: #f4f6f8; --note-bg: #fff8e1; --note-line: #e0b84a; --accent: #1f6feb; }
+@media (prefers-color-scheme: dark) {
+  :root { --text: #e6edf3; --bg: #0f1419; --muted: #9aa7b4; --line: #333b44;
+          --code-bg: #1a2027; --nav-bg: #1a2027; --note-bg: #3a3218; --note-line: #b8932f; --accent: #58a6ff; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+       font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif; }
+.wrap { max-width: 1240px; margin: 0 auto; display: flex; gap: 2.5rem; padding: 0 1.25rem; }
+nav.toc { flex: 0 0 16rem; position: sticky; top: 0; align-self: flex-start; max-height: 100vh; overflow-y: auto;
+          padding: 1.5rem 0 3rem; font-size: .88rem; line-height: 1.45; }
+nav.toc a { display: block; padding: .2rem .5rem; color: var(--text); text-decoration: none; border-radius: 3px; }
+nav.toc a:hover { background: var(--nav-bg); color: var(--accent); }
+nav.toc a.sub { padding-left: 1.4rem; color: var(--muted); font-size: .84rem; }
+main { flex: 1; min-width: 0; padding: 1.5rem 0 5rem; }
+[id] { scroll-margin-top: 1rem; }
+a { color: var(--accent); }
+code, pre { font-family: ui-monospace, "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace; font-size: .92em; }
+code { white-space: nowrap; }
+code.message { white-space: normal; overflow-wrap: anywhere; }
+h1 { margin-top: 0; }
+h2 { border-bottom: 1px solid var(--line); padding-bottom: 4px; margin-top: 2em; }
+h4.option { margin: 1.4em 0 .4em; }
+.opt-type, .version, .toc-title { color: var(--muted); font-weight: normal; }
+.toc-title { text-transform: uppercase; letter-spacing: .06em; font-size: .78rem; margin: 0 0 .5rem; }
+pre { background: var(--code-bg); padding: 10px 12px; overflow-x: auto; border-radius: 4px; }
+table { border-collapse: collapse; margin: .6em 0; }
+th, td { text-align: left; vertical-align: top; padding: 3px 14px 3px 0; }
+td:first-child { white-space: nowrap; }
+th { border-bottom: 1px solid var(--line); }
+.note { background: var(--note-bg); border-left: 4px solid var(--note-line); padding: 2px 12px; margin: 1em 0; }
+.toc-head { display: flex; align-items: center; border-radius: 3px; }
+.toc-head:hover { background: var(--nav-bg); }
+.toc-head a { flex: 1; }
+nav.toc .toc-head a:hover { background: none; }
+.js .toc-subs { display: none; }
+.js .toc-ch.open .toc-subs { display: block; }
+.toc-toggle { flex: none; width: 26px; height: 24px; border: 0; background: none; padding: 0; cursor: pointer;
+              color: var(--muted); display: flex; align-items: center; justify-content: center; }
+.toc-toggle:hover { color: var(--accent); }
+.toc-toggle::before { content: ""; width: 6px; height: 6px; border-right: 1.5px solid currentColor;
+                      border-bottom: 1.5px solid currentColor; transform: rotate(-45deg); transition: transform .15s; }
+.toc-ch.open .toc-toggle::before { transform: rotate(45deg); }
+@media (max-width: 900px) {
+  .wrap { flex-direction: column; gap: 0; }
+  nav.toc { position: static; max-height: none; flex: none; border-bottom: 1px solid var(--line); }
+  .js nav.toc:not(.open) .toc-ch { display: none; }
+  .js .toc-title { cursor: pointer; font-size: .88rem; }
+  .js .toc-title::before { content: "\25B8  "; }
+  .js nav.toc.open .toc-title::before { content: "\25BE  "; }
+}
+</style>
+<script>
+document.documentElement.classList.add('js');
+document.addEventListener('DOMContentLoaded', function () {
+  var nav = document.querySelector('nav.toc');
+  if (!nav) return;
+  nav.querySelectorAll('.toc-ch').forEach(function (ch) {
+    if (!ch.querySelector('.toc-subs a')) return;
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'toc-toggle'; b.title = 'Show or hide the sections';
+    ch.firstElementChild.appendChild(b);
+  });
+  nav.querySelector('.toc-title').addEventListener('click', function () { nav.classList.toggle('open'); });
+  nav.addEventListener('click', function (e) {
+    var t = e.target.closest('.toc-toggle');
+    if (t) { t.closest('.toc-ch').classList.toggle('open'); return; }
+    var a = e.target.closest('a');
+    if (!a) return;
+    if (a.closest('.toc-ch')) a.closest('.toc-ch').classList.add('open');
+    nav.classList.remove('open');
+  });
+  var cur = Array.prototype.find.call(nav.querySelectorAll('a'), function (a) { return a.hash && a.hash === location.hash; });
+  if (cur && cur.closest('.toc-ch')) cur.closest('.toc-ch').classList.add('open');
+});
+</script>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc">
+<p class="toc-title">목차</p>
+<div class="toc-ch"><div class="toc-head"><a href="#intro-2">NPSeeker 소개</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#intro-8">이 설명서에 관하여</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-0">0. 빠른 시작</a></div><div class="toc-subs">
+<a href="#sec-0-1" class="sub">0.1 운영체제에 맞는 버전 다운로드</a>
+<a href="#sec-0-2" class="sub">0.2 압축 파일 풀기</a>
+<a href="#sec-0-3" class="sub">0.3 실행 여부 확인</a>
+<a href="#sec-0-4" class="sub">0.4 그래픽 인터페이스에서 첫 분석 실행</a>
+<a href="#sec-0-5" class="sub">0.5 명령줄에서 첫 분석 실행</a>
+<a href="#sec-0-6" class="sub">0.6 프로그램 도움말 보기</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-1">1. NPSeeker의 프로브 설계와 점수 계산</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-2">2. 표적 및 대조 유전체 준비</a></div><div class="toc-subs">
+<a href="#sec-2-1" class="sub">2.1 폴더로 지정하기</a>
+<a href="#sec-2-2" class="sub">2.2 파일 목록으로 지정하기</a>
+<a href="#sec-2-3" class="sub">2.3 단일 FASTA 파일 지정하기</a>
+<a href="#sec-2-4" class="sub">2.4 FASTA 파일 내용과 입력 검사</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-3">3. 결과 확인과 프로브 선택</a></div><div class="toc-subs">
+<a href="#sec-3-1" class="sub">3.1 화면에 표시되는 결과</a>
+<a href="#sec-3-2" class="sub">3.2 결과 파일</a>
+<a href="#sec-3-3" class="sub">3.3 프로브 선택 시 확인할 사항</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-4">4. 표적 군집화와 single/multi 모드</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-5">5. 옵션과 매개변수</a></div><div class="toc-subs">
+<a href="#sec-5-1" class="sub">5.1 프로브 길이와 계산 자원 (General settings)</a>
+<a href="#sec-5-2" class="sub">5.2 결과 저장과 실행 기록 (Output)</a>
+<a href="#sec-5-3" class="sub">5.3 군집화와 순위 (Target clustering, Probe ranking)</a>
+<a href="#sec-5-4" class="sub">5.4 후보 서열 필터링 (Candidate filtering)</a>
+<a href="#sec-5-5" class="sub">5.5 고급 옵션 (Advanced)</a>
+<a href="#sec-5-6" class="sub">5.6 그래픽 인터페이스와 도움말 (Graphical interface)</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-6">6. 그래픽 인터페이스</a></div><div class="toc-subs">
+<a href="#sec-6-1" class="sub">6.1 시작 및 연결</a>
+<a href="#sec-6-2" class="sub">6.2 주요 화면</a>
+<a href="#sec-6-3" class="sub">6.3 Close, Exit 및 결과 저장</a>
+<a href="#sec-6-4" class="sub">6.4 원격 서버에서 사용하기</a>
+<a href="#sec-6-5" class="sub">6.5 설정 파일 위치</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-7">7. 성능 및 문제 해결</a></div><div class="toc-subs">
+<a href="#sec-7-1" class="sub">7.1 메모리, 실행 시간 및 임시 파일</a>
+<a href="#sec-7-2" class="sub">7.2 자주 나타나는 오류 메시지</a>
+<a href="#sec-7-3" class="sub">7.3 표준 출력과 표준 오류</a>
+<a href="#sec-7-4" class="sub">7.4 프로브가 없거나 실행이 느린 경우</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-8">8. 사용 예</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#app-A">부록 A  옵션 목록</a></div><div class="toc-subs">
+</div></div>
+</nav>
+<main>
+<h1>NPSeeker 사용자 설명서</h1>
+<p class="version">버전 1.5.42</p>
+<h2 id="intro-2">NPSeeker 소개</h2>
+<p>NPSeeker (Nucleic Acid Probe Seeker)는 유전체 서열을 이용해 핵산 프로브를 설계하는 프로그램입니다. 주로 BioFET (생체 전계효과 트랜지스터)와 같은 바이오센서에 사용할 프로브를 고르는 데 목적이 있습니다. 핵산 프로브는 표적 생물의 DNA와 결합하는 짧은 DNA 서열로, 생물을 검출하거나 식별하는 데 사용합니다.</p>
+<p>NPSeeker에는 표적 (검출하려는 생물)과 대조군 (검출되지 않아야 하는 생물)의 유전체를 각각 입력합니다. 먼저 모든 표적 유전체에 공통으로 존재하는 DNA 서열을 찾습니다. 그런 다음 대조군 서열과의 유사성, 표적과의 결합 안정성, 프로브 자체의 접힘 가능성을 평가하여 후보 프로브에 순위를 매깁니다. 프로브 길이는 5~256개 뉴클레오타이드 범위에서 지정할 수 있습니다.</p>
+<p>관련 논문 및 연락처:</p>
+<table>
+<tr><td>논문</td><td>NPSeeker: A BioFET-oriented Nucleic Acid Probe Design Algorithm for Efficient Species Identification and Classification</td></tr>
+<tr><td>저자</td><td>Hao-Yu Peng, Hui Zhi Gan, et al.</td></tr>
+<tr><td>웹사이트</td><td><a href="https://10lab.ceb.nycu.edu.tw/NPSeeker/">https://10lab.ceb.nycu.edu.tw/NPSeeker/</a></td></tr>
+<tr><td>GitHub</td><td><a href="https://github.com/NYCU-10lab/NPSeeker/">https://github.com/NYCU-10lab/NPSeeker/</a></td></tr>
+<tr><td>연락처</td><td><a href="mailto:WadeLo@nycu.edu.tw">WadeLo@nycu.edu.tw</a></td></tr>
+</table>
+<p>NPSeeker를 연구에 이용하신다면 위 논문을 인용해 주시기 바랍니다.</p>
+<h2 id="intro-8">이 설명서에 관하여</h2>
+<p>NPSeeker를 처음 사용한다면 <a href="#ch-0">0장</a>부터 읽으십시오. 그래픽 인터페이스를 사용하려면 0.1~<a href="#sec-0-3">0.3절</a>을 마친 뒤 <a href="#sec-0-4">0.4절</a>로 이동하면 됩니다. 자신의 유전체 파일을 준비하는 방법은 <a href="#ch-2">2장</a>에, 설정을 바꾸는 방법은 <a href="#ch-5">5장</a>에 나옵니다.</p>
+<p>프로그램 자체에도 도움말이 있습니다. <code>-h</code>는 주요 옵션을, <code>-help</code>는 모든 옵션을 보여줍니다. 이 설명서에는 단계별 사용법, 예제와 실용적인 안내를 추가했습니다. 일반 텍스트 (<code>UserManual-ko.txt</code>)와 HTML (<code>UserManual-ko.html</code>)로 제공되며, 그래픽 인터페이스의 Help 화면에서도 읽을 수 있습니다.</p>
+<h2 id="ch-0">0. 빠른 시작</h2>
+<div class="note"><p>별도로 표시하지 않는 한, 명령어는 macOS 및 Linux 기준으로 작성했습니다. Windows에서 입력 방법이 다른 경우 해당 명령어를 함께 안내합니다.</p></div>
+<p>명령줄 프로그램이 처음이라면 이 장을 순서대로 따라 해 보십시오.</p>
+<h3 id="sec-0-1">0.1 운영체제에 맞는 버전 다운로드</h3>
+<p>NPSeeker 웹사이트 또는 GitHub에서 사용하는 운영체제에 맞는 압축 파일을 다운로드합니다. Windows, macOS, Linux용 파일이 각각 제공됩니다. 각 파일에는 두 가지 프로세서 아키텍처용 실행 파일이 들어 있습니다.</p>
+<table>
+<tr><td>x86_64</td><td>일반적인 Intel 및 AMD 프로세서</td></tr>
+<tr><td>arm64</td><td>Apple M 시리즈 칩이 탑재된 Mac 및 ARM 기반 컴퓨터</td></tr>
+</table>
+<p>자신의 컴퓨터가 어느 아키텍처인지 모른다면 다음과 같이 확인하십시오.</p>
+<ul>
+<li>Windows: "설정 -&gt; 시스템 -&gt; 정보"를 엽니다. "시스템 유형"에 x64가 표시되면 x86_64, ARM64가 표시되면 arm64입니다.</li>
+<li>macOS: "Apple 메뉴 -&gt; 이 Mac에 관하여"를 엽니다. Apple M 시리즈 칩을 사용하면 arm64, Intel 프로세서라면 x86_64입니다.</li>
+<li>Linux: 터미널을 열고 uname <code>-m</code>을 입력한 뒤 Enter를 누릅니다. x86_64가 나오면 x86_64, aarch64가 나오면 arm64입니다.</li>
+</ul>
+<h3 id="sec-0-2">0.2 압축 파일 풀기</h3>
+<p>다운로드한 압축 파일을 원하는 폴더에 풉니다.</p>
+<ul>
+<li>Windows: 압축 파일을 마우스 오른쪽 버튼으로 누르고 "모두 추출"을 선택합니다.</li>
+<li>macOS: 압축 파일을 마우스 왼쪽 버튼으로 두 번 누릅니다.</li>
+<li>Linux: 터미널에서 tar xzf 다음에 압축 파일 이름을 입력해 실행합니다.</li>
+</ul>
+<p>압축을 풀면 NPSeeker 폴더에 다음 항목이 들어 있습니다.</p>
+<table>
+<tr><td><code>bin/</code></td><td>x86_64 실행 파일: npseeker (Windows는 <code>npseeker.exe</code>)</td></tr>
+<tr><td><code>bin.arm64/</code></td><td>arm64 실행 파일</td></tr>
+<tr><td><code>doc/</code></td><td>사용자 설명서</td></tr>
+<tr><td><code>dat/sample/</code></td><td>첫 분석을 위한 예제 데이터</td></tr>
+</table>
+<p>논문에 사용한 세균 유전체 (그람음성균 GN, 그람양성균 GP)는 별도로 다운로드할 수 있습니다 (NPSeeker-1.5.42-datasets.zip 또는 <code>.tar.gz</code>). 압축을 푼 뒤 그 안의 datasets 폴더 (<code>NPSeeker/dat/</code> 아래)를 프로그램의 <code>dat/</code> 폴더로 옮기면 <a href="#ch-8">8장</a>의 명령어 예제를 그대로 실행해 테스트할 수 있습니다.</p>
+<p>NPSeeker는 별도의 설치 과정이 필요하지 않으며, 로컬 분석에 인터넷 연결도 필요하지 않습니다. 이 설명서의 명령어는 <code>bin/</code>에 있는 x86_64 실행 파일을 기준으로 합니다. arm64 컴퓨터에서는 bin을 bin.arm64로 바꾸어 입력하십시오.</p>
+<h3 id="sec-0-3">0.3 실행 여부 확인</h3>
+<p>명령줄 창을 열고 압축을 푼 NPSeeker 폴더로 이동합니다.</p>
+<ul>
+<li>Windows: 파일 탐색기에서 NPSeeker 폴더를 엽니다. 주소 표시줄에 cmd를 입력하고 Enter를 누르면 그 폴더에서 명령 프롬프트가 열립니다. PowerShell에서도 같은 명령어를 사용할 수 있습니다.</li>
+<li>macOS: "응용 프로그램 -&gt; 유틸리티 -&gt; 터미널"을 엽니다. cd를 입력하고 공백 한 칸을 넣은 다음, NPSeeker 폴더를 터미널 창으로 끌어다 놓고 Enter를 누릅니다.</li>
+<li>Linux: 터미널을 열고 cd 명령어로 NPSeeker 폴더로 이동합니다.</li>
+</ul>
+<p>이어서 운영체제에 맞는 명령어를 입력하고 Enter를 누릅니다.</p>
+<pre>Windows:          .\bin\npseeker.exe -h
+macOS, Linux:     ./bin/npseeker -h</pre>
+<p>NPSeeker 로고와 사용법, 주요 옵션이 표시되면 정상적으로 실행된 것입니다.</p>
+<p>인터넷에서 다운로드한 디지털 서명이 없는 프로그램은 처음 실행할 때 운영체제에서 보안 경고를 표시할 수 있습니다.</p>
+<div class="note"><p>실행을 허용하기 전에 파일을 반드시 위 "NPSeeker 소개"에 적힌 공식 웹사이트 또는 GitHub에서 받았는지 확인하십시오. 출처를 알 수 없는 프로그램의 보안 경고를 무시하지 마십시오.</p></div>
+<ul>
+<li>Windows: Microsoft Defender SmartScreen의 "Windows의 PC 보호"라는 파란색 창이 나타나고 "실행 안 함" 버튼만 보일 수 있습니다. 이때 "추가 정보"를 누르면 앱 이름과 "게시자: 알 수 없는 게시자" 정보, "실행" 버튼이 표시됩니다. 공식 배포 파일임을 확인한 뒤 "실행"을 누르십시오. 같은 실행 파일에 대해서는 일반적으로 한 번만 확인합니다.</li>
+<li>macOS: Apple에서 공증하지 않은 프로그램의 실행을 차단할 수 있습니다. 터미널에 xattr <code>-dr</code> com.apple.quarantine 다음에 NPSeeker 폴더 경로를 입력해 실행하십시오. 폴더를 터미널 창에 끌어다 놓아 경로를 넣어도 됩니다. 다른 방법으로, 프로그램을 한 번 실행한 뒤 "시스템 설정 -&gt; 개인정보 보호 및 보안"에서 npseeker의 "그래도 열기"를 선택할 수도 있습니다.</li>
+<li>Linux: 보통 추가 조치가 필요하지 않습니다. "permission denied"가 나오면 chmod +x <code>bin/npseeker</code>를 실행하고 다시 시도하십시오. arm64라면 chmod +x <code>bin.arm64/npseeker</code>를 사용합니다.</li>
+</ul>
+<h3 id="sec-0-4">0.4 그래픽 인터페이스에서 첫 분석 실행</h3>
+<p>명령줄 대신 브라우저에서 조작하려면 NPSeeker의 그래픽 인터페이스를 사용할 수 있습니다. Windows에서는 <code>bin/</code>의 <code>npseeker.exe</code>를 마우스 왼쪽 버튼으로 두 번 누릅니다. macOS 또는 Linux에서는 터미널에 다음을 입력합니다.</p>
+<pre>./bin/npseeker --gui</pre>
+<p>브라우저에서 NPSeeker 인터페이스가 열립니다. 포함된 예제 데이터로 시험해 보려면 Design 화면에서 다음과 같이 설정하십시오.</p>
+<ul>
+<li>Target: 황색포도상구균 유전체가 들어 있는 <code>dat/sample/S.aureus/</code> 폴더를 선택합니다.</li>
+<li>Control: 두 종류의 효모 유전체가 들어 있는 <code>dat/sample/yeast/</code> 폴더를 선택합니다.</li>
+<li>Probe length: 기본값 25를 유지하고 다른 설정도 바꾸지 않습니다.</li>
+<li>"Check"를 눌러 입력과 설정을 확인한 뒤 "Go"를 눌러 분석을 시작합니다.</li>
+<li>계산이 끝나면 Results 화면에서 프로브 순위와 점수를 확인하고, 보관할 결과 파일을 다운로드합니다.</li>
+</ul>
+<p>그래픽 인터페이스는 사용 중인 컴퓨터에서 실행되며 유전체 파일을 외부 웹사이트로 전송하지 않습니다. 화면 구성과 종료 방법은 <a href="#ch-6">6장</a>을 참조하십시오.</p>
+<h3 id="sec-0-5">0.5 명령줄에서 첫 분석 실행</h3>
+<p>같은 예제 데이터를 명령줄에서 직접 분석할 수도 있습니다.</p>
+<pre>Windows:          .\bin\npseeker.exe dat\sample\S.aureus\ dat\sample\yeast\
+macOS, Linux:     ./bin/npseeker     dat/sample/S.aureus/ dat/sample/yeast/</pre>
+<p>계산은 몇 초 안에 끝나며, 화면에 다음과 같이 점수순으로 정렬된 프로브가 표시됩니다 (일부만 발췌).</p>
+<pre>Best probes of cluster 0:
+Rank Probe                     Exclus Purity UnFold Affini  Score     Tm
+   1 CCGACTAACCCAGAGCGGACGAGCC  50.84  61.32 100.00  64.22  69.10  65.88
+   2 GACCCGACTAACCCAGAGCGGACGA  50.84  61.40 100.00  63.68  68.98  64.24
+...</pre>
+<p>각 행은 하나의 후보 프로브를 나타냅니다. Probe는 DNA 서열, Score는 종합 점수이며 높은 점수부터 나열됩니다. 나머지 열의 의미는 <a href="#ch-3">3장</a>에 설명되어 있습니다. 마지막에 나오는 Note는 전체 결과를 파일로 저장하려면 <a href="#opt-o"><code>-o</code></a>를 지정해야 한다고 알려줍니다. 예를 들어 다음과 같이 실행합니다.</p>
+<pre>./bin/npseeker dat/sample/S.aureus/ dat/sample/yeast/ -o result/</pre>
+<p>결과 파일은 <code>result/</code> 폴더에 저장됩니다 (<a href="#sec-3-2">3.2절</a>). 다시 실행할 때는 새 출력 폴더를 지정하십시오. 기존 결과를 덮어써도 될 때만 <a href="#opt-w"><code>-w</code></a>를 추가합니다. 자신의 데이터를 분석하려면 두 예제 폴더를 표적 및 대조군 입력 경로로 바꾸면 됩니다 (<a href="#ch-2">2장</a>).</p>
+<h3 id="sec-0-6">0.6 프로그램 도움말 보기</h3>
+<pre>./bin/npseeker -h               주요 옵션
+./bin/npseeker -help            전체 옵션
+./bin/npseeker -help -mode      -mode 도움말 (-help mode도 가능)
+./bin/npseeker -help Output     -help의 Output 항목
+./bin/npseeker -help target     target 도움말 (또는 control)</pre>
+<p>옵션이 잘못되었다면 NPSeeker가 문제와 도움말 확인 방법을 안내하고, 계산은 시작하지 않습니다.</p>
+<h2 id="ch-1">1. NPSeeker의 프로브 설계와 점수 계산</h2>
+<p>NPSeeker는 표적 및 대조 유전체를 입력받아 후보 프로브의 순위를 출력합니다. 표적은 검출하려는 생물, 대조군은 검출을 피해야 하는 생물입니다. 대조군에는 표적과 혼동하기 쉬운 근연종이 포함될 수 있습니다. 분석은 크게 네 단계입니다.</p>
+<ul>
+<li>공통 서열 찾기: NPSeeker는 유전체에서 연속된 k개의 뉴클레오타이드로 이루어진 모든 서열 조각을 찾습니다. 이를 k-mer라고 합니다. 예를 들어 ACGTA의 3-mer는 ACG, CGT, GTA입니다. 모든 표적 유전체에 존재하는 k-mer를 후보 프로브로 삼습니다. 단일 프로브로 모든 표적을 검출하려면 그 서열이 모든 표적에 공통으로 존재해야 합니다. DNA는 서로 상보적인 두 가닥으로 이루어져 있으므로, NPSeeker는 k-mer와 그 역상보 서열을 같은 k-mer로 취급합니다.</li>
+<li>후보 필터링: 염기 조성이 지나치게 치우쳤거나, 같은 염기가 길게 반복되는 서열 (예: AAAA), 스스로 접히거나 동일한 프로브끼리 결합하기 쉬운 서열을 제외합니다. 적합성이 낮은 후보에 후속 계산 시간을 쓰지 않기 위한 단계입니다.</li>
+<li>대조군 검사: 남은 각 후보에 대해 대조 유전체에서 완전히 일치하는 서열, 염기가 몇 개만 다른 유사 서열, 프로브의 짧은 부분 서열이 얼마나 자주 나타나는지 확인합니다.</li>
+<li>점수 계산 및 순위 결정: 후보마다 네 가지 점수를 계산해 종합 점수로 합산한 뒤 순위를 정합니다.</li>
+</ul>
+<table>
+<tr><td>Exclusivity</td><td>표적 특이성: 표적에서는 나타나지만 대조군에서는 드문 정도</td></tr>
+<tr><td>Purity</td><td>순도: 대조군에 유사 서열이나 일치하는 짧은 조각이 적어 비표적 결합 위험이 낮은 정도</td></tr>
+<tr><td>Unfoldability</td><td>비접힘성: 스스로 접힐 가능성이 낮아 표적과 결합하기 쉬운 정도</td></tr>
+<tr><td>Affinity</td><td>결합 친화도: 결합 자유에너지로 예측한 결합 안정성 (프로브가 표적에 결합할 때 방출되는 에너지와 관련됨)</td></tr>
+</table>
+<p>네 가지 항목과 종합 점수는 모두 0~100이며, 높을수록 계산상 유리한 특성을 뜻합니다. 기본적으로 네 점수의 가중치는 같습니다. 이 점수는 실험에서 평가할 후보의 우선순위를 정하기 위한 것입니다. 실제 BioFET 신호의 측정값이 아니며 실험 성능을 보장하지도 않습니다.</p>
+<p>표적 유전체 사이의 차이가 커서 공통 k-mer가 부족하면 NPSeeker가 표적을 여러 군집으로 나누고 군집마다 후보를 찾습니다. 군집화와 출력 모드는 <a href="#ch-4">4장</a>, 점수 공식과 알고리즘의 세부 사항은 관련 논문을 참조하십시오.</p>
+<h2 id="ch-2">2. 표적 및 대조 유전체 준비</h2>
+<p>명령줄에서 처음 두 인수는 표적 (target), 대조군 (control) 순서이며, 그 뒤에 옵션을 지정합니다.</p>
+<pre>./bin/npseeker &lt;target&gt; &lt;control&gt; [options]</pre>
+<p>유전체 하나당 FASTA 파일 하나를 준비하십시오. FASTA는 DNA 서열을 저장하는 텍스트 파일 형식이며 확장자로 <code>.fasta</code>, <code>.fna</code>, <code>.fa</code> 등을 사용합니다. 표적과 대조군은 각각 폴더, 파일 목록, 단일 FASTA 파일 중 하나로 지정할 수 있습니다.</p>
+<h3 id="sec-2-1">2.1 폴더로 지정하기</h3>
+<p>폴더를 지정하면 NPSeeker는 그 안의 <code>.fasta</code>, <code>.fna</code>, <code>.fa</code> 파일을 읽고, 파일 하나를 유전체 하나로 취급합니다. 확장자는 모두 소문자이거나 모두 대문자여야 합니다 (예: <code>.FASTA</code>). 하위 폴더는 검색하지 않습니다.</p>
+<pre>./bin/npseeker targets/ controls/</pre>
+<p>폴더 안의 압축 파일 (<code>.gz</code>, <code>.zst</code>)은 자동으로 읽지 않습니다. 압축 FASTA 파일을 사용하려면 파일 목록으로 지정하십시오.</p>
+<h3 id="sec-2-2">2.2 파일 목록으로 지정하기</h3>
+<p>파일 목록은 한 행에 FASTA 파일 경로 하나씩 적은 텍스트 파일입니다. 목록 파일 이름 앞에 @를 붙이면 NPSeeker가 파일 목록으로 해석합니다.</p>
+<pre>./bin/npseeker @target.list @control.list</pre>
+<p>예를 들어 <code>target.list</code>에는 다음과 같이 적을 수 있습니다.</p>
+<pre># Three target genomes
+genomes/strain_A.fasta
+genomes/strain_B.fna.gz
+/data/others/strain_C.fa</pre>
+<ul>
+<li>빈 행과 #으로 시작하는 행은 무시하므로 주석으로 사용할 수 있습니다.</li>
+<li>상대 경로는 목록 파일이 있는 폴더가 아니라 NPSeeker를 실행한 현재 폴더를 기준으로 해석합니다.</li>
+<li>서로 다른 폴더의 파일을 나열해도 됩니다. gzip (<code>.gz</code>) 또는 zstd (<code>.zst</code>)로 압축한 FASTA 파일도 사용할 수 있습니다.</li>
+<li><a href="#opt-cluster-order"><code>-cluster-order</code></a> input을 사용하면 목록에 적힌 순서대로 군집화를 위한 유전체를 처리합니다 (<a href="#ch-4">4장</a>).</li>
+</ul>
+<p>@를 붙이지 않아도 FASTA 형식이 아닌 파일은 파일 목록으로 해석됩니다. 다만 의도를 분명히 하기 위해 @를 붙이는 것을 권장합니다.</p>
+<h3 id="sec-2-3">2.3 단일 FASTA 파일 지정하기</h3>
+<p>표적 또는 대조군에 유전체가 하나만 있으면 FASTA 파일을 직접 지정할 수 있습니다. 압축 FASTA 파일도 지원합니다.</p>
+<pre>./bin/npseeker strain_A.fasta controls/</pre>
+<h3 id="sec-2-4">2.4 FASTA 파일 내용과 입력 검사</h3>
+<ul>
+<li>FASTA 파일 하나에 염색체나 플라스미드처럼 여러 서열 레코드가 있을 수 있습니다. 한 파일의 레코드는 모두 하나의 유전체로 취급합니다.</li>
+<li>NPSeeker는 대소문자와 관계없이 A, C, G, T를 인식합니다. N처럼 다른 문자가 나오면 서열이 그 위치에서 끊긴 것으로 간주하고, 그 위치를 가로지르는 k-mer는 제외합니다.</li>
+<li>입력 파일이 FASTA 형식인지 확인하며, 파일이 없거나 올바르지 않으면 오류를 표시하고 중단합니다 (<a href="#sec-7-2">7.2절</a>).</li>
+<li>같은 파일을 표적과 대조군에 동시에 넣을 수 없습니다. 중복 파일이 발견되면 파일을 알려주고 실행을 중단합니다.</li>
+</ul>
+<div class="note"><p>표적 및 대조 유전체의 선택은 프로브 순위에 직접 영향을 줍니다. 대조군에는 무관한 생물을 임의로 넣기보다 실제 사용 환경에서 표적과 혼동할 가능성이 있는 생물을 포함하는 것이 좋습니다.</p></div>
+<h2 id="ch-3">3. 결과 확인과 프로브 선택</h2>
+<h3 id="sec-3-1">3.1 화면에 표시되는 결과</h3>
+<p><a href="#opt-o"><code>-o</code></a>를 지정하지 않으면 상위 <a href="#opt-top"><code>-top</code></a>개 (기본값 200)의 프로브가 화면에 표시됩니다. 열에는 Rank, Probe, 네 가지 평가 점수, Score와 Tm이 포함됩니다. <a href="#opt-o"><code>-o</code></a>를 지정하면 자세한 결과를 파일에 저장하고 화면에는 저장한 파일 목록만 표시합니다. <a href="#opt-v"><code>-v</code></a>를 추가하면 설정값과 각 단계의 소요 시간도 확인할 수 있습니다.</p>
+<h3 id="sec-3-2">3.2 결과 파일</h3>
+<p>예를 들어 <a href="#opt-o"><code>-o</code></a> <code>result/</code>를 지정하면 기본적으로 다음 CSV 파일이 저장됩니다. CSV는 각 항목을 쉼표로 구분하는 텍스트 파일 형식입니다.</p>
+<table>
+<tr><td><code>cluster_N_probes.csv</code></td><td>후보 프로브 순위; N은 0부터 시작하는 군집 번호</td></tr>
+<tr><td><code>cluster.csv</code></td><td>각 유전체가 속한 군집</td></tr>
+<tr><td><code>flag.csv</code></td><td>이번 분석에 사용된 설정</td></tr>
+</table>
+<p><a href="#opt-format"><code>-format</code></a> txt를 지정하면 공백으로 열을 맞춘 읽기 쉬운 표로 저장됩니다. CSV는 Excel과 같은 스프레드시트나 다른 프로그램에서 처리하기 편리합니다. single 또는 multi 모드에 따라 생성되는 프로브 파일 수가 달라집니다 (<a href="#ch-4">4장</a>).</p>
+<p><code>cluster_N_probes.csv</code>의 각 열은 다음을 뜻합니다.</p>
+<table>
+<tr><td>Rank</td><td>프로브 순위</td></tr>
+<tr><td>Probe</td><td>프로브 서열 (5'에서 3' 방향)</td></tr>
+<tr><td>Tgt</td><td>표적 유전체에서 나타나는 횟수</td></tr>
+<tr><td>Ctl</td><td>대조 유전체에서 정확히 일치하는 횟수; 적을수록 좋음</td></tr>
+<tr><td>Exclus</td><td>Tgt와 Ctl로 계산한 표적 특이성 점수</td></tr>
+<tr><td>MMs</td><td>대조군의 유사 서열에 대한 점수; 낮을수록 좋음</td></tr>
+<tr><td>Subseq</td><td>대조군에 나타나는 짧은 프로브 조각에 대한 점수; 낮을수록 좋음</td></tr>
+<tr><td>Purity</td><td>MMs와 Subseq로 계산한 순도 점수</td></tr>
+<tr><td>SelfAn</td><td>프로브가 스스로 접히려는 경향 (self-annealing); 낮을수록 좋음</td></tr>
+<tr><td>Dimer</td><td>동일한 프로브끼리 결합하려는 경향 (dimer); 낮을수록 좋음</td></tr>
+<tr><td>UnFold</td><td>SelfAn과 Dimer로 계산한 비접힘성 점수</td></tr>
+<tr><td>Affini</td><td>결합 자유에너지에 기반한 친화도 점수</td></tr>
+<tr><td>Score</td><td>네 가지 점수의 가중평균</td></tr>
+<tr><td>Tm</td><td>융해 온도 (°C): 프로브-표적 이중가닥의 절반이 분리되는 온도; 종합 점수에는 포함되지 않음</td></tr>
+</table>
+<p>Exclus, Purity, UnFold, Affini, Score는 모두 0~100이며 높을수록 좋습니다. 표적이 여러 군집으로 나뉘었다면 Tgt에는 후보가 속한 군집 밖의 표적 유전체에서 발견된 유사 서열도 반영됩니다. 따라서 Tgt가 항상 정확히 일치한 횟수만 나타내는 것은 아닙니다.</p>
+<p><code>cluster.csv</code>에는 Group (target 또는 control), Cluster (표적 군집 번호; 대조군은 빈칸), File (파일 이름)의 세 열이 있습니다. <code>flag.csv</code>에는 Option과 Value가 있어 이번 분석의 설정을 확인할 수 있습니다.</p>
+<p>출력 폴더가 없으면 NPSeeker가 생성합니다. 기존 폴더가 비어 있어도 사용할 수 있습니다. 이미 파일이 들어 있다면 덮어쓰지 않고 실행을 중단합니다. 이전 결과를 교체하려는 경우에만 <a href="#opt-w"><code>-w</code></a>를 추가하십시오. 이 옵션은 이전 NPSeeker 결과 파일 (cluster_N_probes, cluster, flag)을 삭제한 뒤 새 파일을 기록하며, 무관한 파일은 그대로 둡니다. <a href="#opt-w"><code>-w</code></a>를 사용하기 전에 기존 결과가 더 이상 필요하지 않은지 확인하십시오.</p>
+<h3 id="sec-3-3">3.3 프로브 선택 시 확인할 사항</h3>
+<p>Score는 후보를 고르는 좋은 출발점이지만 종합 점수만으로 결정하지는 마십시오. 사용 목적에 따라 다음 항목도 살펴보는 것이 좋습니다.</p>
+<ul>
+<li>Ctl: 0보다 크면 대조 유전체에도 정확히 같은 서열이 있다는 뜻입니다. 따라서 비표적 생물에 결합하는 교차반응이 일어날 수 있습니다.</li>
+<li>Tgt: 나타나는 횟수가 많으면 신호가 강해질 가능성이 있지만, 반복 서열에 해당할 수도 있습니다. 신호 강도를 직접 예측하는 값은 아닙니다.</li>
+<li>Purity와 UnFold: 비표적 결합과 프로브 자체 접힘의 위험을 비교하는 데 도움이 됩니다.</li>
+<li>Tm: 실험 온도에 제약이 있거나 여러 프로브를 함께 쓴다면 각 프로브의 융해 온도를 비교하십시오. 한 실험에서 사용하는 프로브들의 Tm은 되도록 비슷한 것이 좋습니다.</li>
+</ul>
+<p>필요하면 NCBI BLAST로 다른 생물의 유사 서열을 확인하거나 UNAFold (mfold)로 가능한 접힘 구조를 살펴볼 수도 있습니다. Results 화면에서 두 서비스로 연결할 수 있지만, 선택한 프로브 서열이 외부 웹사이트로 전송됩니다 (<a href="#sec-6-2">6.2절</a>). 특정 BioFET 플랫폼에 적합한지는 결국 실제 실험 조건에서 검증해야 합니다.</p>
+<h2 id="ch-4">4. 표적 군집화와 single/multi 모드</h2>
+<p>모든 표적 유전체에 공통인 k-mer가 충분하지 않으면 NPSeeker는 표적을 여러 군집으로 나눕니다. 유전체를 하나씩 처리하면서, 새로운 유전체를 추가했을 때 군집의 모든 구성원이 공통으로 가진 k-mer가 <a href="#opt-min-shared"><code>-min-shared</code></a>개 이상 남아 있어야 그 군집에 넣습니다. 이 조건을 만족하지 못하는 유전체는 다른 군집에서 처리합니다. 여기서의 군집은 후보 탐색을 위한 계산상 분류이며 진화적 또는 계통학적 분류를 의미하지 않습니다.</p>
+<p><a href="#opt-cluster-order"><code>-cluster-order</code></a>는 표적 유전체를 처리할 순서를 결정합니다.</p>
+<ul>
+<li>auto (기본값): 유전체 사이의 k-mer 유사도를 바탕으로 일정한 순서를 정합니다. 같은 유전체 집합이라면 입력 파일의 순서가 달라도 군집화 결과는 같습니다.</li>
+<li>input: 사용자가 입력한 순서를 따릅니다 (예: 파일 목록에 적힌 순서). 특정 참조 유전체를 첫 번째 군집의 시작점으로 삼고 싶을 때 사용합니다.</li>
+</ul>
+<p><a href="#opt-min-shared"><code>-min-shared</code></a>의 기본값은 1입니다. 군집 전체에 공통인 k-mer가 하나라도 남으면 새 유전체를 넣을 수 있으므로, 보통 표적이 하나의 군집을 이룹니다. 이 값을 높이면 군집이 더 많이 만들어질 수 있고, 군집마다 얻을 수 있는 후보도 달라집니다.</p>
+<p>군집이 두 개 이상이라면 <a href="#opt-mode"><code>-mode</code></a>로 후보의 순위와 저장 방식을 선택합니다.</p>
+<ul>
+<li>single (기본값): 모든 군집의 후보를 합쳐 하나의 순위를 만들고, 전체 상위 <a href="#opt-top"><code>-top</code></a>개만 <code>cluster_0_probes.csv</code>에 저장합니다. 상위 후보가 특정 군집에 집중될 수도 있습니다.</li>
+<li>multi: 군집마다 별도의 순위를 매기고, 각 군집에서 최대 <a href="#opt-top"><code>-top</code></a>개씩 <code>cluster_0_probes.csv</code>, <code>cluster_1_probes.csv</code> 등에 저장합니다. 모든 표적 군집에서 후보를 얻고 싶을 때 사용합니다.</li>
+</ul>
+<p>multi 모드에서 군집별로 프로브를 고르면 계산상 모든 표적 군집을 포괄하는 프로브 집합을 구성할 수 있습니다. 다만 실제 검출 성능은 실험으로 검증해야 합니다. 각 군집에 포함된 유전체는 <code>cluster.csv</code>에서 확인할 수 있습니다. 특정 군집에서 필터를 통과한 후보가 없으면 경고를 출력하고 다른 군집의 결과는 그대로 저장합니다.</p>
+<h2 id="ch-5">5. 옵션과 매개변수</h2>
+<p>옵션은 target과 control 입력 뒤에 적습니다. 값을 받는 옵션은 한 칸을 띄우고 값을 입력합니다 (예: <a href="#opt-k"><code>-k</code></a> 31). <a href="#opt-v"><code>-v</code></a>, <a href="#opt-w"><code>-w</code></a>, <code>--gui</code> 같은 스위치는 값을 받지 않습니다. 일부 옵션에는 짧은 이름과 긴 이름이 있으며 (예: <a href="#opt-k"><code>-k</code></a>와 <a href="#opt-k"><code>-kmer</code></a>), 어느 쪽을 써도 됩니다. 숫자는 과학적 표기법도 사용할 수 있습니다. 예를 들어 1e7은 10,000,000입니다.</p>
+<p>아래 항목은 프로그램의 <code>-help</code> 순서를 따릅니다. 절 제목 괄호 안의 영어는 <code>-help</code>에 나오는 항목 이름입니다. 전체 옵션은 부록 A에 간단히 정리했습니다.</p>
+<h3 id="sec-5-1">5.1 프로브 길이와 계산 자원 (General settings)</h3>
+<h4 class="option" id="opt-k"><code>-k, -kmer</code> <span class="opt-type">[정수, 5~256; 기본값: 25]</span></h4>
+<p>프로브의 길이를 뉴클레오타이드 수로 지정합니다. 실험 목적에 맞는 길이를 선택하십시오. k가 커질수록 서로 다른 표적 유전체에서 같은 길이의 완전히 일치하는 서열을 찾기 어려워져 군집을 더 나눠야 할 수 있습니다. 실행 시간은 주로 유전체 크기와 후보 수에 따라 달라집니다. 길이가 긴 프로브가 반드시 계산도 느린 것은 아닙니다 (논문 Figure 4).</p>
+<h4 class="option" id="opt-t"><code>-t, -threads</code> <span class="opt-type">[정수; 기본값: 0]</span></h4>
+<p>계산에 사용할 작업 스레드 수입니다. 0은 사용 가능한 하드웨어 스레드를 모두 사용합니다. 다른 작업과 컴퓨터를 함께 쓴다면 수를 줄이십시오.</p>
+<h4 class="option" id="opt-m"><code>-m, -memory</code> <span class="opt-type">[크기; 기본값: 물리 메모리의 절반, 최대 8G]</span></h4>
+<p>주요 계산 단계의 메모리 예산을 지정합니다. 예를 들어 <a href="#opt-m"><code>-m</code></a> 8G 또는 <a href="#opt-m"><code>-m</code></a> 512M처럼 씁니다. 단위를 생략한 숫자는 GiB로 해석합니다. 예산을 줄이면 배치 처리가 늘어 분석이 느려질 수 있지만 결과는 같습니다. 후보 배치를 불러오는 데 쓰이는 메모리 (<a href="#opt-b"><code>-b</code></a>)와 다른 실행 데이터의 메모리는 이 예산에 포함되지 않습니다 (<a href="#sec-5-5">5.5절</a>).</p>
+<h3 id="sec-5-2">5.2 결과 저장과 실행 기록 (Output)</h3>
+<h4 class="option" id="opt-o"><code>-o, -out-dir</code> <span class="opt-type">[폴더; 기본값: 결과 파일 저장 안 함]</span></h4>
+<p>결과 파일을 저장할 폴더를 지정합니다 (<a href="#sec-3-2">3.2절</a>). <a href="#opt-o"><code>-o</code></a>를 지정하지 않으면 열 수가 적은 결과를 화면에만 표시합니다. 나중에 결과를 보관하거나 비교하고 분석을 재현하려면 출력 폴더를 지정하는 것이 좋습니다.</p>
+<h4 class="option" id="opt-w"><code>-w, --overwrite</code></h4>
+<p>파일이 들어 있는 <a href="#opt-o"><code>-o</code></a> 출력 폴더를 다시 사용할 수 있게 합니다. 기존 NPSeeker 결과 파일을 지우고 새 파일을 기록하며, 다른 파일은 그대로 보존합니다 (<a href="#sec-3-2">3.2절</a>).</p>
+<h4 class="option" id="opt-top"><code>-top</code> <span class="opt-type">[정수; 기본값: 200]</span></h4>
+<p>각 순위 목록에서 출력할 상위 프로브 수입니다. 더 많은 후보를 보려면 수를 늘리십시오. 지나치게 큰 값은 결과 파일뿐 아니라 메모리 사용량과 실행 시간도 늘릴 수 있으므로 필요에 맞게 정하십시오.</p>
+<h4 class="option" id="opt-format"><code>-format</code> <span class="opt-type">[csv 또는 txt; 기본값: csv]</span></h4>
+<p>결과 파일 형식을 선택합니다. csv는 쉼표로 구분된 데이터로 스프레드시트나 다른 프로그램에서 처리하기 편리합니다. txt는 공백으로 열을 맞춘 표라서 바로 읽기 좋습니다.</p>
+<h4 class="option" id="opt-v"><code>-v, --verbose</code></h4>
+<p>입력 자료와 설정값, 각 계산 단계 및 소요 시간 등의 상세 정보를 출력합니다. 문제를 확인하거나 대규모 분석의 진행 상황을 볼 때 유용합니다. 그래픽 인터페이스에서 시작한 분석에는 상세 로그가 항상 사용됩니다.</p>
+<h3 id="sec-5-3">5.3 군집화와 순위 (Target clustering, Probe ranking)</h3>
+<h4 class="option" id="opt-cluster-order"><code>-cluster-order</code> <span class="opt-type">[auto 또는 input; 기본값: auto]</span></h4>
+<p>군집화할 때 표적 유전체를 처리하는 순서입니다. auto는 입력 파일의 순서에 영향을 받지 않으며, input은 사용자가 지정한 순서를 따릅니다. 세부 사용법은 <a href="#ch-4">4장</a>을 참조하십시오.</p>
+<h4 class="option" id="opt-min-shared"><code>-min-shared</code> <span class="opt-type">[정수; 기본값: 1]</span></h4>
+<p>군집 내 모든 유전체가 공통으로 가져야 하는 최소 k-mer 수입니다. 이 값을 높이면 일반적으로 군집이 늘어나지만, 모든 군집에서 적합한 프로브를 얻는다는 보장은 없습니다 (<a href="#ch-4">4장</a>).</p>
+<h4 class="option" id="opt-mode"><code>-mode</code> <span class="opt-type">[single 또는 multi; 기본값: single]</span></h4>
+<p>표적이 여러 군집으로 나뉠 때만 두 모드의 차이가 나타납니다. single은 모든 군집의 후보를 함께 평가하고, multi는 군집마다 별도 순위를 만듭니다. 선택 기준은 <a href="#ch-4">4장</a>을 참조하십시오.</p>
+<h4 class="option" id="opt-weights"><code>-weights</code> <span class="opt-type">[쉼표로 구분한 KEY=WEIGHT; 기본값: 각 항목 1]</span></h4>
+<p>종합 점수에서 표적 특이성 (exc), 순도 (pur), 비접힘성 (unf), 결합 친화도 (aff)가 차지하는 비중을 조정합니다. 예를 들어:</p>
+<pre>-weights exc=2,pur=2</pre>
+<p>이렇게 지정하면 표적 특이성과 순도의 가중치를 각각 두 배로 하고, 따로 지정하지 않은 unf와 aff는 1로 유지합니다. 종합 점수는 다음과 같이 계산합니다.</p>
+<pre>Score = (w_exc*Exclus + w_pur*Purity + w_unf*UnFold + w_aff*Affini)
+        / (w_exc + w_pur + w_unf + w_aff)</pre>
+<p>가중치는 0일 수 있지만 음수는 허용되지 않으며, 적어도 하나는 양수여야 합니다. 가중치가 0인 항목도 계산은 수행하되 Score에는 반영하지 않습니다. 어떤 항목의 가중치를 높이면 순위에 미치는 영향이 커질 뿐, 그 점수가 낮은 후보가 필터에서 제외되지는 않습니다.</p>
+<h4 class="option" id="opt-mm"><code>-mm, -mismatch-cutoff</code> <span class="opt-type">[정수; 기본값: floor(프로브 길이 / 10)]</span></h4>
+<p>순도를 계산할 때 대조 유전체에서 프로브의 유사 서열로 인정할 수 있는 최대 염기 불일치 수입니다. 값을 높이면 더 많은 유사 서열을 찾을 수 있지만 계산 시간과 메모리 사용량이 크게 늘 수 있습니다. 이 값은 프로브 길이보다 작아야 합니다.</p>
+<h3 id="sec-5-4">5.4 후보 서열 필터링 (Candidate filtering)</h3>
+<p>NPSeeker는 시간이 많이 드는 대조 유전체 비교에 앞서 후보를 필터링합니다. 조건이 너무 엄격하면 남는 후보가 없을 수 있습니다. 이때는 아래 문턱값을 하나씩 완화해 보십시오.</p>
+<h4 class="option" id="opt-max-homopolymer"><code>-max-homopolymer</code> <span class="opt-type">[정수; 기본값: 3]</span></h4>
+<p>Homopolymer는 AAAA처럼 같은 염기가 연속으로 나타나는 구간입니다. 이 옵션은 허용할 최대 연속 길이를 지정합니다. 기본값 3에서는 AAA는 허용하지만 AAAA 이상이 포함된 후보는 제외합니다. 값을 높이면 긴 동일 염기 반복이 있는 후보를 더 많이 남깁니다.</p>
+<h4 class="option" id="opt-c"><code>-c, -min-complexity</code> <span class="opt-type">[숫자, 0~1; 기본값: 0.5]</span></h4>
+<p>서열 복잡도 점수의 하한입니다. 네 종류의 염기가 고르게 섞일수록 점수가 높아집니다. 이 문턱값보다 점수가 높아야 통과합니다.</p>
+<h4 class="option" id="opt-e"><code>-e, -min-entropy</code> <span class="opt-type">[숫자, 0~2; 기본값: 1.5]</span></h4>
+<p>서열 엔트로피 점수의 하한입니다. 엔트로피는 서열 패턴이 얼마나 다양한지를 나타냅니다. ACACAC처럼 반복적인 서열은 엔트로피가 낮습니다. 이 문턱값보다 점수가 높아야 통과합니다.</p>
+<p>프로브가 짧으면 가능한 복잡도와 엔트로피의 최댓값도 낮아집니다. 지정한 문턱값이 해당 길이에서 가능한 최댓값을 넘으면 NPSeeker가 오류를 표시하고 최댓값을 알려줍니다.</p>
+<h4 class="option" id="opt-prefilter"><code>-prefilter</code> <span class="opt-type">[T 또는 F; 기본값: T]</span></h4>
+<p>대조 유전체를 검색하기 전에 비접힘성으로 후보를 먼저 걸러낼지 지정합니다. T는 <a href="#opt-min-unfold"><code>-min-unfold</code></a>보다 점수가 낮은 후보를 제거하여 이후 비교량을 줄입니다. F는 사전 필터링을 건너뛰지만, 각 후보의 비접힘성 점수는 여전히 계산합니다.</p>
+<h4 class="option" id="opt-min-unfold"><code>-min-unfold</code> <span class="opt-type">[숫자, 0~100; 기본값: 75]</span></h4>
+<p>사전 필터링에 사용할 비접힘성 문턱값입니다. 값을 낮추면 스스로 접힐 가능성이 높은 후보도 더 많이 남아 이후 비교량이 늘 수 있습니다. 한 배치에서 문턱값을 만족하는 후보가 하나도 없다면, 그 배치에는 사전 필터링을 적용하지 않습니다. 예를 들어 논문의 실험에 사용한 그람양성균 프로브의 비접힘성 점수는 72.54이므로, 해당 순위를 재현하려면 <a href="#opt-min-unfold"><code>-min-unfold</code></a> 70을 사용합니다 (<a href="#ch-8">8장</a>).</p>
+<h3 id="sec-5-5">5.5 고급 옵션 (Advanced)</h3>
+<p>일반적으로는 기본 설정을 그대로 사용해도 됩니다.</p>
+<h4 class="option" id="opt-b"><code>-b, -batch-size</code> <span class="opt-type">[정수; 기본값: 1e7]</span></h4>
+<p>한 번에 읽어 필터링할 후보 k-mer 수입니다. k = 25일 때 후보 하나는 약 170바이트를 사용하므로 기본 배치인 1,000만 개에는 약 1.58 GiB가 필요합니다. 이는 <a href="#opt-m"><code>-m</code></a> 메모리 예산에 추가로 사용되는 메모리입니다. 메모리가 적은 컴퓨터에서는 값을 낮추십시오. 다만 배치가 작아지면 실행 시간이 늘어날 수 있습니다.</p>
+<h4 class="option" id="opt-s"><code>-s, -min-subseq</code> <span class="opt-type">[정수; 기본값: 7]</span></h4>
+<p>순도 점수를 계산할 때 고려하는 프로브 부분 서열의 최소 길이입니다. <a href="#opt-subseq-step"><code>-subseq-step</code></a>과 함께 사용합니다.</p>
+<h4 class="option" id="opt-subseq-step"><code>-subseq-step</code> <span class="opt-type">[정수; 기본값: ceiling(프로브 길이 / 10)]</span></h4>
+<p>순도 점수 계산에서 부분 서열 길이를 한 단계마다 얼마나 줄일지 정합니다. 예를 들어 k = 25이면 기본 간격이 3이므로 길이 22, 19, 16, 13, 10, 7의 부분 서열을 조사합니다. 간격을 줄이면 더 많은 길이를 검사하게 되어 비교 작업량이 늘어납니다.</p>
+<h4 class="option" id="opt-tmp-dir"><code>-tmp-dir</code> <span class="opt-type">[폴더; 기본값: 시스템 임시 폴더]</span></h4>
+<p>중간 계산 파일을 저장할 위치를 지정합니다. NPSeeker는 지정한 위치에 전용 하위 폴더를 만들고, 정상 종료하거나 Ctrl-C로 중단하면 삭제합니다. 시스템 디스크의 여유 공간이 부족할 때는 다른 디스크의 폴더를 지정하십시오.</p>
+<h3 id="sec-5-6">5.6 그래픽 인터페이스와 도움말 (Graphical interface)</h3>
+<table>
+<tr><td><code>--gui</code></td><td>명령줄에서 바로 분석하는 대신 로컬 그래픽 인터페이스 실행</td></tr>
+<tr><td><code>-gui-port</code> [정수]</td><td>인터페이스 접속 포트 (URL의 콜론 뒤 숫자); 기본값: 자동 선택</td></tr>
+<tr><td><code>--no-browser</code></td><td>브라우저를 열지 않고 인터페이스 URL만 표시</td></tr>
+<tr><td><code>--tab</code></td><td>인터페이스를 브라우저 탭으로 열기</td></tr>
+<tr><td><code>-h</code></td><td>간단한 도움말 보기</td></tr>
+<tr><td><code>-help</code> [KEYWORD]</td><td>전체 도움말 또는 특정 옵션<code>/</code>항목의 도움말 보기</td></tr>
+</table>
+<p><code>--gui</code>와 함께 사용할 수 있는 옵션은 <code>-gui-port</code>, <code>--no-browser</code>, <code>--tab</code>뿐입니다. <a href="#opt-k"><code>-k</code></a> 같은 분석 매개변수는 그래픽 인터페이스 안에서 설정해야 합니다. <code>--gui</code>와 함께 명령줄에 넣으면 오류가 발생합니다. 자세한 내용은 <a href="#ch-6">6장</a>을 참조하십시오.</p>
+<h2 id="ch-6">6. 그래픽 인터페이스</h2>
+<p>NPSeeker는 사용자 컴퓨터에서 작은 웹 서버를 실행하고 브라우저를 인터페이스로 사용합니다. 이 서버에는 해당 컴퓨터 (127.0.0.1)에서만 접속할 수 있습니다. 계산은 NPSeeker가 직접 수행하므로 유전체 파일이 외부 웹사이트에 업로드되지는 않습니다. 설정이 같다면 그래픽 인터페이스와 명령줄에서 얻는 결과도 같습니다.</p>
+<h3 id="sec-6-1">6.1 시작 및 연결</h3>
+<ul>
+<li>Windows: <code>bin/</code>의 <code>npseeker.exe</code>를 마우스 왼쪽 버튼으로 두 번 누르거나, 명령 프롬프트에서 <code>.\bin\npseeker.exe</code> <code>--gui</code>를 실행합니다. 프로그램 메시지가 나오는 검은색 콘솔 창이 열립니다. 인터페이스를 사용하는 동안 이 창을 닫지 마십시오.</li>
+<li>macOS, Linux: 터미널에서 <code>./bin/npseeker</code> <code>--gui</code>를 실행합니다.</li>
+</ul>
+<p>NPSeeker는 일반적으로 브라우저를 자동으로 열고 다음과 같은 인터페이스 URL도 출력합니다.</p>
+<pre>http://127.0.0.1:53817/?t=1a2b3c...</pre>
+<p>?t= 뒤의 문자열은 현재 세션의 접근 토큰입니다. 브라우저가 자동으로 열리지 않으면 출력된 URL 전체를 복사해 브라우저에 입력하십시오. 접근 토큰이 포함된 URL이므로 불필요하게 다른 사람에게 공유하지 마십시오.</p>
+<p>기본적으로 인터페이스는 별도의 창으로 열립니다. Edge나 Chrome 같은 브라우저에서는 주소 표시줄이 없는 앱 형태의 창으로, Firefox에서는 새 창으로 열립니다. 기본 브라우저의 탭에서 열고 싶다면 <code>--tab</code>을 추가하십시오.</p>
+<h3 id="sec-6-2">6.2 주요 화면</h3>
+<table>
+<tr><td>Design</td><td>Target과 Control 유전체, 출력 폴더 (선택 사항), 프로브 길이를 지정합니다. 폴더 단위로 선택하거나, 서로 다른 위치의 FASTA 파일을 개별적으로 지정할 수 있습니다. 압축 파일도 개별 선택이 가능합니다. "Tick all"은 폴더의 모든 파일을 선택합니다. "Pick folder"와 "Pick files"는 운영체제의 파일 선택 창을 엽니다. 필요하면 추가 설정을 펼쳐 확인하십시오. 빈 입력란은 기본값을 사용합니다. "Check"는 입력과 설정을 검사하고 "Go"는 분석을 시작합니다.</td></tr>
+<tr><td>Run</td><td>현재 단계, 진행 상황 및 실행 로그를 표시합니다. "Cancel"을 누르면 분석을 중단합니다.</td></tr>
+<tr><td>Results</td><td>순위가 매겨진 프로브와 서열, 각 평가 점수를 확인합니다. 열 제목을 누르면 정렬할 수 있으며 Rank에는 원래의 NPSeeker 순위가 유지됩니다. 프로브를 선택하면 역상보 서열과 융해 온도를 확인하거나 서열을 복사할 수 있습니다. 결과 파일은 개별적으로 받거나 zip 파일로 묶어 다운로드할 수 있습니다.</td></tr>
+<tr><td>Help</td><td>사용자 설명서를 읽고 언어를 전환합니다.</td></tr>
+<tr><td>About</td><td>프로그램, 논문, 저자 및 연락처 정보를 보여줍니다.</td></tr>
+</table>
+<p>Results 화면에는 외부 서비스 두 곳으로 연결하는 기능도 있습니다.</p>
+<ul>
+<li>BLAST at NCBI: 선택한 프로브 서열로 NCBI BLAST를 열어 다른 생물에 유사 서열이 있는지 확인합니다.</li>
+<li>Fold at UNAFold: UNAFold (mfold)에 서열을 보내 DNA 접힘 구조를 예측합니다. 해당 웹사이트 양식의 기본 조건 (37 °C, 1 M Na+)을 사용합니다.</li>
+</ul>
+<div class="note"><p>이 두 기능을 사용하려면 인터넷 연결이 필요하며, 선택한 프로브 서열이 외부 웹사이트로 전송됩니다. 공개하지 않은 서열이라면 외부 서비스에 전송해도 되는지 먼저 확인하십시오.</p></div>
+<p>출력 폴더를 지정하지 않았다면 그래픽 인터페이스는 결과를 사용자 컴퓨터의 임시 저장 공간에 보관합니다. 인터페이스를 종료하면 이 결과는 삭제됩니다. 남겨 둘 결과는 종료 전에 다운로드하십시오.</p>
+<h3 id="sec-6-3">6.3 Close, Exit 및 결과 저장</h3>
+<ul>
+<li>"Close"는 브라우저 페이지만 닫고 NPSeeker는 계속 실행합니다. 다시 접속하려면 콘솔에 출력된 URL을 브라우저에서 여십시오.</li>
+<li>"Exit"는 인터페이스를 종료하고 진행 중인 분석도 중단합니다. 콘솔 창을 닫거나 Ctrl-C를 눌러도 종료됩니다.</li>
+<li>인터페이스의 모든 페이지가 5분 넘게 닫혀 있고 실행 중인 분석이 없다면 NPSeeker가 자동으로 종료됩니다. 아직 다운로드하지 않은 임시 결과도 함께 삭제됩니다.</li>
+</ul>
+<p>"Exit" 또는 "Close"를 누르면 확인 창이 표시됩니다. 계산 중인 작업이 있거나 다운로드하지 않은 임시 결과가 있으면 함께 알려줍니다.</p>
+<p>출력 폴더를 지정했다면 결과 파일은 그곳에 남아 있습니다. 같은 폴더로 다시 분석하면 이전 NPSeeker 결과 파일을 교체하지만, 관련 없는 파일은 그대로 둡니다.</p>
+<p>인터페이스 테마는 Auto, Dark, Light 중에서 선택할 수 있습니다. Auto는 운영체제의 밝은 화면 또는 어두운 화면 설정을 따릅니다.</p>
+<h3 id="sec-6-4">6.4 원격 서버에서 사용하기</h3>
+<p>NPSeeker를 원격 서버에서 실행한다면 SSH 터널을 이용하여 자기 컴퓨터의 브라우저에서 인터페이스를 사용할 수 있습니다. SSH 터널은 로컬 연결 포트를 서버 쪽 포트로 전달하는 암호화된 연결입니다. 먼저 서버에서 NPSeeker를 시작하고 포트를 지정합니다.</p>
+<pre>./bin/npseeker --gui --no-browser -gui-port 53817</pre>
+<p>그다음 자기 컴퓨터에서 터미널을 열고 SSH 터널을 만듭니다.</p>
+<pre>ssh -L 53817:127.0.0.1:53817 username@server</pre>
+<p>SSH 연결을 유지한 채, 서버에 출력된 전체 URL을 로컬 브라우저에 입력합니다. 로컬 포트는 다른 번호를 사용해도 됩니다. 예를 들어:</p>
+<pre>ssh -L 9000:127.0.0.1:53817 username@server</pre>
+<p>이 경우 URL의 주소와 포트를 <a href="http://127.0.0.1:9000/로">http://127.0.0.1:9000/로</a> 바꾸고, 원래 URL의 ?t= 접근 토큰은 그대로 붙여 사용하십시오.</p>
+<div class="note"><p>원격 사용 중에는 인터페이스에 서버의 파일이 표시됩니다. "Pick folder"와 "Pick files"도 서버 쪽에서 파일 선택 창을 엽니다. 서버에 그래픽 데스크톱이 없으면 그 창을 사용할 수 없으므로, 인터페이스에 내장된 파일 브라우저로 파일을 선택하십시오.</p></div>
+<h3 id="sec-6-5">6.5 설정 파일 위치</h3>
+<p>NPSeeker는 다음 실행 때 편리하게 사용할 수 있도록 최근에 사용한 폴더를 <code>recent.txt</code>에, 마지막으로 선택한 위치를 <code>lastpick.txt</code>에 저장합니다. 파일 위치는 다음과 같습니다.</p>
+<table>
+<tr><td>Linux</td><td><code>~/.config/npseeker/</code></td></tr>
+<tr><td>macOS</td><td><code>~/Library/Application Support/npseeker/</code></td></tr>
+<tr><td>Windows</td><td><code>%AppData%\npseeker\</code></td></tr>
+</table>
+<p>분석 중 생성되는 중간 파일은 여기가 아니라 시스템 임시 폴더 또는 <a href="#opt-tmp-dir"><code>-tmp-dir</code></a>로 지정한 위치에 저장됩니다.</p>
+<h2 id="ch-7">7. 성능 및 문제 해결</h2>
+<h3 id="sec-7-1">7.1 메모리, 실행 시간 및 임시 파일</h3>
+<ul>
+<li>메모리: <a href="#opt-m"><code>-m</code></a>은 주요 계산 단계의 메모리를 제한합니다. 하지만 <a href="#opt-b"><code>-b</code></a>로 읽어 들이는 후보 배치와 기타 실행 데이터에는 추가 메모리가 필요합니다. 컴퓨터의 메모리가 부족하면 <a href="#opt-m"><code>-m</code></a>과 <a href="#opt-b"><code>-b</code></a>를 모두 줄이십시오.</li>
+<li>스레드: <a href="#opt-t"><code>-t</code></a> 0은 사용 가능한 모든 하드웨어 스레드를 사용합니다. 다른 작업과 컴퓨터를 함께 사용한다면 수를 줄이십시오.</li>
+<li>실행 시간: 유전체 크기, 공통 후보 수, <a href="#opt-mm"><code>-mm</code></a>, 사용 가능한 메모리, 하드웨어 및 디스크 속도에 따라 달라집니다. k가 커진다고 반드시 더 느려지는 것은 아닙니다. <a href="#opt-v"><code>-v</code></a>로 단계별 시간을 확인할 수 있습니다.</li>
+<li>임시 파일: 분석 중 중간 파일이 만들어집니다. 파일 크기는 데이터와 메모리 예산에 따라 달라지며, 예산을 줄이면 일반적으로 임시 파일이 더 많이 필요합니다. 디스크에 충분한 여유 공간을 확보하십시오. 정상적으로 끝나거나 Ctrl-C로 중단하면 임시 파일이 삭제됩니다.</li>
+</ul>
+<h3 id="sec-7-2">7.2 자주 나타나는 오류 메시지</h3>
+<p>잘못된 명령줄 옵션이나 매개변수에 관한 메시지는 npseeker:로 시작합니다. 입력, 출력 또는 실행 중 발생한 오류는 Error:로 시작합니다. 아래는 흔한 오류와 해결 방법입니다. 메시지에서 target 대신 control이 나온다면 대조군 입력에 문제가 있다는 뜻입니다.</p>
+<ul>
+<li><code class="message">Error: target: no FASTA file (*.fasta, *.fna or *.fa) in the folder ...</code><br>폴더에 인식할 수 있는 FASTA 확장자의 파일이 없습니다. 압축 파일은 파일 목록으로 지정하십시오 (<a href="#sec-2-2">2.2절</a>).</li>
+<li><code class="message">Error: target: "..." is not found</code><br>경로가 올바르지 않습니다. 상대 경로는 NPSeeker를 실행한 폴더를 기준으로 한다는 점에 주의하십시오.</li>
+<li><code class="message">Error: target: "..." is not a FASTA file: ...</code><br>올바른 FASTA 파일이 아닙니다. 마지막 콜론 뒤에 검사 결과가 나옵니다.</li>
+<li><code class="message">Error: target: the FASTA file "...", listed in "...", is not found</code><br>파일 목록에 지정된 파일 하나를 찾을 수 없습니다.</li>
+<li><code class="message">Error: target and control: ...; a genome cannot be both a target and a control</code><br>같은 파일이 표적과 대조군 모두에 포함되어 있습니다.</li>
+<li><code class="message">Error: -o: the folder "..." already exists and is not empty; give -w ...</code><br>출력 폴더가 비어 있지 않습니다. 다른 폴더를 선택하거나, 이전 결과를 교체해도 괜찮을 때만 <a href="#opt-w"><code>-w</code></a>를 추가하십시오.</li>
+<li><code class="message">npseeker: option -mm: must be less than the probe length (-k)</code><br>불일치 허용 수는 프로브 길이보다 작아야 합니다.</li>
+<li><code class="message">npseeker: option -c: no probe of 8 nt has a complexity score above 0.431 ...</code><br>문턱값이 해당 프로브 길이에서 가능한 최댓값을 초과했습니다. 이 예에서는 최댓값이 0.431이므로 값을 낮추십시오 (<a href="#sec-5-4">5.4절</a>).</li>
+<li><code class="message">Error: -tmp-dir: cannot create the folder "...": ...</code><br>임시 폴더를 만들 수 없습니다. 경로와 쓰기 권한을 확인하십시오.</li>
+</ul>
+<h3 id="sec-7-3">7.3 표준 출력과 표준 오류</h3>
+<p>터미널에 표시되는 텍스트는 표준 출력 (stdout)과 표준 오류 (stderr)라는 두 경로를 통해 전달됩니다. 평소에는 두 경로의 내용이 모두 화면에 보여 차이가 드러나지 않습니다. 하지만 명령어 끝에 &gt; <code>out.txt</code>를 추가해 출력을 파일로 보내면 표준 출력만 파일에 들어가고 표준 오류는 화면에 계속 표시됩니다.</p>
+<p>NPSeeker는 계산 결과, 상세 로그 (<a href="#opt-v"><code>-v</code></a>), 오류 메시지를 표준 출력으로 보냅니다. Note:로 시작하는 알림, Warning:으로 시작하는 경고와 진행 막대는 표준 오류로 보냅니다. 따라서 결과를 파일로 보낼 때도 진행 메시지가 섞이지 않고 경고는 화면에서 확인할 수 있습니다.</p>
+<h3 id="sec-7-4">7.4 프로브가 없거나 실행이 느린 경우</h3>
+<p>어떤 후보도 필터를 통과하지 못하면 다음 메시지가 표시됩니다.</p>
+<pre>Warning: no probe passed the filters; relax the thresholds
+         (-max-homopolymer, -c, -e, -min-unfold) to let probes pass.</pre>
+<p><a href="#opt-min-unfold"><code>-min-unfold</code></a>, <a href="#opt-c"><code>-c</code></a>, <a href="#opt-e"><code>-e</code></a> 또는 <a href="#opt-max-homopolymer"><code>-max-homopolymer</code></a>의 조건을 완화해 보십시오 (<a href="#sec-5-4">5.4절</a>). 표적 유전체 사이에 공통 k-mer가 원래 적다면 <a href="#opt-k"><code>-k</code></a>를 줄이거나 <a href="#opt-min-shared"><code>-min-shared</code></a> 및 <a href="#opt-mode"><code>-mode</code></a>를 조정해 볼 수 있습니다 (<a href="#ch-4">4장</a>). <a href="#opt-v"><code>-v</code></a>를 사용하면 각 단계에 남은 후보 수와 소요 시간을 확인할 수 있습니다.</p>
+<p>분석이 예상보다 느리다면 <a href="#opt-m"><code>-m</code></a>의 메모리 예산, 후보 배치 (<a href="#opt-b"><code>-b</code></a>) 및 다른 작업에 필요한 메모리의 합이 컴퓨터의 사용 가능한 물리 메모리를 넘지 않는지 확인하십시오. 부족하면 운영체제가 메모리 내용을 디스크에 옮겨 계산이 크게 느려질 수 있습니다. <a href="#opt-mm"><code>-mm</code></a>를 크게 설정했다면 기본값으로 되돌려 비교해 보십시오. 대규모 데이터 분석에서는 디스크 속도와 임시 폴더의 여유 공간도 확인해야 합니다.</p>
+<h2 id="ch-8">8. 사용 예</h2>
+<p>다음은 macOS 및 Linux 명령어입니다. Windows에서는 <code>./bin/npseeker</code>를 <code>.\bin\npseeker.exe</code>로 바꾸고 파일 경로의 <code>/</code>를 <code>\</code>로 바꾸십시오. 각 예제는 개별적으로 실행할 수 있습니다. <code>result/</code>에 이전 결과가 남아 있다면 새 폴더를 지정하거나 기존 NPSeeker 결과를 교체할 때만 <a href="#opt-w"><code>-w</code></a>를 추가하십시오.</p>
+<p>기본 분석: <code>result/</code> 폴더에 결과 저장</p>
+<pre>./bin/npseeker dat/sample/S.aureus/ dat/sample/yeast/ -o result/</pre>
+<p>표적을 파일 목록에서 읽고 목록 순서대로 군집화:</p>
+<pre>./bin/npseeker @target.list controls/ -cluster-order input -o result/</pre>
+<p>32개 작업 스레드와 16 GiB 메모리로 길이 31의 프로브 설계:</p>
+<pre>./bin/npseeker targets/ controls/ -k 31 -t 32 -m 16G -o result/</pre>
+<p>종합 점수에서 표적 특이성과 순도의 비중 높이기:</p>
+<pre>./bin/npseeker targets/ controls/ -weights exc=2,pur=2 -o result/</pre>
+<p>표적 군집별로 후보 프로브 찾기:</p>
+<pre>./bin/npseeker targets/ controls/ -min-shared 20000 -mode multi -o result/</pre>
+<p>논문 Table 3의 세균 프로브 순위 재현 (모든 기본값이 아니라 연구에서 사용한 매개변수를 적용; 데이터셋은 별도로 다운로드하며 배치 방법은 <a href="#sec-0-2">0.2절</a> 참고):</p>
+<pre>./bin/npseeker dat/datasets/GP/ dat/datasets/GN/ -k 23 -min-unfold 70 \
+    -weights exc=2,pur=2 -o GP_probes/
+./bin/npseeker dat/datasets/GN/ dat/datasets/GP/ -k 23 -min-unfold 70 \
+    -weights exc=2,pur=2 -o GN_probes/</pre>
+<p><a href="#opt-min-unfold"><code>-min-unfold</code></a> 70은 실험에 사용한 그람양성균 프로브 (비접힘성 점수 72.54)를 남기기 위한 설정입니다. 위 명령어 끝의 <code>\</code>는 macOS 및 Linux에서 다음 행으로 명령어를 이어 쓰는 기호입니다. Windows 명령 프롬프트에서는 ^를, PowerShell에서는 백틱 (`)을 사용하거나 명령어 전체를 한 행에 입력해도 됩니다.</p>
+<p>논문의 데이터셋 중 일부는 ATCC 유전체 데이터베이스 (ATCC Genome Portal)에서 가져온 것으로, ATCC 이용 약관상 재배포가 허용되지 않습니다. 그래서 <code>dat/datasets/</code>에는 NCBI의 대응 데이터를 넣었으며, 두 데이터셋의 파일별 대응 관계는 <code>dat/datasets/sources.txt</code>에 있습니다. 이 데이터로도 Table 3의 두 프로브의 서열과 순위는 논문과 같지만, 후보 수, 출현 횟수, 각 점수는 약간 다릅니다. 이 중 S. enterica ATCC 43976은 NCBI에 불완전한 어셈블리만 있습니다 (23S rRNA의 일부가 빠져 있음). GN을 표적으로 할 때 이 유전체를 빼면 (그래픽 인터페이스에서는 선택을 해제하고, 명령줄에서는 파일 목록 <code>@dat/datasets/GN-without-43976.list</code>를 사용) 후보 수가 65로 돌아오고, 보충 자료 Table S3의 상위 8개 프로브도 논문과 같아집니다.</p>
+<p>읽기 쉬운 표로 저장하고 더 많은 후보 프로브 출력:</p>
+<pre>./bin/npseeker targets/ controls/ -format txt -top 1000 -o result/</pre>
+<h2 id="app-A">부록 A  옵션 목록</h2>
+<table>
+<tr><th>옵션</th><th>기본값</th><th>용도 (절)</th></tr>
+<tr><td><a href="#opt-k"><code>-k</code></a>, <a href="#opt-k"><code>-kmer</code></a></td><td>25</td><td>프로브 길이, 5~256 (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-t"><code>-t</code></a>, <a href="#opt-t"><code>-threads</code></a></td><td>0</td><td>작업 스레드 수 (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-m"><code>-m</code></a>, <a href="#opt-m"><code>-memory</code></a></td><td>물리 메모리의 절반, 최대 8G</td><td>메모리 예산 (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-o"><code>-o</code></a>, <a href="#opt-o"><code>-out-dir</code></a></td><td>저장 안 함</td><td>출력 폴더 (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-w"><code>-w</code></a>, <a href="#opt-w"><code>--overwrite</code></a></td><td>꺼짐</td><td>이전 결과 교체 (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-top"><code>-top</code></a></td><td>200</td><td>출력할 프로브 수 (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-format"><code>-format</code></a></td><td>csv</td><td>csv 또는 txt (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-v"><code>-v</code></a>, <a href="#opt-v"><code>--verbose</code></a></td><td>꺼짐</td><td>상세 실행 로그 (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-cluster-order"><code>-cluster-order</code></a></td><td>auto</td><td>auto 또는 input (<a href="#ch-4">4</a>, <a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-min-shared"><code>-min-shared</code></a></td><td>1</td><td>공통 k-mer 하한 (<a href="#ch-4">4</a>, <a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-mode"><code>-mode</code></a></td><td>single</td><td>single 또는 multi (<a href="#ch-4">4</a>, <a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-weights"><code>-weights</code></a></td><td>각 항목 1</td><td>점수 가중치 (<a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-mm"><code>-mm</code></a>, <a href="#opt-mm"><code>-mismatch-cutoff</code></a></td><td>floor(k/10)</td><td>최대 불일치 수 (<a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-max-homopolymer"><code>-max-homopolymer</code></a></td><td>3</td><td>동일 염기 연속 길이 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-c"><code>-c</code></a>, <a href="#opt-c"><code>-min-complexity</code></a></td><td>0.5</td><td>복잡도 하한 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-e"><code>-e</code></a>, <a href="#opt-e"><code>-min-entropy</code></a></td><td>1.5</td><td>엔트로피 하한 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-prefilter"><code>-prefilter</code></a></td><td>T</td><td>비접힘성 사전 필터 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-min-unfold"><code>-min-unfold</code></a></td><td>75</td><td>비접힘성 하한 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-b"><code>-b</code></a>, <a href="#opt-b"><code>-batch-size</code></a></td><td>1e7</td><td>배치당 후보 수 (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-s"><code>-s</code></a>, <a href="#opt-s"><code>-min-subseq</code></a></td><td>7</td><td>최소 부분 서열 길이 (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-subseq-step"><code>-subseq-step</code></a></td><td>ceiling(k/10)</td><td>부분 서열 길이 간격 (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-tmp-dir"><code>-tmp-dir</code></a></td><td>시스템 임시 폴더</td><td>임시 파일 위치 (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><code>--gui</code></td><td>꺼짐</td><td>그래픽 인터페이스 (<a href="#sec-5-6">5.6</a>, <a href="#ch-6">6</a>)</td></tr>
+<tr><td><code>-gui-port</code></td><td>자동 선택</td><td>접속 포트 (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>--no-browser</code></td><td>꺼짐</td><td>브라우저 열지 않음 (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>--tab</code></td><td>꺼짐</td><td>브라우저 탭으로 열기 (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>-h</code></td><td colspan="2">간단 도움말 (<a href="#sec-0-6">0.6</a>, <a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>-help</code> [KEYWORD]</td><td colspan="2">상세<code>/</code>항목 도움말 (<a href="#sec-0-6">0.6</a>, <a href="#sec-5-6">5.6</a>)</td></tr>
+</table>
+</main>
+</div>
+</body>
+</html>

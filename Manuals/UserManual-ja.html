@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="manual2html.py (from UserManual-ja.txt; do not edit by hand)">
+<title>NPSeeker ユーザーマニュアル</title>
+<style>
+:root { color-scheme: light dark; --text: #1f2933; --bg: #ffffff; --muted: #6b7a88; --line: #d9dee3;
+        --code-bg: #f3f5f7; --nav-bg: #f4f6f8; --note-bg: #fff8e1; --note-line: #e0b84a; --accent: #1f6feb; }
+@media (prefers-color-scheme: dark) {
+  :root { --text: #e6edf3; --bg: #0f1419; --muted: #9aa7b4; --line: #333b44;
+          --code-bg: #1a2027; --nav-bg: #1a2027; --note-bg: #3a3218; --note-line: #b8932f; --accent: #58a6ff; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+       font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif; }
+.wrap { max-width: 1240px; margin: 0 auto; display: flex; gap: 2.5rem; padding: 0 1.25rem; }
+nav.toc { flex: 0 0 16rem; position: sticky; top: 0; align-self: flex-start; max-height: 100vh; overflow-y: auto;
+          padding: 1.5rem 0 3rem; font-size: .88rem; line-height: 1.45; }
+nav.toc a { display: block; padding: .2rem .5rem; color: var(--text); text-decoration: none; border-radius: 3px; }
+nav.toc a:hover { background: var(--nav-bg); color: var(--accent); }
+nav.toc a.sub { padding-left: 1.4rem; color: var(--muted); font-size: .84rem; }
+main { flex: 1; min-width: 0; padding: 1.5rem 0 5rem; }
+[id] { scroll-margin-top: 1rem; }
+a { color: var(--accent); }
+code, pre { font-family: ui-monospace, "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace; font-size: .92em; }
+code { white-space: nowrap; }
+code.message { white-space: normal; overflow-wrap: anywhere; }
+h1 { margin-top: 0; }
+h2 { border-bottom: 1px solid var(--line); padding-bottom: 4px; margin-top: 2em; }
+h4.option { margin: 1.4em 0 .4em; }
+.opt-type, .version, .toc-title { color: var(--muted); font-weight: normal; }
+.toc-title { text-transform: uppercase; letter-spacing: .06em; font-size: .78rem; margin: 0 0 .5rem; }
+pre { background: var(--code-bg); padding: 10px 12px; overflow-x: auto; border-radius: 4px; }
+table { border-collapse: collapse; margin: .6em 0; }
+th, td { text-align: left; vertical-align: top; padding: 3px 14px 3px 0; }
+td:first-child { white-space: nowrap; }
+th { border-bottom: 1px solid var(--line); }
+.note { background: var(--note-bg); border-left: 4px solid var(--note-line); padding: 2px 12px; margin: 1em 0; }
+.toc-head { display: flex; align-items: center; border-radius: 3px; }
+.toc-head:hover { background: var(--nav-bg); }
+.toc-head a { flex: 1; }
+nav.toc .toc-head a:hover { background: none; }
+.js .toc-subs { display: none; }
+.js .toc-ch.open .toc-subs { display: block; }
+.toc-toggle { flex: none; width: 26px; height: 24px; border: 0; background: none; padding: 0; cursor: pointer;
+              color: var(--muted); display: flex; align-items: center; justify-content: center; }
+.toc-toggle:hover { color: var(--accent); }
+.toc-toggle::before { content: ""; width: 6px; height: 6px; border-right: 1.5px solid currentColor;
+                      border-bottom: 1.5px solid currentColor; transform: rotate(-45deg); transition: transform .15s; }
+.toc-ch.open .toc-toggle::before { transform: rotate(45deg); }
+@media (max-width: 900px) {
+  .wrap { flex-direction: column; gap: 0; }
+  nav.toc { position: static; max-height: none; flex: none; border-bottom: 1px solid var(--line); }
+  .js nav.toc:not(.open) .toc-ch { display: none; }
+  .js .toc-title { cursor: pointer; font-size: .88rem; }
+  .js .toc-title::before { content: "\25B8  "; }
+  .js nav.toc.open .toc-title::before { content: "\25BE  "; }
+}
+</style>
+<script>
+document.documentElement.classList.add('js');
+document.addEventListener('DOMContentLoaded', function () {
+  var nav = document.querySelector('nav.toc');
+  if (!nav) return;
+  nav.querySelectorAll('.toc-ch').forEach(function (ch) {
+    if (!ch.querySelector('.toc-subs a')) return;
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'toc-toggle'; b.title = 'Show or hide the sections';
+    ch.firstElementChild.appendChild(b);
+  });
+  nav.querySelector('.toc-title').addEventListener('click', function () { nav.classList.toggle('open'); });
+  nav.addEventListener('click', function (e) {
+    var t = e.target.closest('.toc-toggle');
+    if (t) { t.closest('.toc-ch').classList.toggle('open'); return; }
+    var a = e.target.closest('a');
+    if (!a) return;
+    if (a.closest('.toc-ch')) a.closest('.toc-ch').classList.add('open');
+    nav.classList.remove('open');
+  });
+  var cur = Array.prototype.find.call(nav.querySelectorAll('a'), function (a) { return a.hash && a.hash === location.hash; });
+  if (cur && cur.closest('.toc-ch')) cur.closest('.toc-ch').classList.add('open');
+});
+</script>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc">
+<p class="toc-title">目次</p>
+<div class="toc-ch"><div class="toc-head"><a href="#intro-2">NPSeeker について</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#intro-8">本マニュアルについて</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-0">0. クイックスタート</a></div><div class="toc-subs">
+<a href="#sec-0-1" class="sub">0.1 使用環境に合ったファイルをダウンロードする</a>
+<a href="#sec-0-2" class="sub">0.2 圧縮ファイルの展開</a>
+<a href="#sec-0-3" class="sub">0.3 NPSeeker が実行できることを確認する</a>
+<a href="#sec-0-4" class="sub">0.4 GUI で最初の解析を行う</a>
+<a href="#sec-0-5" class="sub">0.5 コマンドラインで最初の解析を行う</a>
+<a href="#sec-0-6" class="sub">0.6 プログラムのヘルプを表示する</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-1">1. NPSeeker によるプローブの設計と評価</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-2">2. 標的ゲノムと対照ゲノムの準備</a></div><div class="toc-subs">
+<a href="#sec-2-1" class="sub">2.1 フォルダーを指定する</a>
+<a href="#sec-2-2" class="sub">2.2 ファイルリストを指定する</a>
+<a href="#sec-2-3" class="sub">2.3 単一の FASTA ファイルを指定する</a>
+<a href="#sec-2-4" class="sub">2.4 FASTA の内容と入力チェック</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-3">3. 結果の見方とプローブの選び方</a></div><div class="toc-subs">
+<a href="#sec-3-1" class="sub">3.1 画面に表示される結果</a>
+<a href="#sec-3-2" class="sub">3.2 出力ファイル</a>
+<a href="#sec-3-3" class="sub">3.3 プローブを選ぶ際のポイント</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-4">4. 標的ゲノムのクラスタリングと single / multi モード</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-5">5. オプションとパラメータ</a></div><div class="toc-subs">
+<a href="#sec-5-1" class="sub">5.1 プローブ長と計算資源 (General settings)</a>
+<a href="#sec-5-2" class="sub">5.2 出力と実行ログ (Output)</a>
+<a href="#sec-5-3" class="sub">5.3 クラスタリングと順位付け (Target clustering, Probe ranking)</a>
+<a href="#sec-5-4" class="sub">5.4 候補のフィルタリング (Candidate filtering)</a>
+<a href="#sec-5-5" class="sub">5.5 詳細オプション (Advanced)</a>
+<a href="#sec-5-6" class="sub">5.6 GUI とヘルプ (Graphical interface)</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-6">6. グラフィカルインターフェース</a></div><div class="toc-subs">
+<a href="#sec-6-1" class="sub">6.1 起動と接続</a>
+<a href="#sec-6-2" class="sub">6.2 各ページの機能</a>
+<a href="#sec-6-3" class="sub">6.3 Close、Exit と結果の保存</a>
+<a href="#sec-6-4" class="sub">6.4 リモートサーバー上の GUI を使う</a>
+<a href="#sec-6-5" class="sub">6.5 設定ファイルの場所</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-7">7. 性能とトラブルシューティング</a></div><div class="toc-subs">
+<a href="#sec-7-1" class="sub">7.1 メモリ、実行時間、一時ファイル</a>
+<a href="#sec-7-2" class="sub">7.2 よくあるエラーメッセージ</a>
+<a href="#sec-7-3" class="sub">7.3 標準出力と標準エラー出力</a>
+<a href="#sec-7-4" class="sub">7.4 プローブが見つからない場合や解析が遅い場合</a>
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#ch-8">8. 使用例</a></div><div class="toc-subs">
+</div></div>
+<div class="toc-ch"><div class="toc-head"><a href="#app-A">付録 A  オプション一覧</a></div><div class="toc-subs">
+</div></div>
+</nav>
+<main>
+<h1>NPSeeker ユーザーマニュアル</h1>
+<p class="version">バージョン 1.5.42</p>
+<h2 id="intro-2">NPSeeker について</h2>
+<p>NPSeeker (Nucleic Acid Probe Seeker) は、ゲノム配列から核酸プローブを設計するプログラムです。主に BioFET (生体電界効果トランジスタ) などのバイオセンサーに用いるプローブの選定を目的としています。核酸プローブは、標的生物の DNA に結合する短い DNA 配列で、生物の検出や識別に利用します。</p>
+<p>NPSeeker には、標的 (検出したい生物) と対照 (検出対象から除外したい生物) の 2 組のゲノムを入力します。まず、すべての標的ゲノムに共通する DNA 配列を探します。次に、対照ゲノムとの類似性、標的 DNA との結合の安定性、プローブ自身の折り畳まれやすさを評価し、候補をスコア順に並べます。プローブ長は 5～256 塩基の範囲で指定できます。</p>
+<p>関連論文と連絡先:</p>
+<table>
+<tr><td>論文</td><td>NPSeeker: A BioFET-oriented Nucleic Acid Probe Design Algorithm for Efficient Species Identification and Classification</td></tr>
+<tr><td>著者</td><td>Hao-Yu Peng, Hui Zhi Gan, et al.</td></tr>
+<tr><td>Web</td><td><a href="https://10lab.ceb.nycu.edu.tw/NPSeeker/">https://10lab.ceb.nycu.edu.tw/NPSeeker/</a></td></tr>
+<tr><td>GitHub</td><td><a href="https://github.com/NYCU-10lab/NPSeeker/">https://github.com/NYCU-10lab/NPSeeker/</a></td></tr>
+<tr><td>連絡先</td><td><a href="mailto:WadeLo@nycu.edu.tw">WadeLo@nycu.edu.tw</a></td></tr>
+</table>
+<p>NPSeeker を研究に利用した場合は、上記の論文を引用してください。</p>
+<h2 id="intro-8">本マニュアルについて</h2>
+<p>初めて使う場合は、<a href="#ch-0">第 0 章</a>からお読みください。GUI を使いたい場合は、<a href="#sec-0-1">0.1</a>～<a href="#sec-0-3">0.3</a> 節を終えた後、<a href="#sec-0-4">0.4 節</a>に進めます。自分のゲノムデータを用意する方法は<a href="#ch-2">第 2 章</a>、設定の変更方法は<a href="#ch-5">第 5 章</a>を参照してください。</p>
+<p>プログラムにもヘルプ機能があります。<code>-h</code> は主なオプションを、<code>-help</code> はすべてのオプションを表示します。本マニュアルでは、実際の操作手順、使用例、設定の考え方も説明します。プレーンテキスト版 (<code>UserManual-ja.txt</code>) と HTML 版 (<code>UserManual-ja.html</code>) があり、GUI の Help ページからも参照できます。</p>
+<h2 id="ch-0">0. クイックスタート</h2>
+<div class="note"><p>本マニュアルのコマンドは、特記しない限り macOS と Linux の形式で示します。Windows で操作が異なる場合は、その都度説明します。</p></div>
+<p>コマンドラインでプログラムを実行したことがない場合は、この章の順に操作してください。</p>
+<h3 id="sec-0-1">0.1 使用環境に合ったファイルをダウンロードする</h3>
+<p>NPSeeker の Web サイトまたは GitHub から、お使いの OS 用の圧縮ファイルをダウンロードします。Windows、macOS、Linux 用がそれぞれ用意されています。各ファイルには、次の 2 種類の CPU アーキテクチャ向け実行ファイルが含まれています。</p>
+<table>
+<tr><td>x86_64</td><td>一般的な Intel <code>/</code> AMD 製プロセッサ</td></tr>
+<tr><td>arm64</td><td>Apple M シリーズ搭載 Mac など、ARM 系プロセッサ搭載機</td></tr>
+</table>
+<p>どちらを使えばよいか分からない場合は、次の方法で確認してください。</p>
+<ul>
+<li>Windows: 「設定 -&gt; システム -&gt; バージョン情報」を開きます。「システムの種類」が x64 なら x86_64、ARM64 なら arm64 です。</li>
+<li>macOS: 「アップルメニュー -&gt; このMacについて」を開きます。チップが Apple M シリーズなら arm64、Intel プロセッサなら x86_64 です。</li>
+<li>Linux: ターミナルを開いて uname <code>-m</code> と入力し、Enter キーを押します。x86_64 と表示されたら x86_64、aarch64 なら arm64 です。</li>
+</ul>
+<h3 id="sec-0-2">0.2 圧縮ファイルの展開</h3>
+<p>ダウンロードしたファイルを任意のフォルダーに展開します。</p>
+<ul>
+<li>Windows: 圧縮ファイルを右クリックし、「すべて展開」を選びます。</li>
+<li>macOS: 圧縮ファイルをダブルクリックします。</li>
+<li>Linux: ターミナルで tar xzf に続けて圧縮ファイル名を指定します。</li>
+</ul>
+<p>展開すると NPSeeker フォルダーができ、次のファイルが含まれます。</p>
+<table>
+<tr><td><code>bin/</code></td><td>x86_64 用実行ファイル npseeker (Windows は <code>npseeker.exe</code>)</td></tr>
+<tr><td><code>bin.arm64/</code></td><td>arm64 用実行ファイル</td></tr>
+<tr><td><code>doc/</code></td><td>ユーザーマニュアル</td></tr>
+<tr><td><code>dat/sample/</code></td><td>初回の解析に使うサンプルデータ</td></tr>
+</table>
+<p>論文で使った細菌のゲノム (グラム陰性菌 <code>GN/</code> とグラム陽性菌 <code>GP/</code>) は別途ダウンロードします (NPSeeker-1.5.42-datasets.zip または <code>.tar.gz</code>)。展開して、中にある datasets フォルダー (<code>NPSeeker/dat/</code> の下) をプログラムの <code>dat/</code> フォルダーに移せば、<a href="#ch-8">第 8 章</a>のコマンド例をそのまま使ってテストできます。</p>
+<p>インストール作業は不要です。ローカルでの解析にインターネット接続も必要ありません。本マニュアルでは <code>bin/</code> の x86_64 用ファイルを使います。arm64 の場合は、コマンド中の bin を bin.arm64 に置き換えてください。</p>
+<h3 id="sec-0-3">0.3 NPSeeker が実行できることを確認する</h3>
+<p>コマンドラインの画面を開き、NPSeeker フォルダーに移動します。</p>
+<ul>
+<li>Windows: エクスプローラーで NPSeeker フォルダーを開き、アドレスバーに cmd と入力して Enter を押します。このフォルダーを作業場所とするコマンドプロンプトが開きます。PowerShell でも同じコマンドを使えます。</li>
+<li>macOS: 「ターミナル」(アプリケーション -&gt; ユーティリティ) を開きます。cd と半角スペースを入力し、NPSeeker フォルダーを画面にドラッグして Enter を押します。</li>
+<li>Linux: ターミナルを開き、cd で NPSeeker フォルダーに移動します。</li>
+</ul>
+<p>次のコマンドを入力し、Enter を押します。</p>
+<pre>Windows:          .\bin\npseeker.exe -h
+macOS, Linux:     ./bin/npseeker -h</pre>
+<p>NPSeeker のロゴ、使い方、主なオプションが表示されれば準備完了です。</p>
+<p>インターネットからダウンロードした署名のないプログラムは、初回実行時に OS のセキュリティ警告が表示される場合があります。</p>
+<div class="note"><p>実行を許可する前に、上記の正規の NPSeeker サイトまたは GitHub から入手したファイルであることを確認してください。入手元が不明なプログラムの警告を安易に解除しないでください。</p></div>
+<ul>
+<li>Windows: Microsoft Defender SmartScreen により「Windows によって PC が保護されました」と表示され、「実行しない」だけが選べる場合があります。その場合は「詳細情報」を押します。アプリ名と発行元の情報に加えて「実行」ボタンが表示されたら、これを押して起動します。同じ実行ファイルについては、通常、繰り返し確認されません。</li>
+<li>macOS: Apple による公証を受けていないために起動が拒否される場合があります。ターミナルで xattr <code>-dr</code> com.apple.quarantine に続けて NPSeeker フォルダーのパスを指定してください (フォルダーをドラッグしてパスを入力できます)。または、一度起動を試した後、「システム設定 -&gt; プライバシーとセキュリティ」で npseeker の項目を探し、「このまま開く」を選ぶ方法もあります。</li>
+<li>Linux: 通常は追加操作は不要です。permission denied と表示されたら、chmod +x <code>bin/npseeker</code> を実行してください。arm64 では chmod +x <code>bin.arm64/npseeker</code> を使い、その後もう一度試してください。</li>
+</ul>
+<h3 id="sec-0-4">0.4 GUI で最初の解析を行う</h3>
+<p>コマンドラインを使わずに、ブラウザー上の GUI で操作することもできます。Windows では <code>bin/</code> にある <code>npseeker.exe</code> をダブルクリックします。macOS と Linux では、ターミナルで次のコマンドを実行します。</p>
+<pre>./bin/npseeker --gui</pre>
+<p>ブラウザーに NPSeeker の画面が開きます。まず付属データで試しましょう。Design ページで次の項目を設定します。</p>
+<ul>
+<li>Target: <code>dat/sample/S.aureus/</code> を選びます。黄色ブドウ球菌のゲノムが含まれます。</li>
+<li>Control: <code>dat/sample/yeast/</code> を選びます。2 種類の酵母のゲノムです。</li>
+<li>Probe length: 既定値の 25 のままにし、他の設定も変更しません。</li>
+<li>"Check" を押して入力と設定を確認し、"Go" で解析を開始します。</li>
+<li>終了したら Results ページでプローブとスコアを確認し、必要な結果をダウンロードしてください。</li>
+</ul>
+<p>GUI は手元のコンピューターで動作し、ゲノムファイルを外部の Web サイトへ送信することはありません。各画面と終了方法については<a href="#ch-6">第 6 章</a>をご覧ください。</p>
+<h3 id="sec-0-5">0.5 コマンドラインで最初の解析を行う</h3>
+<p>同じ付属データをコマンドラインから解析することもできます。</p>
+<pre>Windows:          .\bin\npseeker.exe dat\sample\S.aureus\ dat\sample\yeast\
+macOS, Linux:     ./bin/npseeker     dat/sample/S.aureus/ dat/sample/yeast/</pre>
+<p>数秒以内に解析が終わり、プローブがスコア順に表示されます。以下は一部です。</p>
+<pre>Best probes of cluster 0:
+Rank Probe                     Exclus Purity UnFold Affini  Score     Tm
+   1 CCGACTAACCCAGAGCGGACGAGCC  50.84  61.32 100.00  64.22  69.10  65.88
+   2 GACCCGACTAACCCAGAGCGGACGA  50.84  61.40 100.00  63.68  68.98  64.24
+...</pre>
+<p>1 行が 1 つの候補プローブを表します。Probe は DNA 配列、Score は総合スコアで、高い順に並んでいます。他の列については<a href="#ch-3">第 3 章</a>で説明します。最後の Note は、詳しい結果をファイルに保存するには <a href="#opt-o"><code>-o</code></a> が必要であることを知らせています。例えば、次のように指定します。</p>
+<pre>./bin/npseeker dat/sample/S.aureus/ dat/sample/yeast/ -o result/</pre>
+<p>結果は <code>result/</code> に保存されます (<a href="#sec-3-2">3.2 節</a>)。再実行する場合は別の出力フォルダーを指定するか、以前の結果を置き換えてよい場合に限り <a href="#opt-w"><code>-w</code></a> を追加してください。自分のゲノムを解析するときは、2 つの入力フォルダーを標的用と対照用に置き換えます (<a href="#ch-2">第 2 章</a>)。</p>
+<h3 id="sec-0-6">0.6 プログラムのヘルプを表示する</h3>
+<pre>./bin/npseeker -h               主なオプション
+./bin/npseeker -help            すべてのオプション
+./bin/npseeker -help -mode      -mode の説明 (-help mode でも可)
+./bin/npseeker -help Output     -help の Output セクション
+./bin/npseeker -help target     target の説明 (control も指定可)</pre>
+<p>オプションの指定が正しくない場合、NPSeeker は問題点とヘルプの調べ方を表示し、解析を開始しません。</p>
+<h2 id="ch-1">1. NPSeeker によるプローブの設計と評価</h2>
+<p>NPSeeker は標的と対照のゲノムを入力として受け取り、候補プローブを順位付きで出力します。標的は検出したい生物、対照は検出対象から除外したい生物です。対照には、標的と混同しやすい近縁種などが該当します。処理は大きく次の 4 段階に分かれます。</p>
+<ul>
+<li>共通配列の探索: ゲノムを先頭から走査し、連続する k 塩基を順に取り出します。この短い配列を k-mer と呼びます。例えば ACGTA の 3-mer は ACG、CGT、GTA です。すべての標的ゲノムに存在する k-mer が候補となります。1 本のプローブで全標的を検出するには、共通配列が必要です。DNA は相補的な 2 本鎖なので、k-mer とその逆相補配列を同じ k-mer として扱います。</li>
+<li>候補のフィルタリング: 塩基組成が偏った配列、同じ塩基が長く続く配列 (例: AAAA)、自身が折り畳まれたり、同じプローブ同士が結合したりしやすい配列を除外します。こうして後の重い計算を減らします。</li>
+<li>対照ゲノムの検査: 残った候補について、対照中の完全一致配列、数塩基だけ異なる類似配列、プローブの短い部分配列の出現を調べます。</li>
+<li>スコア付けと順位付け: 次の 4 項目を計算して総合スコアを求めます。</li>
+</ul>
+<table>
+<tr><td>Exclusivity</td><td>標的に存在し、対照にはほとんど存在しない程度</td></tr>
+<tr><td>Purity</td><td>対照中の類似配列や短い一致部分が少なく、意図しない結合を起こしにくい程度</td></tr>
+<tr><td>Unfoldability</td><td>自身が折り畳まれにくく、標的と結合できる状態を保ちやすい程度</td></tr>
+<tr><td>Affinity</td><td>標的 DNA への結合の強さを、結合の自由エネルギーから予測</td></tr>
+</table>
+<p>各項目と総合スコアは 0～100 の範囲で、高いほど望ましい性質を示します。既定では 4 項目を同じ重みで平均します。これらは実験で検証する候補の優先順位を付けるための計算値であり、BioFET の信号強度の実測値でも、実験性能を保証する値でもありません。</p>
+<p>標的ゲノム間の差が大きく、全体で共有する k-mer が少ない場合は、標的を複数のクラスターに分け、各クラスターから候補を探します。クラスタリングと出力モードは<a href="#ch-4">第 4 章</a>、スコアの式とアルゴリズムの詳細は研究論文を参照してください。</p>
+<h2 id="ch-2">2. 標的ゲノムと対照ゲノムの準備</h2>
+<p>コマンドラインでは、最初の 2 つの引数に標的と対照をこの順で指定し、その後にオプションを続けます。</p>
+<pre>./bin/npseeker &lt;target&gt; &lt;control&gt; [options]</pre>
+<p>1 ゲノムにつき 1 つの FASTA ファイルを用意してください。FASTA は DNA 配列を記録するテキスト形式で、一般に拡張子 <code>.fasta</code>、<code>.fna</code>、<code>.fa</code> が使われます。標的と対照はそれぞれ、フォルダー、ファイルリスト、単一ファイルのいずれかで指定できます。</p>
+<h3 id="sec-2-1">2.1 フォルダーを指定する</h3>
+<p>フォルダーを指定すると、その直下の <code>.fasta</code>、<code>.fna</code>、<code>.fa</code> で終わるファイルを読み取り、1 ファイルを 1 ゲノムとして扱います。拡張子はすべて小文字でもすべて大文字でも構いません (例: <code>.FASTA</code>)。サブフォルダーは検索しません。</p>
+<pre>./bin/npseeker targets/ controls/</pre>
+<p>フォルダー内の圧縮ファイル (<code>.gz</code>、<code>.zst</code>) は読み取り対象外です。圧縮 FASTA ファイルを使う場合は、ファイルリストで指定してください。</p>
+<h3 id="sec-2-2">2.2 ファイルリストを指定する</h3>
+<p>ファイルリストは、各行に FASTA ファイルのパスを 1 つずつ記したテキストファイルです。リストとして読み取らせるには、名前の先頭に @ を付けます。</p>
+<pre>./bin/npseeker @target.list @control.list</pre>
+<p>例えば <code>target.list</code> は次のようになります。</p>
+<pre># Three target genomes
+genomes/strain_A.fasta
+genomes/strain_B.fna.gz
+/data/others/strain_C.fa</pre>
+<ul>
+<li>空行と # で始まる行は無視されます。# はコメントにも使えます。</li>
+<li>相対パスは、リストファイルの保存場所ではなく、NPSeeker を実行する作業ディレクトリからの相対パスとして解釈されます。</li>
+<li>別々のフォルダーにあるファイルや、gzip (<code>.gz</code>)、zstd (<code>.zst</code>) で圧縮した FASTA ファイルも指定できます。</li>
+<li><a href="#opt-cluster-order"><code>-cluster-order</code></a> input を指定すると、リスト中の順番がクラスタリング時の処理順になります (<a href="#ch-4">第 4 章</a>)。</li>
+</ul>
+<p>@ を付けずに指定したファイルでも、FASTA 形式でなければファイルリストとして解釈されます。意図を明確にするため、@ の使用を推奨します。</p>
+<h3 id="sec-2-3">2.3 単一の FASTA ファイルを指定する</h3>
+<p>標的または対照に 1 ゲノムしかない場合は、その FASTA ファイルを直接指定できます。圧縮 FASTA ファイルにも対応しています。</p>
+<pre>./bin/npseeker strain_A.fasta controls/</pre>
+<h3 id="sec-2-4">2.4 FASTA の内容と入力チェック</h3>
+<ul>
+<li>1 つの FASTA ファイルには、染色体やプラスミドなどの複数の配列レコードが含まれていても構いません。全レコードを 1 ゲノムとみなします。</li>
+<li>A、C、G、T は大文字と小文字のどちらも受け付けます。それ以外の文字 (例: N) では配列を区切り、その位置をまたぐ k-mer は数えません。</li>
+<li>NPSeeker は入力ファイルの FASTA 形式を検査します。ファイルが見つからない場合や形式が不正な場合は、エラーを表示して停止します (<a href="#sec-7-2">7.2 節</a>)。</li>
+<li>同じファイルを標的と対照の両方に指定することはできません。重複が見つかった場合は、そのファイルを示して停止します。</li>
+</ul>
+<div class="note"><p>標的と対照の選び方は、プローブの順位に直接影響します。対照には、無関係な生物を適当に選ぶのではなく、実際の検査で標的と混同する可能性がある生物を含めることを推奨します。</p></div>
+<h2 id="ch-3">3. 結果の見方とプローブの選び方</h2>
+<h3 id="sec-3-1">3.1 画面に表示される結果</h3>
+<p><a href="#opt-o"><code>-o</code></a> を指定しない場合、上位 <a href="#opt-top"><code>-top</code></a> 件 (既定値は 200) のプローブが画面に表示されます。表示項目は Rank、Probe、4 つのスコア、Score、Tm です。<a href="#opt-o"><code>-o</code></a> を指定した場合は詳細をファイルに保存し、画面には保存したファイルの一覧を表示します。<a href="#opt-v"><code>-v</code></a> を追加すると設定値や処理時間も確認できます。</p>
+<h3 id="sec-3-2">3.2 出力ファイル</h3>
+<p>例えば <a href="#opt-o"><code>-o</code></a> <code>result/</code> を指定すると、既定では CSV 形式 (カンマ区切り) で次のファイルが保存されます。</p>
+<table>
+<tr><td><code>cluster_N_probes.csv</code></td><td>プローブ候補の順位表。N は 0 から始まるクラスター番号</td></tr>
+<tr><td><code>cluster.csv</code></td><td>各ゲノムが属するクラスター</td></tr>
+<tr><td><code>flag.csv</code></td><td>今回の解析に使用した設定値</td></tr>
+</table>
+<p><a href="#opt-format"><code>-format</code></a> txt を指定すると、空白で列をそろえた読みやすいテキスト表になります。CSV は Excel などの表計算ソフトや他のプログラムでの処理に便利です。single と multi では出力ファイル数が異なります (<a href="#ch-4">第 4 章</a>)。</p>
+<p><code>cluster_N_probes.csv</code> の各項目は次のとおりです。</p>
+<table>
+<tr><td>Rank</td><td>プローブの順位</td></tr>
+<tr><td>Probe</td><td>プローブ配列 (5' 端から 3' 端への向きで記載)</td></tr>
+<tr><td>Tgt</td><td>標的ゲノム中の出現回数</td></tr>
+<tr><td>Ctl</td><td>対照ゲノム中の完全一致の出現回数。少ないほど望ましい</td></tr>
+<tr><td>Exclus</td><td>Tgt と Ctl から計算する Exclusivity スコア</td></tr>
+<tr><td>MMs</td><td>対照中の類似配列に関する値。小さいほど望ましい</td></tr>
+<tr><td>Subseq</td><td>対照中の短いプローブ断片に関する値。小さいほど望ましい</td></tr>
+<tr><td>Purity</td><td>MMs と Subseq から計算する Purity スコア</td></tr>
+<tr><td>SelfAn</td><td>プローブ自身が折り畳まれやすい程度 (自己アニーリング) 小さいほど望ましい</td></tr>
+<tr><td>Dimer</td><td>同じプローブ同士が結合しやすい程度 (二量体形成) 小さいほど望ましい</td></tr>
+<tr><td>UnFold</td><td>SelfAn と Dimer から計算する Unfoldability スコア</td></tr>
+<tr><td>Affini</td><td>結合の自由エネルギーに基づく Affinity スコア</td></tr>
+<tr><td>Score</td><td>4 項目のスコアの加重平均</td></tr>
+<tr><td>Tm</td><td>融解温度 (°C)。プローブと標的からなる二本鎖の半数が解離する温度で、Score には含めない</td></tr>
+</table>
+<p>Exclus、Purity、UnFold、Affini、Score は 0～100 の範囲で、値が高いほど望ましいことを示します。標的が複数のクラスターに分かれる場合、Tgt には自分のクラスター以外の標的ゲノム中にある類似配列も含まれます。したがって、必ずしも完全一致の出現回数だけを表すわけではありません。</p>
+<p><code>cluster.csv</code> には Group (target または control)、Cluster (標的のクラスター番号。対照は空欄)、File (ファイル名) が記録されます。<code>flag.csv</code> には Option と Value が記録され、解析時の設定を確認できます。</p>
+<p>指定した出力フォルダーがなければ自動作成されます。既に存在していても、空なら使用できます。中にファイルがある場合は、既存データを保護するためエラーで停止します。以前の結果を置き換えてよい場合に限り <a href="#opt-w"><code>-w</code></a> を指定してください。過去の NPSeeker 出力 (cluster_N_probes、cluster、flag) は削除されますが、無関係なファイルは残ります。</p>
+<h3 id="sec-3-3">3.3 プローブを選ぶ際のポイント</h3>
+<p>Score は候補選定の出発点になりますが、総合スコアだけで判断しないでください。用途に応じて、次の項目も確認します。</p>
+<ul>
+<li>Ctl: 0 より大きければ、対照ゲノムにも完全一致する配列があります。非標的生物への結合 (交差反応) の可能性に注意してください。</li>
+<li>Tgt: 出現回数が多いほど信号が強くなる可能性はありますが、反復配列に由来する場合もあります。信号強度を直接予測する数値ではありません。</li>
+<li>Purity と UnFold: 非標的配列への意図しない結合や、プローブが自身で折り畳まれるリスクを比較するための指標です。</li>
+<li>Tm: 測定温度に制約がある場合や複数のプローブを同時に使う場合は、融解温度を比較してください。同じ実験に使うプローブは Tm が近い方が望ましいでしょう。</li>
+</ul>
+<p>必要に応じて NCBI BLAST で他の生物に類似配列がないか調べたり、UNAFold (mfold) で折り畳み構造を予測したりできます。Results ページには両サービスへのリンクがありますが、選択したプローブ配列が外部サイトへ送信されます (<a href="#sec-6-2">6.2 節</a>)。特定の BioFET で実際に利用できるかどうかは、最終的に目的の実験条件で確かめる必要があります。</p>
+<h2 id="ch-4">4. 標的ゲノムのクラスタリングと single / multi モード</h2>
+<p>すべての標的ゲノムに共通する k-mer が少なすぎる場合、NPSeeker は標的を複数のクラスターに分けます。ゲノムを 1 つずつ処理し、新しいゲノムを加えてもクラスター全体の共通 k-mer が <a href="#opt-min-shared"><code>-min-shared</code></a> 個以上残るときだけ、そのクラスターに加えます。条件を満たさなければ別のクラスターへ回します。このクラスターは候補探索のための計算上の区分で、進化的・系統学的な分類を意味するものではありません。</p>
+<p><a href="#opt-cluster-order"><code>-cluster-order</code></a> は、標的ゲノムを処理する順序を指定します。</p>
+<ul>
+<li>auto (既定値): ゲノム間の共通 k-mer 数に基づき、決定的な順序を選びます。同じゲノム集合なら、入力ファイルの並びを変えてもクラスタリング結果は変わりません。</li>
+<li>input: ファイルリストなど、使用者が指定した順序に従います。特定の参照ゲノムを最初のクラスターの起点にしたい場合に使います。</li>
+</ul>
+<p><a href="#opt-min-shared"><code>-min-shared</code></a> の既定値は 1 です。新しいゲノムを加えた後も、クラスター全体に共通する k-mer が 1 個以上あれば同じクラスターに入るため、通常は 1 つのクラスターになります。値を増やすとクラスター数が増える場合があり、各クラスターで得られる候補も変わります。</p>
+<p>標的が複数のクラスターに分かれたときは、<a href="#opt-mode"><code>-mode</code></a> で出力方法を選びます。</p>
+<ul>
+<li>single (既定値): 全クラスターの候補をまとめて順位付けし、総合順位の上位 <a href="#opt-top"><code>-top</code></a> 件だけを <code>cluster_0_probes.csv</code> に保存します。上位候補の多くが同じクラスターに由来する場合もあります。</li>
+<li>multi: クラスターごとに順位付けし、それぞれ上位 <a href="#opt-top"><code>-top</code></a> 件までを <code>cluster_0_probes.csv</code>、<code>cluster_1_probes.csv</code> などに保存します。各標的クラスターの候補を得たい場合に使用します。</li>
+</ul>
+<p>multi モードで各クラスターからプローブを選ぶと、計算上は全標的クラスターを対象とするプローブの組を構成できます。ただし、実際の検出性能には実験による検証が必要です。ゲノムの所属先は <code>cluster.csv</code> で確認できます。あるクラスターの候補がすべてフィルターで除外された場合は警告が表示され、他のクラスターの結果はそのまま保存されます。</p>
+<h2 id="ch-5">5. オプションとパラメータ</h2>
+<p>オプションは標的と対照の入力の後に指定します。値を取るオプションは、<a href="#opt-k"><code>-k</code></a> 31 のように半角スペースで区切って記します。<a href="#opt-v"><code>-v</code></a>、<a href="#opt-w"><code>-w</code></a>、<code>--gui</code> のようなスイッチには値を付けません。<a href="#opt-k"><code>-k</code></a> と <a href="#opt-k"><code>-kmer</code></a> のように短い名前と長い名前がある場合は、どちらでも指定できます。数値には指数表記も使えます。例えば 1e7 は 10,000,000 です。以下の分類は <code>-help</code> の出力に従います。各節の見出しにある括弧内は <code>-help</code> のセクション名です。<a href="#app-A">付録 A</a> にオプション一覧をまとめています。</p>
+<h3 id="sec-5-1">5.1 プローブ長と計算資源 (General settings)</h3>
+<h4 class="option" id="opt-k"><code>-k, -kmer</code> <span class="opt-type">[整数、5～256、既定値 25]</span></h4>
+<p>プローブの長さを塩基数で指定します。目的の測定法に合った長さを選んでください。k が大きいほど、互いに異なる標的ゲノムの間で同一の長い配列が共有されにくくなり、クラスター数が増える場合があります。実行時間は主にゲノムサイズと候補数に左右されるため、プローブが長いほど遅くなるとは限りません (論文 Figure 4)。</p>
+<h4 class="option" id="opt-t"><code>-t, -threads</code> <span class="opt-type">[整数、既定値 0]</span></h4>
+<p>並列処理に使うスレッド数を指定します。0 は利用可能なハードウェアスレッドをすべて使います。他の作業とコンピューターを共用する場合は、値を小さくするとよいでしょう。</p>
+<h4 class="option" id="opt-m"><code>-m, -memory</code> <span class="opt-type">[容量、既定値は物理メモリの半分、上限 8G]</span></h4>
+<p>主な計算処理で使うメモリの予算を指定します。例えば <a href="#opt-m"><code>-m</code></a> 8G や <a href="#opt-m"><code>-m</code></a> 512M とします。単位なしの数値は GiB として解釈されます。予算を減らすと分割処理が増えて遅くなることがありますが、結果は変わりません。候補を読み込むバッチ (<a href="#opt-b"><code>-b</code></a>) とその他の実行時データに必要なメモリは、この予算に含まれません (<a href="#sec-5-5">5.5 節</a>)。</p>
+<h3 id="sec-5-2">5.2 出力と実行ログ (Output)</h3>
+<h4 class="option" id="opt-o"><code>-o, -out-dir</code> <span class="opt-type">[フォルダー、既定ではファイル保存なし]</span></h4>
+<p>結果ファイルの保存先を指定します (<a href="#sec-3-2">3.2 節</a>)。<a href="#opt-o"><code>-o</code></a> を省略すると、画面には項目数の少ない結果表だけが表示されます。結果を保存し、後で分析、比較、再現したい場合は出力フォルダーを指定してください。</p>
+<h4 class="option" id="opt-w"><code>-w, --overwrite</code></h4>
+<p><a href="#opt-o"><code>-o</code></a> で指定したフォルダーが空でなくても使用できるようにします。以前の NPSeeker 結果ファイルを削除してから新しい結果を書き込み、その他のファイルは残します (<a href="#sec-3-2">3.2 節</a>)。</p>
+<h4 class="option" id="opt-top"><code>-top</code> <span class="opt-type">[整数、既定値 200]</span></h4>
+<p>各順位表で何件の上位プローブを出力するか指定します。より多くの候補を確認したいときに増やしてください。ただし、大きすぎる値は出力ファイル、メモリ使用量、実行時間を増やす場合があります。</p>
+<h4 class="option" id="opt-format"><code>-format</code> <span class="opt-type">[csv または txt、既定値 csv]</span></h4>
+<p>結果ファイルの形式を指定します。csv はカンマ区切りで、表計算ソフトや他のプログラムでの処理に適しています。txt は空白で桁をそろえた表で、直接読むのに便利です。</p>
+<h4 class="option" id="opt-v"><code>-v, --verbose</code></h4>
+<p>入力情報、設定、処理段階、各段階の実行時間などを詳しく表示します。問題の調査や、大規模な解析の進行確認に役立ちます。GUI から開始した解析では常に詳細ログが記録されます。</p>
+<h3 id="sec-5-3">5.3 クラスタリングと順位付け (Target clustering, Probe ranking)</h3>
+<h4 class="option" id="opt-cluster-order"><code>-cluster-order</code> <span class="opt-type">[auto または input、既定値 auto]</span></h4>
+<p>標的ゲノムをクラスタリングする際の処理順を指定します。auto では入力順に依存せず、input では指定された順番を使います。詳しくは<a href="#ch-4">第 4 章</a>を参照してください。</p>
+<h4 class="option" id="opt-min-shared"><code>-min-shared</code> <span class="opt-type">[整数、既定値 1]</span></h4>
+<p>クラスター内の全ゲノムで共有しなければならない k-mer の最小数です。値を大きくするとクラスターが増える傾向がありますが、すべてのクラスターで適切なプローブが見つかるとは限りません (<a href="#ch-4">第 4 章</a>)。</p>
+<h4 class="option" id="opt-mode"><code>-mode</code> <span class="opt-type">[single または multi、既定値 single]</span></h4>
+<p>標的が複数のクラスターに分かれた場合にのみ違いが生じます。single は全クラスターの候補をまとめて順位付けし、multi はクラスターごとに順位表を作ります。選び方は<a href="#ch-4">第 4 章</a>をご覧ください。</p>
+<h4 class="option" id="opt-weights"><code>-weights</code> <span class="opt-type">[KEY=WEIGHT をカンマ区切り、既定値は各項目とも 1]</span></h4>
+<p>Exclusivity (exc)、Purity (pur)、Unfoldability (unf)、Affinity (aff) の総合スコアへの重みを調整します。例えば、次のように指定します。</p>
+<pre>-weights exc=2,pur=2</pre>
+<p>この場合、Exclusivity と Purity の重みが 2 倍になり、指定していない unf と aff は 1 のままです。総合スコアは次の式で求めます。</p>
+<pre>Score = (w_exc*Exclus + w_pur*Purity + w_unf*UnFold + w_aff*Affini)
+        / (w_exc + w_pur + w_unf + w_aff)</pre>
+<p>重みは 0 以上で、すべて 0 にはできません。重みが 0 の項目も計算されますが、総合スコアには寄与しません。重みを増やしても、ある項目のスコアが低い候補が直接除外されるわけではなく、順位への影響が変わります。</p>
+<h4 class="option" id="opt-mm"><code>-mm, -mismatch-cutoff</code> <span class="opt-type">[整数、既定値は floor(プローブ長 / 10)]</span></h4>
+<p>Purity の評価時に、対照中の配列をプローブと類似とみなす塩基の不一致数の上限を指定します。値を大きくすると多くの類似配列が検出されますが、時間とメモリの使用量が大幅に増える場合があります。値はプローブ長より小さくする必要があります。</p>
+<h3 id="sec-5-4">5.4 候補のフィルタリング (Candidate filtering)</h3>
+<p>NPSeeker は計算負荷の高い対照ゲノムとの比較前に候補を絞り込みます。条件が厳しすぎると候補が残らない場合があります。そのときは、次のしきい値を緩めてみてください。</p>
+<h4 class="option" id="opt-max-homopolymer"><code>-max-homopolymer</code> <span class="opt-type">[整数、既定値 3]</span></h4>
+<p>ホモポリマー (homopolymer) とは、AAAA のように同じ塩基が連続する配列です。このオプションで許容する最長の連続数を指定します。既定値の 3 なら AAA は許容され、AAAA 以上の連続がある候補は除外されます。値を増やすと、長い連続塩基を含む候補も残りやすくなります。</p>
+<h4 class="option" id="opt-c"><code>-c, -min-complexity</code> <span class="opt-type">[数値、0～1、既定値 0.5]</span></h4>
+<p>配列複雑度の下限を指定します。4 種類の塩基の割合が均等なほど高い値になります。しきい値を超える候補だけが残ります。</p>
+<h4 class="option" id="opt-e"><code>-e, -min-entropy</code> <span class="opt-type">[数値、0～2、既定値 1.5]</span></h4>
+<p>配列エントロピーの下限を指定します。エントロピーは配列パターンの多様さを表し、ACACAC のような反復配列では低くなります。しきい値を超える候補だけが残ります。短いプローブでは、複雑度とエントロピーの理論上の最大値も低くなります。指定値がその長さでの最大値を超えると、NPSeeker はエラーとともに最大値を表示します。</p>
+<h4 class="option" id="opt-prefilter"><code>-prefilter</code> <span class="opt-type">[T または F、既定値 T]</span></h4>
+<p>対照ゲノムの走査前に Unfoldability によるフィルタリングを行うか指定します。T は <a href="#opt-min-unfold"><code>-min-unfold</code></a> 未満の候補を除外し、後の比較処理を減らします。F はこの事前フィルターを無効にしますが、各候補の Unfoldability スコアは通常どおり計算されます。</p>
+<h4 class="option" id="opt-min-unfold"><code>-min-unfold</code> <span class="opt-type">[数値、0～100、既定値 75]</span></h4>
+<p>事前フィルターに使う Unfoldability のしきい値です。下げると、自身が折り畳まれやすい候補も残り、後の比較処理が増える場合があります。あるバッチの全候補がしきい値に届かないときは、そのバッチの事前フィルターを省略します。論文で評価したグラム陽性菌用プローブの Unfoldability は 72.54 です。その順位を再現するには <a href="#opt-min-unfold"><code>-min-unfold</code></a> 70 を指定します (<a href="#ch-8">第 8 章</a>)。</p>
+<h3 id="sec-5-5">5.5 詳細オプション (Advanced)</h3>
+<p>通常は既定値を変更する必要はありません。</p>
+<h4 class="option" id="opt-b"><code>-b, -batch-size</code> <span class="opt-type">[整数、既定値 1e7]</span></h4>
+<p>1 回に読み込んでフィルタリングする候補 k-mer の数を指定します。k = 25 では 1 候補あたり約 170 バイトなので、既定の 1,000 万候補には約 1.58 GiB のメモリが必要です。この容量は <a href="#opt-m"><code>-m</code></a> の予算とは別です。メモリの少ないコンピューターでは値を減らしてください。ただし、バッチ数が増えて実行時間が長くなる場合があります。</p>
+<h4 class="option" id="opt-s"><code>-s, -min-subseq</code> <span class="opt-type">[整数、既定値 7]</span></h4>
+<p>Purity の評価に使う短いプローブ断片の最小長を指定します。<a href="#opt-subseq-step"><code>-subseq-step</code></a> と組み合わせて使用します。</p>
+<h4 class="option" id="opt-subseq-step"><code>-subseq-step</code> <span class="opt-type">[整数、既定値は ceiling(プローブ長 / 10)]</span></h4>
+<p>Purity の評価で調べる断片長を、何塩基ずつ短くするか指定します。例えば k = 25 では既定の間隔は 3 で、長さ 22、19、16、13、10、7 の断片を調べます。間隔を小さくすると調べる長さが増え、処理負荷も大きくなります。</p>
+<h4 class="option" id="opt-tmp-dir"><code>-tmp-dir</code> <span class="opt-type">[フォルダー、既定値はシステムの一時フォルダー]</span></h4>
+<p>計算に必要な一時ファイルの保存先を指定します。NPSeeker はその下に専用フォルダーを作り、正常終了時や Ctrl-C による中断時に削除します。システムディスクの空き容量が足りない場合は、別のディスクを指定します。</p>
+<h3 id="sec-5-6">5.6 GUI とヘルプ (Graphical interface)</h3>
+<table>
+<tr><td><code>--gui</code></td><td>ローカル GUI を起動し、直接の解析は行わない</td></tr>
+<tr><td><code>-gui-port</code> [整数]</td><td>GUI が使用するポート番号 (URL のコロンの後の数値) 既定値は自動選択</td></tr>
+<tr><td><code>--no-browser</code></td><td>ブラウザーを開かず、GUI の URL だけを表示</td></tr>
+<tr><td><code>--tab</code></td><td>既定のブラウザーのタブで GUI を開く</td></tr>
+<tr><td><code>-h</code></td><td>簡易ヘルプを表示</td></tr>
+<tr><td><code>-help</code> [KEYWORD]</td><td>全ヘルプまたは指定項目・セクションの説明を表示</td></tr>
+</table>
+<p><code>--gui</code> と併用できるのは <code>-gui-port</code>、<code>--no-browser</code>、<code>--tab</code> だけです。<a href="#opt-k"><code>-k</code></a> など解析に関する設定は GUI 内で指定してください。<code>--gui</code> とともにコマンドラインで指定するとエラーになります。詳しくは<a href="#ch-6">第 6 章</a>をご覧ください。</p>
+<h2 id="ch-6">6. グラフィカルインターフェース</h2>
+<p>NPSeeker は手元のコンピューターで小さな Web サーバーを起動し、ブラウザーから操作できるようにします。接続先は 127.0.0.1 で、同じコンピューターからのみアクセスできます。解析そのものは NPSeeker が行い、ゲノムファイルが外部の Web サイトにアップロードされることはありません。同じ設定なら GUI とコマンドラインの解析結果は一致します。</p>
+<h3 id="sec-6-1">6.1 起動と接続</h3>
+<ul>
+<li>Windows: <code>bin/</code> 内の <code>npseeker.exe</code> をダブルクリックするか、コマンドプロンプトで <code>.\bin\npseeker.exe</code> <code>--gui</code> を実行します。プログラムのメッセージが表示されるコンソール画面 (黒い文字画面) が開くので、GUI の使用中は閉じないでください。</li>
+<li>macOS、Linux: ターミナルで <code>./bin/npseeker</code> <code>--gui</code> を実行します。</li>
+</ul>
+<p>通常はブラウザーが自動的に開き、次のような URL も表示されます。</p>
+<pre>http://127.0.0.1:53817/?t=1a2b3c...</pre>
+<p>?t= 以降は、そのセッション用のアクセストークンです。ブラウザーが自動的に開かない場合は、表示された URL 全体をコピーして開いてください。トークンを含む URL をむやみに第三者に知らせないでください。</p>
+<p>既定では独立したウィンドウで GUI が開きます。Edge や Chrome などではアドレスバーのないアプリケーション形式のウィンドウ、Firefox では新しいウィンドウになります。<code>--tab</code> を付けると、既定のブラウザーのタブで開けます。</p>
+<h3 id="sec-6-2">6.2 各ページの機能</h3>
+<table>
+<tr><td>Design</td><td>Target、Control、出力フォルダー (省略可)、プローブ長を設定。フォルダー単位、または個別の FASTA ファイルを選べます。圧縮ファイルや別の場所のファイルも指定できます。"Tick all" はフォルダー内のファイルをまとめて選択します。"Pick folder" と "Pick files" は OS の選択画面を開きます。詳細設定は必要に応じて展開します。空欄は既定値を使用します。"Check" は入力と設定を検査し、"Go" は解析を開始します。</td></tr>
+<tr><td>Run</td><td>現在の処理段階、進行状況、実行ログを表示します。"Cancel" で解析を中止できます。</td></tr>
+<tr><td>Results</td><td>プローブの順位、配列、各スコアを確認できます。列の見出しを押すと並び替えられますが、Rank の値は NPSeeker による元の順位のままです。プローブを選ぶと逆相補配列や融解温度を確認し、配列をコピーできます。結果ファイルは個別、または zip 形式で一括ダウンロード可能。</td></tr>
+<tr><td>Help</td><td>マニュアルを読み、表示言語を切り替えます。</td></tr>
+<tr><td>About</td><td>プログラム、論文、著者、連絡先の情報を表示します。</td></tr>
+</table>
+<p>Results ページには、次の外部サービスへのリンクもあります。</p>
+<ul>
+<li>BLAST at NCBI: 選択した配列で NCBI BLAST を開き、他の生物に類似配列があるか調べます。</li>
+<li>Fold at UNAFold: 配列を UNAFold (mfold) に送り、DNA の折り畳みを予測します。Web サイトのフォームの既定条件 (37 °C、1 M Na+) を使います。</li>
+</ul>
+<div class="note"><p>この 2 つのサービスにはインターネット接続が必要で、選択した配列が外部サイトへ送信されます。未公開配列を扱う場合は、外部サービスへ送ってよいか事前に確認してください。</p></div>
+<p>出力フォルダーを指定しない場合、GUI は結果をローカルディスクに一時保存します。GUI を終了すると一時保存した結果は削除されます。必要な結果は終了前にダウンロードしてください。</p>
+<h3 id="sec-6-3">6.3 Close、Exit と結果の保存</h3>
+<ul>
+<li>"Close" はブラウザーのページだけを閉じます。NPSeeker は動き続けます。再び開くには、コンソールに表示された URL にアクセスしてください。</li>
+<li>"Exit" は GUI を終了し、実行中の解析も停止します。コンソール画面を閉じるか、Ctrl-C を押した場合もプログラムは終了します。</li>
+<li>GUI のページをすべて閉じたまま 5 分を超え、解析も実行していない場合、NPSeeker は自動終了します。未ダウンロードの一時保存結果も削除されます。</li>
+</ul>
+<p>"Exit" または "Close" を押すと確認画面が表示されます。解析の実行中や、まだダウンロードしていない一時保存結果がある場合は、その旨が示されます。</p>
+<p>出力フォルダーを指定していれば結果はその場所に残ります。同じフォルダーで再び解析すると、以前の NPSeeker 結果ファイルは置き換えられ、関係のないファイルはそのまま残ります。</p>
+<p>GUI の配色は Auto、Dark、Light から選べます。Auto は OS のライト <code>/</code> ダークモードに合わせます。</p>
+<h3 id="sec-6-4">6.4 リモートサーバー上の GUI を使う</h3>
+<p>NPSeeker をリモートサーバーで動かす場合、SSH トンネル (手元のポートをサーバー側のポートへ転送する暗号化接続) を使えば、自分のブラウザーから GUI を操作できます。まずサーバー上でポートを指定して起動します。</p>
+<pre>./bin/npseeker --gui --no-browser -gui-port 53817</pre>
+<p>次に、自分のコンピューターでターミナルを開き、SSH トンネルを作ります。</p>
+<pre>ssh -L 53817:127.0.0.1:53817 username@server</pre>
+<p>SSH 接続を維持したまま、自分のブラウザーでサーバーが表示した URL 全体を開いてください。手元のポート番号だけを変えることもできます。例えば:</p>
+<pre>ssh -L 9000:127.0.0.1:53817 username@server</pre>
+<p>この場合、URL の接続先を <a href="http://127.0.0.1:9000/">http://127.0.0.1:9000/</a> に変更し、元の ?t= 以降のアクセストークンはそのまま残します。</p>
+<div class="note"><p>リモート利用時、GUI に表示されるのはサーバー上のファイルです。"Pick folder" と "Pick files" が開く選択画面もサーバー側のものです。サーバーにデスクトップ環境がない場合は、この選択画面を使えません。その場合は GUI 内蔵のファイルブラウザーを使用してください。</p></div>
+<h3 id="sec-6-5">6.5 設定ファイルの場所</h3>
+<p>NPSeeker は、最近使ったフォルダーを <code>recent.txt</code>、最後に選んだ場所を <code>lastpick.txt</code> に記録し、次回の操作に利用します。保存先は次のとおりです。</p>
+<table>
+<tr><td>Linux</td><td><code>~/.config/npseeker/</code></td></tr>
+<tr><td>macOS</td><td><code>~/Library/Application Support/npseeker/</code></td></tr>
+<tr><td>Windows</td><td><code>%AppData%\npseeker\</code></td></tr>
+</table>
+<p>解析中の一時ファイルはここではなく、システムの一時フォルダー、または <a href="#opt-tmp-dir"><code>-tmp-dir</code></a> で指定した場所に保存されます。</p>
+<h2 id="ch-7">7. 性能とトラブルシューティング</h2>
+<h3 id="sec-7-1">7.1 メモリ、実行時間、一時ファイル</h3>
+<ul>
+<li>メモリ: <a href="#opt-m"><code>-m</code></a> は主要な計算処理のメモリ予算です。<a href="#opt-b"><code>-b</code></a> で読み込む候補やその他の実行時データには別途メモリが必要です。不足する場合は <a href="#opt-m"><code>-m</code></a> と <a href="#opt-b"><code>-b</code></a> の両方を減らしてください。</li>
+<li>スレッド: <a href="#opt-t"><code>-t</code></a> 0 は利用できるハードウェアスレッドをすべて使います。他の処理とコンピューターを共用する場合は減らしてください。</li>
+<li>時間: ゲノムサイズ、共通候補の数、<a href="#opt-mm"><code>-mm</code></a>、メモリ、ハードウェア、ディスク速度に左右されます。k を大きくしても、必ずしも遅くなりません。<a href="#opt-v"><code>-v</code></a> で各段階の実行時間を確認できます。</li>
+<li>一時ファイル: 解析中に一時ファイルが作られます。必要な容量はデータとメモリ予算によって変わり、予算が小さいほど一時ファイルが多くなる傾向があります。十分な空き容量を確保してください。正常終了時や Ctrl-C による中断時に一時ファイルは削除されます。</li>
+</ul>
+<h3 id="sec-7-2">7.2 よくあるエラーメッセージ</h3>
+<p>コマンドラインのオプションやパラメータが不正な場合、メッセージは "npseeker:" で始まります。入出力や実行中のエラーは "Error:" で始まります。よくある例と対処方法を以下に示します。target の代わりに control と表示される場合は、対照側の入力に問題があります。</p>
+<ul>
+<li><code class="message">Error: target: no FASTA file (*.fasta, *.fna or *.fa) in the folder ...</code><br>フォルダーに該当する拡張子の FASTA ファイルがありません。圧縮したファイルはファイルリストで指定してください (<a href="#sec-2-2">2.2 節</a>)。</li>
+<li><code class="message">Error: target: "..." is not found</code><br>指定したパスが間違っています。相対パスは NPSeeker を実行したフォルダーを基準に解釈される点にも注意してください。</li>
+<li><code class="message">Error: target: "..." is not a FASTA file: ...</code><br>FASTA 形式として不正です。コロン以降に理由が表示されます。</li>
+<li><code class="message">Error: target: the FASTA file "...", listed in "...", is not found</code><br>ファイルリストに記載したファイルが見つかりません。</li>
+<li><code class="message">Error: target and control: ...; a genome cannot be both a target and a control</code><br>同じファイルが標的と対照の両方に含まれています。</li>
+<li><code class="message">Error: -o: the folder "..." already exists and is not empty; give -w ...</code><br>出力フォルダーが空ではありません。別の場所を選ぶか、以前の結果を置き換えてよい場合に限り <a href="#opt-w"><code>-w</code></a> を指定してください。</li>
+<li><code class="message">npseeker: option -mm: must be less than the probe length (-k)</code><br><a href="#opt-mm"><code>-mm</code></a> はプローブ長より小さくする必要があります。</li>
+<li><code class="message">npseeker: option -c: no probe of 8 nt has a complexity score above 0.431 ...</code><br>設定したしきい値が、このプローブ長で取り得る最大値を超えています。この例では最大値は 0.431 です。値を下げてください (<a href="#sec-5-4">5.4 節</a>)。</li>
+<li><code class="message">Error: -tmp-dir: cannot create the folder "...": ...</code><br>一時フォルダーを作成できません。パスと書き込み権限を確認してください。</li>
+</ul>
+<h3 id="sec-7-3">7.3 標準出力と標準エラー出力</h3>
+<p>ターミナルに表示される文字には、標準出力 (stdout) と標準エラー出力 (stderr) という 2 つの経路があります。通常はどちらも同じ画面に表示されます。コマンドの末尾に &gt; <code>out.txt</code> を付けるなど、出力をファイルへリダイレクトすると違いが分かります。stdout はファイルに入り、stderr はそのまま画面に表示されます。</p>
+<p>NPSeeker は結果、<a href="#opt-v"><code>-v</code></a> の実行ログ、エラーメッセージを stdout に出力します。Note: で始まる通知、Warning: で始まる警告、進行状況バーは stderr に出力します。そのため、結果をファイルに保存しても進行状況が混ざらず、警告は画面上で確認できます。</p>
+<h3 id="sec-7-4">7.4 プローブが見つからない場合や解析が遅い場合</h3>
+<p>フィルターを通過する候補が 1 つもない場合、次の警告が表示されます。</p>
+<pre>Warning: no probe passed the filters; relax the thresholds
+         (-max-homopolymer, -c, -e, -min-unfold) to let probes pass.</pre>
+<p><a href="#opt-min-unfold"><code>-min-unfold</code></a>、<a href="#opt-c"><code>-c</code></a>、<a href="#opt-e"><code>-e</code></a>、<a href="#opt-max-homopolymer"><code>-max-homopolymer</code></a> の条件を緩めてみてください (<a href="#sec-5-4">5.4 節</a>)。標的同士で共有する k-mer が非常に少ない場合は、<a href="#opt-k"><code>-k</code></a> を短くするか、<a href="#opt-min-shared"><code>-min-shared</code></a> と <a href="#opt-mode"><code>-mode</code></a> を調整します (<a href="#ch-4">第 4 章</a>)。<a href="#opt-v"><code>-v</code></a> を付けると、各処理段階で残った候補数と実行時間を確認できます。</p>
+<p>解析が予想以上に遅い場合は、<a href="#opt-m"><code>-m</code></a> の予算、<a href="#opt-b"><code>-b</code></a> のバッチ、その他の処理に必要なメモリの合計が、使用できる物理メモリ内に収まるか確認します。不足すると OS がメモリ内容をディスクへ退避し、処理が大きく遅くなることがあります。<a href="#opt-mm"><code>-mm</code></a> を大きくしている場合は既定値に戻して比較します。大きなデータでは、ディスク速度や一時フォルダーの空き容量も確認してください。</p>
+<h2 id="ch-8">8. 使用例</h2>
+<p>以下は macOS と Linux のコマンド形式です。Windows では <code>./bin/npseeker</code> を <code>.\bin\npseeker.exe</code> に、ファイルパス中の <code>/</code> を <code>\</code> に置き換えてください。各例は独立して実行できます。<code>result/</code> に以前の結果が残っている場合は、別の出力フォルダーを指定するか、以前の結果を置き換えてよい場合に限り <a href="#opt-w"><code>-w</code></a> を追加してください。</p>
+<p>基本的な解析。結果を <code>result/</code> に保存します。</p>
+<pre>./bin/npseeker dat/sample/S.aureus/ dat/sample/yeast/ -o result/</pre>
+<p>ファイルリストから標的を指定し、その並び順でクラスタリングします。</p>
+<pre>./bin/npseeker @target.list controls/ -cluster-order input -o result/</pre>
+<p>長さ 31 塩基のプローブを、32 スレッド、16 GiB のメモリ予算で設計します。</p>
+<pre>./bin/npseeker targets/ controls/ -k 31 -t 32 -m 16G -o result/</pre>
+<p>Exclusivity と Purity の総合スコアに対する重みを大きくします。</p>
+<pre>./bin/npseeker targets/ controls/ -weights exc=2,pur=2 -o result/</pre>
+<p>複数の標的クラスターについて、候補をそれぞれ探索します。</p>
+<pre>./bin/npseeker targets/ controls/ -min-shared 20000 -mode multi -o result/</pre>
+<p>論文 Table 3 の細菌プローブの順位を再現します。すべて既定値を使うのではなく、研究時の設定を指定します。データセットは別途ダウンロードします (置き方は <a href="#sec-0-2">0.2 節</a>を参照)。</p>
+<pre>./bin/npseeker dat/datasets/GP/ dat/datasets/GN/ -k 23 -min-unfold 70 \
+    -weights exc=2,pur=2 -o GP_probes/
+./bin/npseeker dat/datasets/GN/ dat/datasets/GP/ -k 23 -min-unfold 70 \
+    -weights exc=2,pur=2 -o GN_probes/</pre>
+<p><a href="#opt-min-unfold"><code>-min-unfold</code></a> 70 は、実験で使ったグラム陽性菌用プローブ (Unfoldability スコア 72.54) を残すための設定です。上記の <code>\</code> は、macOS <code>/</code> Linux でコマンドを次の行に続ける記号です。Windows のコマンドプロンプトでは ^、PowerShell ではバッククォート (`) を使います。コマンド全体を 1 行で入力することもできます。</p>
+<p>論文のデータセットの一部は ATCC のゲノムデータベース (ATCC Genome Portal) から取得したもので、ATCC の利用規約では再配布が認められていません。そのため <code>dat/datasets/</code> には NCBI の対応するデータを収録しています。両者のファイルごとの対応は <code>dat/datasets/sources.txt</code> を参照してください。このデータでも、Table 3 の 2 本のプローブの配列と順位は論文と同じですが、候補の総数、出現回数、各スコアはわずかに異なります。このうち S. enterica ATCC 43976 は、NCBI には不完全なアセンブリしかありません (23S rRNA の一部が欠けています)。GN を標的とする計算でこのゲノムを外すと (グラフィカルインターフェースではチェックを外し、コマンドラインではファイルリスト <code>@dat/datasets/GN-without-43976.list</code> を使います)、候補数は 65 に戻り、補足資料 Table S3 の上位 8 本も論文と一致します。</p>
+<p>読みやすいテキスト表で保存し、出力するプローブ数を増やします。</p>
+<pre>./bin/npseeker targets/ controls/ -format txt -top 1000 -o result/</pre>
+<h2 id="app-A">付録 A  オプション一覧</h2>
+<table>
+<tr><th>オプション</th><th>既定値</th><th>用途 (参照節)</th></tr>
+<tr><td><a href="#opt-k"><code>-k</code></a>, <a href="#opt-k"><code>-kmer</code></a></td><td>25</td><td>プローブ長 5～256 (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-t"><code>-t</code></a>, <a href="#opt-t"><code>-threads</code></a></td><td>0</td><td>スレッド数 (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-m"><code>-m</code></a>, <a href="#opt-m"><code>-memory</code></a></td><td>物理メモリの半分上限 8G</td><td>メモリ予算 (<a href="#sec-5-1">5.1</a>)</td></tr>
+<tr><td><a href="#opt-o"><code>-o</code></a>, <a href="#opt-o"><code>-out-dir</code></a></td><td>保存しない</td><td>出力フォルダー (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-w"><code>-w</code></a>, <a href="#opt-w"><code>--overwrite</code></a></td><td>オフ</td><td>以前の結果を置換 (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-top"><code>-top</code></a></td><td>200</td><td>出力件数 (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-format"><code>-format</code></a></td><td>csv</td><td>csv <code>/</code> txt の選択 (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-v"><code>-v</code></a>, <a href="#opt-v"><code>--verbose</code></a></td><td>オフ</td><td>詳細ログ (<a href="#sec-5-2">5.2</a>)</td></tr>
+<tr><td><a href="#opt-cluster-order"><code>-cluster-order</code></a></td><td>auto</td><td>auto <code>/</code> input (<a href="#ch-4">4</a>、<a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-min-shared"><code>-min-shared</code></a></td><td>1</td><td>共通 k-mer 数の下限 (<a href="#ch-4">4</a>、<a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-mode"><code>-mode</code></a></td><td>single</td><td>single <code>/</code> multi (<a href="#ch-4">4</a>、<a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-weights"><code>-weights</code></a></td><td>各項目 1</td><td>4 スコアの重み (<a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-mm"><code>-mm</code></a>, <a href="#opt-mm"><code>-mismatch-cutoff</code></a></td><td>floor(k/10)</td><td>許容不一致数 (<a href="#sec-5-3">5.3</a>)</td></tr>
+<tr><td><a href="#opt-max-homopolymer"><code>-max-homopolymer</code></a></td><td>3</td><td>同一塩基の最長連続数 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-c"><code>-c</code></a>, <a href="#opt-c"><code>-min-complexity</code></a></td><td>0.5</td><td>配列複雑度の下限 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-e"><code>-e</code></a>, <a href="#opt-e"><code>-min-entropy</code></a></td><td>1.5</td><td>エントロピー下限 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-prefilter"><code>-prefilter</code></a></td><td>T</td><td>事前フィルターの有無 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-min-unfold"><code>-min-unfold</code></a></td><td>75</td><td>Unfoldability の下限 (<a href="#sec-5-4">5.4</a>)</td></tr>
+<tr><td><a href="#opt-b"><code>-b</code></a>, <a href="#opt-b"><code>-batch-size</code></a></td><td>1e7</td><td>1 バッチの候補数 (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-s"><code>-s</code></a>, <a href="#opt-s"><code>-min-subseq</code></a></td><td>7</td><td>断片の最小長 (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-subseq-step"><code>-subseq-step</code></a></td><td>ceiling(k/10)</td><td>断片長の間隔 (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><a href="#opt-tmp-dir"><code>-tmp-dir</code></a></td><td>システムの一時領域</td><td>一時ファイルの保存先 (<a href="#sec-5-5">5.5</a>)</td></tr>
+<tr><td><code>--gui</code></td><td>オフ</td><td>GUI (<a href="#sec-5-6">5.6</a>、<a href="#ch-6">6</a>)</td></tr>
+<tr><td><code>-gui-port</code></td><td>自動選択</td><td>GUI のポート番号 (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>--no-browser</code></td><td>オフ</td><td>ブラウザーを開かない (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>--tab</code></td><td>オフ</td><td>ブラウザーのタブで開く (<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>-h</code></td><td colspan="2">簡易ヘルプ (<a href="#sec-0-6">0.6</a>、<a href="#sec-5-6">5.6</a>)</td></tr>
+<tr><td><code>-help</code> [KEYWORD]</td><td colspan="2">全体 <code>/</code> 個別ヘルプ (<a href="#sec-0-6">0.6</a>、<a href="#sec-5-6">5.6</a>)</td></tr>
+</table>
+</main>
+</div>
+</body>
+</html>
