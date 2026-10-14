@@ -95,50 +95,50 @@ https://10lab.ceb.nycu.edu.tw/NPSeeker/
   <tr>
     <td nowrap="nowrap" style="padding:5px 10px;">Chinese</td>
     <td align="center" nowrap="nowrap" style="padding:5px 10px;">
-      <a href="Manuals/UserManual-zh-TW.html" target="_blank">中文 (繁)</a><br>
-      <a href="Manuals/UserManual-zh-CN.html" target="_blank">中文 (简)</a>
+      <a href="https://10lab.ceb.nycu.edu.tw/NPSeeker/dat/downloads/manuals/UserManual-zh-TW.html" target="_blank">中文 (繁)</a><br>
+      <a href="https://10lab.ceb.nycu.edu.tw/NPSeeker/dat/downloads/manuals/UserManual-zh-CN.html" target="_blank">中文 (简)</a>
     </td>
   </tr>
   <tr>
     <td nowrap="nowrap" style="padding:5px 10px;">English</td>
     <td align="center" nowrap="nowrap" style="padding:5px 10px;">
-      <a href="Manuals/UserManual-en.html" target="_blank">English</a>
+      <a href="https://10lab.ceb.nycu.edu.tw/NPSeeker/dat/downloads/manuals/UserManual-en.html" target="_blank">English</a>
     </td>
   </tr>
   <tr>
     <td nowrap="nowrap" style="padding:5px 10px;">French</td>
     <td align="center" nowrap="nowrap" style="padding:5px 10px;">
-      <a href="Manuals/UserManual-fr.html" target="_blank">Français</a>
+      <a href="https://10lab.ceb.nycu.edu.tw/NPSeeker/dat/downloads/manuals/UserManual-fr.html" target="_blank">Français</a>
     </td>
   </tr>
   <tr>
     <td nowrap="nowrap" style="padding:5px 10px;">German</td>
     <td align="center" nowrap="nowrap" style="padding:5px 10px;">
-      <a href="Manuals/UserManual-de.html" target="_blank">Deutsch</a>
+      <a href="https://10lab.ceb.nycu.edu.tw/NPSeeker/dat/downloads/manuals/UserManual-de.html" target="_blank">Deutsch</a>
     </td>
   </tr>
   <tr>
     <td nowrap="nowrap" style="padding:5px 10px;">Japanese</td>
     <td align="center" nowrap="nowrap" style="padding:5px 10px;">
-      <a href="Manuals/UserManual-ja.html" target="_blank">日本語</a>
+      <a href="https://10lab.ceb.nycu.edu.tw/NPSeeker/dat/downloads/manuals/UserManual-ja.html" target="_blank">日本語</a>
     </td>
   </tr>
   <tr>
     <td nowrap="nowrap" style="padding:5px 10px;">Korean</td>
     <td align="center" nowrap="nowrap" style="padding:5px 10px;">
-      <a href="Manuals/UserManual-ko.html" target="_blank">한국어</a>
+      <a href="https://10lab.ceb.nycu.edu.tw/NPSeeker/dat/downloads/manuals/UserManual-ko.html" target="_blank">한국어</a>
     </td>
   </tr>
   <tr>
     <td nowrap="nowrap" style="padding:5px 10px;">Portuguese (Brazil)</td>
     <td align="center" nowrap="nowrap" style="padding:5px 10px;">
-      <a href="Manuals/UserManual-pt-BR.html" target="_blank">Português (Brasil)</a>
+      <a href="https://10lab.ceb.nycu.edu.tw/NPSeeker/dat/downloads/manuals/UserManual-pt-BR.html" target="_blank">Português (Brasil)</a>
     </td>
   </tr>
   <tr>
     <td nowrap="nowrap" style="padding:5px 10px;">Thai</td>
     <td align="center" nowrap="nowrap" style="padding:5px 10px;">
-      <a href="Manuals/UserManual-th.html" target="_blank">ไทย</a>
+      <a href="https://10lab.ceb.nycu.edu.tw/NPSeeker/dat/downloads/manuals/UserManual-th.html" target="_blank">ไทย</a>
     </td>
   </tr>
 </table>
